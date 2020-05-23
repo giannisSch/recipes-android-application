@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUpActivity">
+
+    <TextView
+        android:id="@+id/signUpHeaderTextView"
+        style="@style/TextHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="152dp"
+        android:layout_marginEnd="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Create account" />
+
+    <TextView
+        android:id="@+id/signUpDescriptionTextView"
+        style="@style/TextOnBackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="37dp"
+        android:layout_marginEnd="37dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signUpHeaderTextView"
+        tools:text="Get on board" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/signUpUsernameTextField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/username"
+        android:textColorHint="@color/colorOnHint"
+        android:layout_marginStart="36dp"
+        android:layout_marginEnd="37dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signUpDescriptionTextView"
+        app:layout_constraintBottom_toTopOf="@+id/signUpEmailTextField"
+        app:shapeAppearanceOverlay="@style/RoundFieldAppearance"
+        app:startIconDrawable="@drawable/ic_person_24dp"
+        app:layout_constraintVertical_chainStyle="packed"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/signUpEmailTextField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/prompt_password"
+        android:textColorHint="@color/colorOnHint"
+        android:layout_marginStart="36dp"
+        android:layout_marginEnd="37dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signUpUsernameTextField"
+        app:layout_constraintBottom_toTopOf="@id/signUpPasswordTextField"
+        app:shapeAppearanceOverlay="@style/RoundFieldAppearance"
+        app:startIconDrawable="@drawable/ic_lock_outline_24dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/signUpPasswordTextField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/prompt_email"
+        android:textColorHint="@color/colorOnHint"
+        android:layout_marginStart="36dp"
+        android:layout_marginEnd="37dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signUpEmailTextField"
+        app:layout_constraintBottom_toTopOf="@id/signUpCreateAccountButton"
+
+        app:shapeAppearanceOverlay="@style/RoundFieldAppearance"
+        app:startIconDrawable="@drawable/ic_mail_outline_24dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+    <Button
+        android:id="@+id/signUpCreateAccountButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:shapeAppearanceOverlay="@style/RoundFieldAppearance"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:textStyle="normal"
+        android:text="Create Account"
+        android:textColor="@color/colorOnBackground"
+        android:layout_marginBottom="75dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="38dp"
+        app:backgroundTint="@color/colorBackground"
+        app:strokeColor="@color/colorPrimary"
+        app:strokeWidth="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="HardcodedText" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
