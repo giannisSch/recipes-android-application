@@ -16,7 +16,7 @@
         android:textStyle="bold"
         android:textColor="#333333"
         android:lineSpacingExtra="6sp"
-        tools:text="Find your\nnext recipe"
+        android:text="Find your\nnext recipe"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="@id/login_btn"
         android:layout_marginTop="152dp" />
@@ -28,7 +28,7 @@
         android:fontFamily="sans-serif"
         android:textColor="#333333"
         android:lineSpacingExtra="6sp"
-        tools:text="Become the chef that you \nhave always wanted"
+        android:text="Become the chef that\nyou have always wanted"
         app:layout_constraintLeft_toLeftOf="@id/login_btn"
         app:layout_constraintTop_toBottomOf="@+id/find_txt"
         android:layout_marginTop="20dp" />
