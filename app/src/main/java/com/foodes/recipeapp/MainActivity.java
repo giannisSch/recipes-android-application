@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,16 +19,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState){
         super.onPostCreate(savedInstanceState);
-        Button loginButton = findViewById(R.id.mainLoginButton);
-        Button createAnAccountButton = findViewById(R.id.mainCreateAnAccountButton);
+        Button login = findViewById(R.id.mainLoginButton);
+        Button createAnAccount = findViewById(R.id.mainCreateAnAccountButton);
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 gotoActivity(LoginActivity.class);
             }
         });
-        createAnAccountButton.setOnClickListener(new View.OnClickListener() {
+        createAnAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 gotoActivity(SignUpActivity.class);
