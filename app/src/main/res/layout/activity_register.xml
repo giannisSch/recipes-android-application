@@ -45,7 +45,6 @@
         app:layout_constraintTop_toBottomOf="@id/reg_main_txt"
         android:text="Get on board" />
 
-
     <EditText
         android:id="@+id/reg_username_txt"
         android:layout_width="287dp"
@@ -53,7 +52,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="Username"
-        android:layout_marginTop="88.5dp"
+        android:layout_marginTop="45dp"
         android:drawableLeft="@drawable/ic_user_icon"
         android:drawableStart="@drawable/ic_user_icon"
         android:drawablePadding="7dp"
@@ -69,7 +68,7 @@
         android:ems="10"
         android:inputType="textEmailAddress"
         android:hint="E-mail"
-        android:layout_marginTop="29.5dp"
+        android:layout_marginTop="20dp"
         android:drawableLeft="@drawable/ic_email_icon_24dp"
         android:drawableStart="@drawable/ic_email_icon_24dp"
         android:drawablePadding="7dp"
@@ -85,7 +84,8 @@
         android:ems="10"
         android:inputType="textPassword"
         android:hint="Password"
-        android:layout_marginTop="29.5dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="45dp"
         android:drawableLeft="@drawable/ic_pass_icon_24dp"
         android:drawableStart="@drawable/ic_pass_icon_24dp"
         android:drawablePadding="7dp"
@@ -102,7 +102,7 @@
         android:textColor="#ffffff"
         android:textAllCaps="false"
         android:backgroundTint="@color/colorPrimary"
-        android:layout_marginTop="102dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/reg_password_txt"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
