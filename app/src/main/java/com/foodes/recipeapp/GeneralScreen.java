@@ -43,12 +43,12 @@ public class GeneralScreen extends AppCompatActivity {
 
     //Login & Register methods to change screens according to user preference
     private void goToLoginScreen() {
-        Intent login = new Intent(this,Login.class);
+        Intent login = new Intent(GeneralScreen.this,Login.class);
         startActivity(login);
     }
 
     private void goToRegisterScreen(){
-        Intent register = new Intent(this,Register.class);
+        Intent register = new Intent(GeneralScreen.this,Register.class);
         startActivity(register);
     }
 }

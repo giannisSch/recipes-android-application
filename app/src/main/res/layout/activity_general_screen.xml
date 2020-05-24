@@ -31,7 +31,8 @@
         android:text="Become the chef that\nyou have always wanted"
         app:layout_constraintLeft_toLeftOf="@id/login_btn"
         app:layout_constraintTop_toBottomOf="@+id/find_txt"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        />
 
 
     <Button
@@ -46,8 +47,8 @@
         android:backgroundTint="@color/design_default_color_primary"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-
         app:layout_constraintBottom_toTopOf="@+id/create_acc_btn"
+        android:layout_marginTop="122dp"
         android:layout_marginBottom="15dp" />
 
     <Button
