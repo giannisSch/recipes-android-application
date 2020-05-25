@@ -43,8 +43,10 @@ public class Register extends AppCompatActivity {
         reg_email = findViewById(R.id.reg_email_txt);
         reg_password = findViewById(R.id.reg_password_txt);
 
-        //Create Account Btn
+        //find a way to register a user
+        // database
 
+        //Create Account Btn
         Button createAccBtn = findViewById(R.id.reg_main_btn);
         createAccBtn.setOnClickListener(new View.OnClickListener() {
             @Override
