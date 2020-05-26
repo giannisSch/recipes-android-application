@@ -4,11 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
-    tools:ignore="ExtraText">
+    tools:context=".SignUpActivity">
 
     <ImageButton
-        android:id="@+id/loginBackImageButton"
+        android:id="@+id/signUpBackImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_back"
@@ -17,10 +16,10 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="60dp"
         android:layout_marginStart="36dp"
-       />
+        />
 
     <TextView
-        android:id="@+id/loginHeaderTextView"
+        android:id="@+id/signUpHeaderTextView"
         style="@style/TextHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,24 +28,23 @@
         android:layout_marginEnd="36dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/loginBackImageButton"
-        android:text="Welcome back" />
+        app:layout_constraintTop_toBottomOf="@id/signUpBackImageButton"
+        android:text="Create account" />
 
     <TextView
-        android:id="@+id/loginDescriptionTextView"
+        android:id="@+id/signUpDescriptionTextView"
         style="@style/TextOnBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="37dp"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="37dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginHeaderTextView"
-        android:text="What would you like to cook today? \nLogin and find what you desire" />
+        app:layout_constraintTop_toBottomOf="@+id/signUpHeaderTextView"
+        android:text="Get on board" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/loginUsernameTextField"
+        android:id="@+id/signUpUsernameTextField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/username"
@@ -55,8 +53,8 @@
         android:layout_marginEnd="37dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginDescriptionTextView"
-        app:layout_constraintBottom_toTopOf="@+id/loginPasswordTextField"
+        app:layout_constraintTop_toBottomOf="@+id/signUpDescriptionTextView"
+        app:layout_constraintBottom_toTopOf="@+id/signUpEmailTextField"
         app:shapeAppearanceOverlay="@style/RoundFieldAppearance"
         app:startIconDrawable="@drawable/ic_person_24dp"
         app:layout_constraintVertical_chainStyle="packed"
@@ -64,11 +62,12 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/loginPasswordTextField"
+        android:id="@+id/signUpEmailTextField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/prompt_password"
@@ -77,46 +76,52 @@
         android:layout_marginEnd="37dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginUsernameTextField"
-        app:layout_constraintBottom_toTopOf="@id/loginForgotPasswordButton"
+        app:layout_constraintTop_toBottomOf="@+id/signUpUsernameTextField"
+        app:layout_constraintBottom_toTopOf="@id/signUpPasswordTextField"
         app:shapeAppearanceOverlay="@style/RoundFieldAppearance"
         app:startIconDrawable="@drawable/ic_lock_outline_24dp"
-        app:endIconMode="password_toggle"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/loginForgotPasswordButton"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/signUpPasswordTextField"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/forgot_password"
-        android:textAllCaps="false"
-        android:textSize="13sp"
-        android:textStyle="normal"
-        android:textColor="@color/colorOnBackground"
-        android:lineSpacingExtra="2sp"
-        android:fontFamily="sans-serif-light"
+        android:hint="@string/prompt_email"
+        android:textColorHint="@color/colorOnHint"
+        android:layout_marginStart="36dp"
         android:layout_marginEnd="37dp"
+
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/loginPasswordTextField"
-        app:layout_constraintBottom_toTopOf="@id/loginLoginButton"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signUpEmailTextField"
+        app:layout_constraintBottom_toTopOf="@id/signUpCreateAccountButton"
+        app:shapeAppearanceOverlay="@style/RoundFieldAppearance"
+        app:startIconDrawable="@drawable/ic_mail_outline_24dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
 
     <Button
-        android:id="@+id/loginLoginButton"
+        android:id="@+id/signUpCreateAccountButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:shapeAppearanceOverlay="@style/RoundFieldAppearance"
         android:textAllCaps="false"
         android:textSize="16sp"
         android:textStyle="normal"
-        android:text="Login"
+        android:text="Create Account"
         android:textColor="@color/colorOnBackground"
         android:layout_marginBottom="75dp"
         android:layout_marginStart="35dp"
@@ -128,5 +133,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:ignore="HardcodedText" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
