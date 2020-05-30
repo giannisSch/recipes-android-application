@@ -1,5 +1,7 @@
 package com.foodes.recipeapp;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 
 public class Recipe {
@@ -37,5 +39,11 @@ public class Recipe {
 
     public void setIngredients(ArrayList<String> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return description;
     }
 }

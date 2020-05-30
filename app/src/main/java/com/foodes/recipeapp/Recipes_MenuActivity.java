@@ -6,17 +6,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Recipes_MenuActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
-    private RecAdapter adapter;
-    private ArrayList <Recipe> recipeArrayList;
-
+    private List<Object> recipeList;
+    private CustomAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,16 +26,19 @@ public class Recipes_MenuActivity extends AppCompatActivity {
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        recipeArrayList = new ArrayList<>();
+        recipeList = new ArrayList<Object>();
         createListData();
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new RecAdapter(recipeArrayList, new ItemClickListener(){
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+
+        adapter = new CustomAdapter(new ItemClickListener() {
             @Override
-            public void onItemClick(Recipe recipe) {
-                //exoume to recipe
+            public void onItemClick(Object item) {
+                Log.i("CUSTOM", item.toString());
             }
-        }));
+        });
+        recyclerView.setAdapter(adapter);
+        adapter.submitList(recipeList);
+
 
     }
 
@@ -45,9 +48,9 @@ public class Recipes_MenuActivity extends AppCompatActivity {
         ingredients.add("ladi");
         ingredients.add("alati");
         Recipe recipe = new Recipe("patates", "tiganites",ingredients);
-        recipeArrayList.add(recipe);
+        recipeList.add(recipe);
         recipe = new Recipe("makaronia", "me kima",ingredients);
-        recipeArrayList.add(recipe);
+        recipeList.add(recipe);
 
     }
 }
