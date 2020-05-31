@@ -24,26 +24,6 @@ public class LoginActivity extends AppCompatActivity {
     }
     protected void onPostCreate(@Nullable Bundle savedInstanceState){
         super.onPostCreate(savedInstanceState);
-        ImageButton backButton = findViewById(R.id.loginBackImageButton);
-
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LoginActivity.super.onBackPressed();
-            }
-        });
-
-        //Declaring Back Button
-        ImageView back_btn = findViewById(R.id.loginBackImageButton);
-
-        //Listener for back button
-        back_btn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent goBack = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(goBack);
-            }
-        });
 
         //login button & Listener
         Button loginBtn = findViewById(R.id.loginLoginButton);

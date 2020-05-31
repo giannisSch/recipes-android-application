@@ -7,29 +7,17 @@
     tools:context=".LoginActivity"
     tools:ignore="ExtraText">
 
-    <ImageButton
-        android:id="@+id/loginBackImageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_back"
-        android:background="@color/colorBackground"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="60dp"
-        android:layout_marginStart="36dp"
-       />
-
     <TextView
         android:id="@+id/loginHeaderTextView"
         style="@style/TextHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="33dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="36dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/loginBackImageButton"
+        app:layout_constraintTop_toTopOf="parent"
         android:text="Welcome back" />
 
     <TextView
@@ -111,7 +99,7 @@
     <Button
         android:id="@+id/loginLoginButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="52dp"
         app:shapeAppearanceOverlay="@style/RoundFieldAppearance"
         android:textAllCaps="false"
         android:textSize="16sp"

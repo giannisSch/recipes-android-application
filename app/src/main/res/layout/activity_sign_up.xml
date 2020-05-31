@@ -6,17 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".SignUpActivity">
 
-    <ImageButton
-        android:id="@+id/signUpBackImageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_back"
-        android:background="@color/colorBackground"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="60dp"
-        android:layout_marginStart="36dp"
-        />
+
 
     <TextView
         android:id="@+id/signUpHeaderTextView"
@@ -24,11 +14,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="33dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="36dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signUpBackImageButton"
+        app:layout_constraintTop_toTopOf="parent"
         android:text="Create account" />
 
     <TextView
@@ -113,7 +103,7 @@
     <Button
         android:id="@+id/signUpCreateAccountButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="52dp"
         app:shapeAppearanceOverlay="@style/RoundFieldAppearance"
         android:textAllCaps="false"
         android:textSize="16sp"
