@@ -1,5 +1,6 @@
 package com.foodes.recipeapp;
 
+import android.content.Context;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -10,12 +11,10 @@ public abstract class AbstractViewHolder<T extends Object> extends RecyclerView.
 
     @Nullable
     private ItemClickListener listener;
-
     T data;
 
     public AbstractViewHolder(@NonNull View itemView) {
         super(itemView);
-
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,10 +1,10 @@
 package com.foodes.recipeapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.Button;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -13,15 +13,12 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-    }
-    protected void onPostCreate(@Nullable Bundle savedInstanceState){
-        super.onPostCreate(savedInstanceState);
-        ImageButton backButton = findViewById(R.id.signUpBackImageButton);
-
-        backButton.setOnClickListener(new View.OnClickListener() {
+        Button createAccountBtn = (Button) findViewById(R.id.signUpCreateAccountButton);
+        createAccountBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SignUpActivity.super.onBackPressed();
+                Intent intent = new Intent(SignUpActivity.this, SearchActivity.class);
+                startActivity(intent);
             }
         });
     }

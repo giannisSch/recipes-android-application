@@ -1,10 +1,10 @@
 package com.foodes.recipeapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.Button;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity {
@@ -13,18 +13,17 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-    }
-    protected void onPostCreate(@Nullable Bundle savedInstanceState){
-        super.onPostCreate(savedInstanceState);
-        ImageButton backButton = findViewById(R.id.loginBackImageButton);
 
-        backButton.setOnClickListener(new View.OnClickListener() {
+        Button logInButton = (Button)findViewById(R.id.loginLoginButton);
+        logInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LoginActivity.super.onBackPressed();
+                Intent intent = new Intent(LoginActivity.this, SearchActivity.class);
+                startActivity(intent);
             }
         });
     }
+
 }
 
 
