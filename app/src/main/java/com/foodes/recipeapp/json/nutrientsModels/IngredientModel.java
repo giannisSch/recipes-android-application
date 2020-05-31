@@ -1,4 +1,4 @@
-package com.foodes.recipeapp;
+package com.foodes.recipeapp.json.nutrientsModels;
 
 public class IngredientModel {
     String text;

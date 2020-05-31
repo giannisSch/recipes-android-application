@@ -1,6 +1,6 @@
-package com.foodes.recipeapp;
+package com.foodes.recipeapp.json.nutrientsModels;
 
-public class Hit {
+public class HitModel {
 
     RecipeModel recipe;
     boolean bookmarked, bought;

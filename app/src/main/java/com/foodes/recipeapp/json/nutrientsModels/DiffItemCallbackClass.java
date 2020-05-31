@@ -1,4 +1,4 @@
-package com.foodes.recipeapp;
+package com.foodes.recipeapp.json.nutrientsModels;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;

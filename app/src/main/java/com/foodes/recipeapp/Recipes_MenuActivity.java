@@ -15,6 +15,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 
+import com.foodes.recipeapp.json.nutrientsModels.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +34,7 @@ public class Recipes_MenuActivity extends AppCompatActivity {
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         recipeList = new ArrayList<Object>();
-        createListData();
+
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
         adapter = new CustomAdapter(new ItemClickListener() {
@@ -42,7 +44,6 @@ public class Recipes_MenuActivity extends AppCompatActivity {
             }
         });
         recyclerView.setAdapter(adapter);
-        adapter.submitList(recipeList);
 
         RequestQueue queue = Volley.newRequestQueue(this);
         String url ="https://api.edamam.com/search?q=egg&app_id=57e6d292&app_key=000b571f7a78bfb4fb9820a7cc3b283e";
@@ -53,7 +54,8 @@ public class Recipes_MenuActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         JsonModel jsonModel = new Gson().fromJson(response, JsonModel.class);
                         Log.i("RESPONSE", jsonModel.getQ());
-
+                        addRecipesToList(jsonModel);
+                        adapter.submitList(recipeList);
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -62,21 +64,17 @@ public class Recipes_MenuActivity extends AppCompatActivity {
             }
         });
 
-// Add the request to the RequestQueue.
+        // Add the request to the RequestQueue.
         queue.add(stringRequest);
 
+    }
+
+    private void addRecipesToList(JsonModel jsonModel){
+        List<HitModel> hits =  jsonModel.getHit();
+        for(int i = 0; i < hits.size(); i++){
+            recipeList.add(hits.get(i).getRecipe());
+        }
 
     }
 
-    private void createListData() {
-
-        ArrayList<String> ingredients = new ArrayList<String>();
-        ingredients.add("ladi");
-        ingredients.add("alati");
-        Recipe recipe = new Recipe("patates", "tiganites",ingredients);
-        recipeList.add(recipe);
-        recipe = new Recipe("makaronia", "me kima",ingredients);
-        recipeList.add(recipe);
-
-    }
 }

@@ -1,13 +1,19 @@
-package com.foodes.recipeapp;
+package com.foodes.recipeapp.json.nutrientsModels;
+
 import com.foodes.recipeapp.json.nutrientsModels.CaModel;
 import com.foodes.recipeapp.json.nutrientsModels.ChocdfModel;
 import com.foodes.recipeapp.json.nutrientsModels.CholeModel;
 import com.foodes.recipeapp.json.nutrientsModels.EnercKcalModel;
+import com.foodes.recipeapp.json.nutrientsModels.FamsModel;
+import com.foodes.recipeapp.json.nutrientsModels.FapuModel;
 import com.foodes.recipeapp.json.nutrientsModels.FasatModel;
 import com.foodes.recipeapp.json.nutrientsModels.FatModel;
+import com.foodes.recipeapp.json.nutrientsModels.FatrnModel;
 import com.foodes.recipeapp.json.nutrientsModels.FeModel;
 import com.foodes.recipeapp.json.nutrientsModels.FibtgModel;
+import com.foodes.recipeapp.json.nutrientsModels.FolacModel;
 import com.foodes.recipeapp.json.nutrientsModels.FoldfeModel;
+import com.foodes.recipeapp.json.nutrientsModels.FolfdModel;
 import com.foodes.recipeapp.json.nutrientsModels.KModel;
 import com.foodes.recipeapp.json.nutrientsModels.MgModel;
 import com.foodes.recipeapp.json.nutrientsModels.NaModel;
@@ -15,6 +21,7 @@ import com.foodes.recipeapp.json.nutrientsModels.NiaModel;
 import com.foodes.recipeapp.json.nutrientsModels.PModel;
 import com.foodes.recipeapp.json.nutrientsModels.ProcntModel;
 import com.foodes.recipeapp.json.nutrientsModels.RibfModel;
+import com.foodes.recipeapp.json.nutrientsModels.SugarModel;
 import com.foodes.recipeapp.json.nutrientsModels.ThiaModel;
 import com.foodes.recipeapp.json.nutrientsModels.TocphaModel;
 import com.foodes.recipeapp.json.nutrientsModels.VitaRaeModel;
@@ -23,14 +30,19 @@ import com.foodes.recipeapp.json.nutrientsModels.Vitb6aModel;
 import com.foodes.recipeapp.json.nutrientsModels.VitcModel;
 import com.foodes.recipeapp.json.nutrientsModels.VitdModel;
 import com.foodes.recipeapp.json.nutrientsModels.Vitk1Model;
+import com.foodes.recipeapp.json.nutrientsModels.WaterModel;
 import com.foodes.recipeapp.json.nutrientsModels.ZnModel;
 
-public class TotalDailyModel {
+public class TotalNutrientsModel {
     EnercKcalModel ENERC_KCAL;
     FatModel FAT;
     FasatModel FASAT;
+    FatrnModel FATRN;
+    FamsModel FAMS;
+    FapuModel FAPU;
     ChocdfModel CHOCDF;
     FibtgModel FIBTG;
+    SugarModel SUGAR;
     ProcntModel PROCNT;
     CholeModel CHOLE;
     NaModel NA;
@@ -47,10 +59,13 @@ public class TotalDailyModel {
     NiaModel NIA;
     Vitb6aModel VITB6A;
     FoldfeModel FOLDFE;
+    FolfdModel FOLFD;
+    FolacModel FOLAC;
     Vitb12Model VITB12;
     VitdModel VITD;
     TocphaModel TOCPHA;
     Vitk1Model VITK1;
+    WaterModel WATER;
 
     public EnercKcalModel getENERC_KCAL() {
         return ENERC_KCAL;
@@ -76,6 +91,30 @@ public class TotalDailyModel {
         this.FASAT = FASAT;
     }
 
+    public FatrnModel getFATRN() {
+        return FATRN;
+    }
+
+    public void setFATRN(FatrnModel FATRN) {
+        this.FATRN = FATRN;
+    }
+
+    public FamsModel getFAMS() {
+        return FAMS;
+    }
+
+    public void setFAMS(FamsModel FAMS) {
+        this.FAMS = FAMS;
+    }
+
+    public FapuModel getFAPU() {
+        return FAPU;
+    }
+
+    public void setFAPU(FapuModel FAPU) {
+        this.FAPU = FAPU;
+    }
+
     public ChocdfModel getCHOCDF() {
         return CHOCDF;
     }
@@ -90,6 +129,14 @@ public class TotalDailyModel {
 
     public void setFIBTG(FibtgModel FIBTG) {
         this.FIBTG = FIBTG;
+    }
+
+    public SugarModel getSUGAR() {
+        return SUGAR;
+    }
+
+    public void setSUGAR(SugarModel SUGAR) {
+        this.SUGAR = SUGAR;
     }
 
     public ProcntModel getPROCNT() {
@@ -220,6 +267,22 @@ public class TotalDailyModel {
         this.FOLDFE = FOLDFE;
     }
 
+    public FolfdModel getFOLFD() {
+        return FOLFD;
+    }
+
+    public void setFOLFD(FolfdModel FOLFD) {
+        this.FOLFD = FOLFD;
+    }
+
+    public FolacModel getFOLAC() {
+        return FOLAC;
+    }
+
+    public void setFOLAC(FolacModel FOLAC) {
+        this.FOLAC = FOLAC;
+    }
+
     public Vitb12Model getVITB12() {
         return VITB12;
     }
@@ -250,5 +313,13 @@ public class TotalDailyModel {
 
     public void setVITK1(Vitk1Model VITK1) {
         this.VITK1 = VITK1;
+    }
+
+    public WaterModel getWATER() {
+        return WATER;
+    }
+
+    public void setWATER(WaterModel WATER) {
+        this.WATER = WATER;
     }
 }

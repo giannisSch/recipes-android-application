@@ -1,4 +1,4 @@
-package com.foodes.recipeapp;
+package com.foodes.recipeapp.json.nutrientsModels;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ public class JsonModel {
     String q;
     int from, to ;
     int count;
-    List<Hit> hit;
+    List<HitModel> hits;
 
     public String getQ() {
         return q;
@@ -40,11 +40,11 @@ public class JsonModel {
         this.count = count;
     }
 
-    public List<Hit> getHit() {
-        return hit;
+    public List<HitModel> getHit() {
+        return hits;
     }
 
-    public void setHit(List<Hit> hint) {
-        this.hit = hit;
+    public void setHit(List<HitModel> hint) {
+        this.hits = hits;
     }
 }

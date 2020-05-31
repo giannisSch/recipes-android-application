@@ -1,6 +1,10 @@
-package com.foodes.recipeapp;
+package com.foodes.recipeapp.json.nutrientsModels;
 
-class SubModel {
+import androidx.annotation.Nullable;
+
+import java.util.List;
+
+public class DigestModel {
     String label;
     String fat;
     String schemaOrgTag;
@@ -8,6 +12,9 @@ class SubModel {
     boolean hasRDI;
     double daily;
     String unit;
+
+    @Nullable
+    List<SubModel> sub;
 
     public String getLabel() {
         return label;
@@ -63,5 +70,14 @@ class SubModel {
 
     public void setUnit(String unit) {
         this.unit = unit;
+    }
+
+    @Nullable
+    public List<SubModel> getSub() {
+        return sub;
+    }
+
+    public void setSub(@Nullable List<SubModel> sub) {
+        this.sub = sub;
     }
 }
