@@ -1,21 +1,27 @@
 package com.foodes.recipeapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText username_txt;
-    private EditText password_txt;
-    private Button login_main_btn;
+    private TextInputEditText getUsername, getPassword;
+    private String username, password;
+    private Button loginBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,23 +31,28 @@ public class LoginActivity extends AppCompatActivity {
     protected void onPostCreate(@Nullable Bundle savedInstanceState){
         super.onPostCreate(savedInstanceState);
 
-        //login button & Listener
-        Button loginBtn = findViewById(R.id.loginLoginButton);
+        //getting access on editTxts & Buttons
+        getUsername = findViewById(R.id.loginUsernameTest);
+        getPassword = findViewById(R.id.loginPasswordTest);
+        loginBtn = findViewById(R.id.loginLoginButton);
+
+        //getting values from EditTexts
+
+
+        //login btn listener
         loginBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-//                if (UserIsAuthenticated()){
-                loginUser();
-//                }else{
-//                    displayError();
-//                }
+                username = getUsername.getText().toString();
+                password = getPassword.getText().toString();
+
+                if (username.equals("admin") && password.equals("1234")){
+                    loginUser();
+                } else {
+                    displayError();
+                }
             }
         });
-    }
-
-    private boolean UserIsAuthenticated(){
-        //create method
-        return false;
     }
 
     private void loginUser(){
@@ -51,7 +62,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void displayError(){
-        //create method
+        Context context = getApplicationContext();
+        CharSequence text = "Please enter valid credentials";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
     }
 
 }

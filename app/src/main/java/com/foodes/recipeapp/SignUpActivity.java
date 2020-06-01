@@ -1,5 +1,6 @@
 package com.foodes.recipeapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -25,10 +26,9 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private TextInputLayout  GetUsername, GetEmail, GetPassword, GetPasswordConfirm;
+    private TextInputEditText  getUsername, getEmail, getPassword, getPasswordConfirm;
+    private String username, email,password,passwordConfirm;
     private Button createAccountBtn;
-    private UsersDatabase db;
-    private UsersDao Usersdao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,39 +39,49 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
-        GetUsername = findViewById(R.id.signUpUsernameTextField);
-        GetEmail = findViewById(R.id.signUpEmailTextField);
-        GetPassword = findViewById(R.id.signUpPasswordTextField);
-        GetPasswordConfirm = findViewById(R.id.signUpPasswordConfigTextField);
+        //locating txtFields
+        getUsername = findViewById(R.id.signUpUsernameTxt);
+        getEmail = findViewById(R.id.signUpEmailTxt);
+        getPassword = findViewById(R.id.signUpPasswordTxt);
+        getPasswordConfirm = findViewById(R.id.signUpPasswordConfTxt);
         createAccountBtn = findViewById(R.id.signUpCreateAccountButton);
-
-        String username = GetUsername.getEditText().getText().toString().trim();
-        String email = GetEmail.getEditText().getText().toString().trim();
-        String password = GetPassword.getEditText().getText().toString().trim();
-        String passwordConfirm = GetPasswordConfirm.getEditText().getText().toString().trim();
-
-        //does not allow null text
-        if (username == null && email == null && password == null && passwordConfirm == null){
-            createAccountBtn.setEnabled(false);
-            //change to blue color
-        }else{
-            createAccountBtn.setEnabled(true);
-        }
 
         createAccountBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (createAccountBtn.isEnabled()){
-                    register();
-                }
+                //getting values from EditTexts
+                username = getUsername.getText().toString();
+                email = getEmail.getText().toString();
+                password = getPassword.getText().toString();
+                passwordConfirm = getPasswordConfirm.getText().toString();
+
+                //Checks if passwords are the same | If yes the user proceeds
+                checkIfPasswordsMatch();
+
             }
         });
+    }
 
+    private void checkIfPasswordsMatch(){
+        if (password.equals(passwordConfirm)) {
+            register();
+        } else {
+            showToast();
+        }
     }
 
     //Register method
     private void register(){
         Intent regUser = new Intent(SignUpActivity.this, AccountCreated.class);
         startActivity(regUser);
+    }
+
+    private void showToast(){
+        Context context = getApplicationContext();
+        CharSequence text = "Please enter valid credentials";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
     }
 }
