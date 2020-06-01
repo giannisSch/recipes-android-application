@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void loginUser(){
         //create method
-        Intent userIsLoggedIn = new Intent(LoginActivity.this, AppHomeScreen.class);
+        Intent userIsLoggedIn = new Intent(LoginActivity.this, Recipes_MenuActivity.class);
         startActivity(userIsLoggedIn);
     }
 
