@@ -54,10 +54,8 @@ public class SignUpActivity extends AppCompatActivity {
                 email = getEmail.getText().toString();
                 password = getPassword.getText().toString();
                 passwordConfirm = getPasswordConfirm.getText().toString();
-
                 //Checks if passwords are the same | If yes the user proceeds
                 checkIfPasswordsMatch();
-
             }
         });
     }

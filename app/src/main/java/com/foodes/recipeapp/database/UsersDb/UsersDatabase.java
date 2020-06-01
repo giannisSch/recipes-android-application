@@ -10,7 +10,7 @@ import androidx.room.RoomDatabase;
 @Database(entities = {User.class} , exportSchema = false ,version = 1)
 public abstract class UsersDatabase extends RoomDatabase {
 
-    //sugkleton (= to instance mias klasis apo opoudhpote an to zhthsw tha mou fernei to idio instance)
+    //sigleton (= to instance mias klasis apo opoudhpote an to zhthsw tha mou fernei to idio instance)
     private static UsersDatabase instance;
 
     //prepei na orisw pws tha parw to instance auths ths database

@@ -11,7 +11,6 @@ import java.io.Serializable;
 public class User {
 
     //Fields
-
     @NonNull
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
