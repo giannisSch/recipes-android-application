@@ -25,13 +25,13 @@ public class MainActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gotoLoginActivity();
+                gotoLoginActivity(); //goes to login activity
             }
         });
         createAnAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gotoRegisterActivity();
+                gotoRegisterActivity(); //goes to register activity
             }
         });
     }
