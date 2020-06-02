@@ -29,32 +29,30 @@ public class SignUpActivity extends AppCompatActivity {
     private TextInputEditText  getUsername, getEmail, getPassword, getPasswordConfirm;
     private String username, email,password,passwordConfirm;
     private Button createAccountBtn;
+    UsersDatabase database;
+    UsersDao dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        //create instance db
+        database = UsersDatabase.getInstance(this);
     }
 
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-
         //locating txtFields
         getUsername = findViewById(R.id.signUpUsernameTxt);
         getEmail = findViewById(R.id.signUpEmailTxt);
         getPassword = findViewById(R.id.signUpPasswordTxt);
         getPasswordConfirm = findViewById(R.id.signUpPasswordConfTxt);
+        //register btn
         createAccountBtn = findViewById(R.id.signUpCreateAccountButton);
-
         createAccountBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //getting values from EditTexts
-                username = getUsername.getText().toString();
-                email = getEmail.getText().toString();
-                password = getPassword.getText().toString();
-                passwordConfirm = getPasswordConfirm.getText().toString();
-                //Checks if passwords are the same | If yes the user proceeds
+                getValuesToString();
                 checkIfPasswordsMatch();
             }
         });
@@ -64,21 +62,41 @@ public class SignUpActivity extends AppCompatActivity {
         if (password.equals(passwordConfirm)) {
             register();
         } else {
-            showToast();
+            showErrorToast();
         }
+    }
+
+    private void getValuesToString(){
+        //getting values from EditTexts
+        username = getUsername.getText().toString();
+        email = getEmail.getText().toString();
+        password = getPassword.getText().toString();
+        passwordConfirm = getPasswordConfirm.getText().toString();
     }
 
     //Register method
     private void register(){
+        //creates new user in db & moves to new activity
+        User user = new User(username,password);  //creates new user with username,password,email parameters
+        database.getUserDao().insert(user); // **VM
+
+        showToast(); //informs the user that his account has been created
         Intent regUser = new Intent(SignUpActivity.this, AccountCreated.class);
         startActivity(regUser);
     }
 
     private void showToast(){
         Context context = getApplicationContext();
+        CharSequence text = "Your account has been created!";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
+
+    private void showErrorToast(){
+        Context context = getApplicationContext();
         CharSequence text = "Please enter valid credentials";
         int duration = Toast.LENGTH_SHORT;
-
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
     }

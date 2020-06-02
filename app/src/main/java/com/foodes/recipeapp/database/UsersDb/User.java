@@ -8,33 +8,33 @@ import androidx.room.PrimaryKey;
 import java.io.Serializable;
 
 @Entity(tableName = "Users")
-public class User {
+public class User{
 
     //Fields
-    @NonNull
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     private int id;
+
     @ColumnInfo(name = "username")
     private String username;
+
     @ColumnInfo(name = "email")
     private String email;
+
     @ColumnInfo(name = "password")
     private String password;
 
     //id auto generates so Im not including in constructor
-    public User(String username, String email, String password) {
+    public User(String username, String password) {
         this.username = username;
-        this.email = email;
         this.password = password;
     }
 
-    @NonNull
     public int getId() {
         return id;
     }
 
-    public void setId(@NonNull int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
