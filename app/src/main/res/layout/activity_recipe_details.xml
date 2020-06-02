@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#303030"
+    android:fitsSystemWindows="true">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:liftOnScroll="true"
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:expandedTitleMarginStart="72dp"
+            app:expandedTitleMarginBottom="28dp"
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:contentScrim="?attr/colorPrimary"
+            app:statusBarScrim="?attr/colorPrimaryVariant">
+<!--            app:expandedTitleTextAppearance="@style/TextAppearance.App.CollapsingToolbar.Expanded"-->
+<!--            app:collapsedTitleTextAppearance="@style/TextAppearance.App.CollapsingToolbar.Collapsed">-->
+
+        <ImageView
+            android:id="@+id/foodImg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/egg"
+            android:scaleType="centerCrop"
+            android:fitsSystemWindows="true"/>
+<!--            android:contentDescription="@string/content_description_media"-->
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:title="@string/app_name"
+                app:layout_scrollFlags="scroll|enterAlways|snap"
+                android:elevation="0dp"
+                app:layout_collapseMode="pin"
+                app:menu="@menu/top_app_bar"
+                app:navigationIcon="@drawable/ic_mail_outline_24dp"
+                style="@style/Widget.MaterialComponents.Toolbar.Primary"
+                android:background="@android:color/transparent"
+                />
+
+
+    </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Note: A RecyclerView can also be used -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:padding="16dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/proteinText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Protein"
+                android:text="@string/protein"
+                android:textColor="#fff"
+                android:textSize="26sp"
+                app:layout_constraintEnd_toStartOf="@id/carbsText"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                />
+
+            <TextView
+                android:id="@+id/numberOfProtein"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="125g"
+                android:textColor="#fff"
+                android:textSize="26sp"
+                app:layout_constraintEnd_toEndOf="@id/proteinText"
+                app:layout_constraintTop_toBottomOf="@id/proteinText"
+                app:layout_constraintStart_toStartOf="@id/proteinText"
+                android:layout_marginTop="5dp"
+                />
+
+            <TextView
+                android:id="@+id/carbsText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Crabs"
+                android:text="@string/carbs"
+                android:textColor="#fff"
+                android:textSize="26sp"
+                app:layout_constraintStart_toEndOf="@id/proteinText"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/fatText"
+                />
+
+            <TextView
+                android:id="@+id/numberOfCrab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="50g"
+                android:textColor="#fff"
+                android:textSize="26sp"
+                app:layout_constraintEnd_toEndOf="@id/carbsText"
+                app:layout_constraintTop_toBottomOf="@id/carbsText"
+                app:layout_constraintStart_toStartOf="@id/carbsText"
+                android:layout_marginTop="5dp"
+                />
+            <TextView
+                android:id="@+id/fatText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Fat"
+                android:text="@string/fat"
+                android:textColor="#fff"
+                android:textSize="26sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/carbsText"
+                app:layout_constraintEnd_toEndOf="@id/caloriesText"
+                />
+
+            <TextView
+                android:id="@+id/numberOfFat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="50g"
+                android:textColor="#fff"
+                android:textSize="26sp"
+                app:layout_constraintEnd_toEndOf="@id/fatText"
+                app:layout_constraintTop_toBottomOf="@id/fatText"
+                app:layout_constraintStart_toStartOf="@id/fatText"
+                android:layout_marginTop="5dp"
+                />
+
+            <TextView
+                android:id="@+id/caloriesText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Calories"
+                android:text="@string/calories"
+                android:textColor="#fff"
+                android:textSize="26sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/fatText"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/numberOfCalories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="50g"
+                android:textColor="#fff"
+                android:textSize="26sp"
+                app:layout_constraintEnd_toEndOf="@id/caloriesText"
+                app:layout_constraintTop_toBottomOf="@id/caloriesText"
+                app:layout_constraintStart_toStartOf="@id/caloriesText"
+                android:layout_marginTop="5dp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recipeDetailsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:textColor="#fff"
+                />
+    </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

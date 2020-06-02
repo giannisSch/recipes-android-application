@@ -1,10 +1,13 @@
 package com.foodes.recipeapp.json.nutrientsModels;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.Nullable;
 
 import java.util.List;
 
-public class DigestModel {
+public class DigestModel implements Parcelable {
     String label;
     String fat;
     String schemaOrgTag;
@@ -15,6 +18,28 @@ public class DigestModel {
 
     @Nullable
     List<SubModel> sub;
+
+    protected DigestModel(Parcel in) {
+        label = in.readString();
+        fat = in.readString();
+        schemaOrgTag = in.readString();
+        total = in.readDouble();
+        hasRDI = in.readByte() != 0;
+        daily = in.readDouble();
+        unit = in.readString();
+    }
+
+    public static final Creator<DigestModel> CREATOR = new Creator<DigestModel>() {
+        @Override
+        public DigestModel createFromParcel(Parcel in) {
+            return new DigestModel(in);
+        }
+
+        @Override
+        public DigestModel[] newArray(int size) {
+            return new DigestModel[size];
+        }
+    };
 
     public String getLabel() {
         return label;
@@ -79,5 +104,21 @@ public class DigestModel {
 
     public void setSub(@Nullable List<SubModel> sub) {
         this.sub = sub;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(label);
+        dest.writeString(fat);
+        dest.writeString(schemaOrgTag);
+        dest.writeDouble(total);
+        dest.writeByte((byte) (hasRDI ? 1 : 0));
+        dest.writeDouble(daily);
+        dest.writeString(unit);
     }
 }

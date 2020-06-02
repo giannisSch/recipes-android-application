@@ -17,12 +17,14 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.foodes.recipeapp.json.nutrientsModels.HitModel;
 import com.foodes.recipeapp.json.nutrientsModels.JsonModel;
+import com.foodes.recipeapp.recyclerviews.ItemClickListener;
+import com.foodes.recipeapp.recyclerviews.menu.CustomAdapter;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Recipes_MenuActivity extends AppCompatActivity {
+public class RecipesMenuActivity extends AppCompatActivity {
 
     private List<Object> recipeList;
     private CustomAdapter adapter;
@@ -43,15 +45,19 @@ public class Recipes_MenuActivity extends AppCompatActivity {
             @Override
             public void onItemClick(Object item) {
                 Log.i("CUSTOM", item.toString());
-                Intent intent = new Intent(Recipes_MenuActivity.this, SearchActivity.class);
+                Intent intent = new Intent(RecipesMenuActivity.this, RecipeDetailsActivity.class);
                 intent.putExtra("RecipeModel", (Parcelable) item);
                 startActivity(intent);
             }
         });
         recyclerView.setAdapter(adapter);
 
+        Intent intent = getIntent();
+        String ingredient = intent.getExtras().getString("ingredient");
+
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="https://api.edamam.com/search?q=egg&app_id=57e6d292&app_key=000b571f7a78bfb4fb9820a7cc3b283e";
+        String url = "https://api.edamam.com/search?q=" + ingredient + "&app_id=57e6d292&app_key=000b571f7a78bfb4fb9820a7cc3b283e";
+        //String url = "https://api.edamam.com/search?q=egg&app_id=57e6d292&app_key=000b571f7a78bfb4fb9820a7cc3b283e";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

@@ -16,14 +16,16 @@ private Button searchBtn;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+
         basicIngredient = (EditText) findViewById(R.id.basicIngredientEditText);
         searchBtn = (Button) findViewById(R.id.searchBtn);
 
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SearchActivity.this, Recipes_MenuActivity.class);
-                intent.putExtra("ingredient", basicIngredient.getText().toString().toLowerCase());
+                Intent intent = new Intent(SearchActivity.this, RecipesMenuActivity.class);
+                intent.putExtra("ingredient", basicIngredient.getText().toString().toLowerCase().trim());
                 startActivity(intent);
 
             }

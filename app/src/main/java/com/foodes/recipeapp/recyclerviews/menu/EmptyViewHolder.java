@@ -1,4 +1,4 @@
-package com.foodes.recipeapp;
+package com.foodes.recipeapp.recyclerviews.menu;
 
 import android.view.View;
 

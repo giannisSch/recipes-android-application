@@ -1,11 +1,12 @@
-package com.foodes.recipeapp;
+package com.foodes.recipeapp.recyclerviews.menu;
 
-import android.content.Context;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.foodes.recipeapp.recyclerviews.ItemClickListener;
 
 public abstract class AbstractViewHolder<T extends Object> extends RecyclerView.ViewHolder {
 

@@ -11,13 +11,14 @@
         android:roundIcon="@mipmap/food_logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".RecipeDetailsActivity" />
         <activity android:name=".AccountCreated" />
-        <activity android:name=".SearchActivity" />
+        <activity android:name=".RecipesMenuActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".SplashActivity" />
-        <activity android:name=".Recipes_MenuActivity">
+        <activity android:name=".SearchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

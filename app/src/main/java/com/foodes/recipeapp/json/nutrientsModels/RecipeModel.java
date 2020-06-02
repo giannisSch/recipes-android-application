@@ -42,7 +42,8 @@ public class RecipeModel  implements Parcelable {
         totalTime = in.readDouble();
         //Parcelable
         totalNutrients = in.readParcelable(TotalNutrientsModel.class.getClassLoader());
-        ingredients = in.createTypedArrayList (IngredientModel.CREATOR);
+        ingredients = in.createTypedArrayList(IngredientModel.CREATOR);
+        digest = in.createTypedArrayList(DigestModel.CREATOR);
     }
 
     public static final Creator<RecipeModel> CREATOR = new Creator<RecipeModel>() {
@@ -223,6 +224,8 @@ public class RecipeModel  implements Parcelable {
         //parcelable
         dest.writeParcelable((Parcelable) totalNutrients, flags);
         dest.writeTypedList(ingredients);
+        dest.writeTypedList(digest);
+
 
     }
 

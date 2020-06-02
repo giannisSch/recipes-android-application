@@ -1,4 +1,4 @@
-package com.foodes.recipeapp;
+package com.foodes.recipeapp.recyclerviews.menu;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,8 +7,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ListAdapter;
 
+import com.foodes.recipeapp.R;
 import com.foodes.recipeapp.json.nutrientsModels.DiffItemCallbackClass;
 import com.foodes.recipeapp.json.nutrientsModels.RecipeModel;
+import com.foodes.recipeapp.recyclerviews.ItemClickListener;
 
 public class CustomAdapter extends ListAdapter<Object, AbstractViewHolder<Object>> {
 

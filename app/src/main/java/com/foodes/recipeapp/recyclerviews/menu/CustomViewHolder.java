@@ -1,14 +1,14 @@
-package com.foodes.recipeapp;
+package com.foodes.recipeapp.recyclerviews.menu;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.bumptech.glide.Glide;
+import com.foodes.recipeapp.R;
 import com.foodes.recipeapp.json.nutrientsModels.RecipeModel;
+import com.foodes.recipeapp.recyclerviews.ItemClickListener;
 import com.squareup.picasso.Picasso;
 
 public class CustomViewHolder extends AbstractViewHolder<Object> {
