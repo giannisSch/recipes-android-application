@@ -1,9 +1,30 @@
 package com.foodes.recipeapp.json.nutrientsModels;
 
-public class CaModel {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class CaModel implements Parcelable {
     String label;
     double quantity;
     String unit;
+
+    protected CaModel(Parcel in) {
+        label = in.readString();
+        quantity = in.readDouble();
+        unit = in.readString();
+    }
+
+    public static final Creator<CaModel> CREATOR = new Creator<CaModel>() {
+        @Override
+        public CaModel createFromParcel(Parcel in) {
+            return new CaModel(in);
+        }
+
+        @Override
+        public CaModel[] newArray(int size) {
+            return new CaModel[size];
+        }
+    };
 
     public String getLabel() {
         return label;
@@ -27,5 +48,17 @@ public class CaModel {
 
     public void setUnit(String unit) {
         this.unit = unit;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(label);
+        dest.writeDouble(quantity);
+        dest.writeString(unit);
     }
 }

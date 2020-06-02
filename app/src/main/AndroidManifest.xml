@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.foodes.recipeapp">
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -10,13 +11,13 @@
         android:roundIcon="@mipmap/food_logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AccountCreated"></activity>
+        <activity android:name=".AccountCreated" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".Recipes_MenuActivity"></activity>
-        <activity android:name=".SplashActivity">
+        <activity android:name=".SplashActivity" />
+        <activity android:name=".Recipes_MenuActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

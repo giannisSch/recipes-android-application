@@ -1,39 +1,11 @@
 package com.foodes.recipeapp.json.nutrientsModels;
 
-import com.foodes.recipeapp.json.nutrientsModels.CaModel;
-import com.foodes.recipeapp.json.nutrientsModels.ChocdfModel;
-import com.foodes.recipeapp.json.nutrientsModels.CholeModel;
-import com.foodes.recipeapp.json.nutrientsModels.EnercKcalModel;
-import com.foodes.recipeapp.json.nutrientsModels.FamsModel;
-import com.foodes.recipeapp.json.nutrientsModels.FapuModel;
-import com.foodes.recipeapp.json.nutrientsModels.FasatModel;
-import com.foodes.recipeapp.json.nutrientsModels.FatModel;
-import com.foodes.recipeapp.json.nutrientsModels.FatrnModel;
-import com.foodes.recipeapp.json.nutrientsModels.FeModel;
-import com.foodes.recipeapp.json.nutrientsModels.FibtgModel;
-import com.foodes.recipeapp.json.nutrientsModels.FolacModel;
-import com.foodes.recipeapp.json.nutrientsModels.FoldfeModel;
-import com.foodes.recipeapp.json.nutrientsModels.FolfdModel;
-import com.foodes.recipeapp.json.nutrientsModels.KModel;
-import com.foodes.recipeapp.json.nutrientsModels.MgModel;
-import com.foodes.recipeapp.json.nutrientsModels.NaModel;
-import com.foodes.recipeapp.json.nutrientsModels.NiaModel;
-import com.foodes.recipeapp.json.nutrientsModels.PModel;
-import com.foodes.recipeapp.json.nutrientsModels.ProcntModel;
-import com.foodes.recipeapp.json.nutrientsModels.RibfModel;
-import com.foodes.recipeapp.json.nutrientsModels.SugarModel;
-import com.foodes.recipeapp.json.nutrientsModels.ThiaModel;
-import com.foodes.recipeapp.json.nutrientsModels.TocphaModel;
-import com.foodes.recipeapp.json.nutrientsModels.VitaRaeModel;
-import com.foodes.recipeapp.json.nutrientsModels.Vitb12Model;
-import com.foodes.recipeapp.json.nutrientsModels.Vitb6aModel;
-import com.foodes.recipeapp.json.nutrientsModels.VitcModel;
-import com.foodes.recipeapp.json.nutrientsModels.VitdModel;
-import com.foodes.recipeapp.json.nutrientsModels.Vitk1Model;
-import com.foodes.recipeapp.json.nutrientsModels.WaterModel;
-import com.foodes.recipeapp.json.nutrientsModels.ZnModel;
+import android.annotation.SuppressLint;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class TotalNutrientsModel {
+@SuppressLint("ParcelCreator")
+public class TotalNutrientsModel implements Parcelable {
     EnercKcalModel ENERC_KCAL;
     FatModel FAT;
     FasatModel FASAT;
@@ -66,6 +38,21 @@ public class TotalNutrientsModel {
     TocphaModel TOCPHA;
     Vitk1Model VITK1;
     WaterModel WATER;
+
+    protected TotalNutrientsModel(Parcel in) {
+    }
+
+    public static final Creator<TotalNutrientsModel> CREATOR = new Creator<TotalNutrientsModel>() {
+        @Override
+        public TotalNutrientsModel createFromParcel(Parcel in) {
+            return new TotalNutrientsModel(in);
+        }
+
+        @Override
+        public TotalNutrientsModel[] newArray(int size) {
+            return new TotalNutrientsModel[size];
+        }
+    };
 
     public EnercKcalModel getENERC_KCAL() {
         return ENERC_KCAL;
@@ -321,5 +308,14 @@ public class TotalNutrientsModel {
 
     public void setWATER(WaterModel WATER) {
         this.WATER = WATER;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
     }
 }

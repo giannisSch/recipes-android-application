@@ -9,13 +9,18 @@ import androidx.room.Update;
 
 import com.foodes.recipeapp.database.UsersDb.User;
 
+import java.util.List;
+
 @Dao
 public interface UsersDao {
 
     @Query("SELECT * FROM Users WHERE username = :username and email = :email and password = :password")
     User getUser(String username, String email , String password);
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Query("Select * from Users")
+    List<User> getAllUsers();
+
+    @Insert
     void insert(User user);
 
     @Delete

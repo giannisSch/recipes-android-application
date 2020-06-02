@@ -1,6 +1,8 @@
 package com.foodes.recipeapp;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
@@ -13,9 +15,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.foodes.recipeapp.json.nutrientsModels.HitModel;
+import com.foodes.recipeapp.json.nutrientsModels.JsonModel;
 import com.google.gson.Gson;
-
-import com.foodes.recipeapp.json.nutrientsModels.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +43,9 @@ public class Recipes_MenuActivity extends AppCompatActivity {
             @Override
             public void onItemClick(Object item) {
                 Log.i("CUSTOM", item.toString());
+                Intent intent = new Intent(Recipes_MenuActivity.this, SearchActivity.class);
+                intent.putExtra("RecipeModel", (Parcelable) item);
+                startActivity(intent);
             }
         });
         recyclerView.setAdapter(adapter);

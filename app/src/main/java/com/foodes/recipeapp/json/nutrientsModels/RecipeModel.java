@@ -1,8 +1,11 @@
 package com.foodes.recipeapp.json.nutrientsModels;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
-public class RecipeModel {
+public class RecipeModel  implements Parcelable {
     String uri;
     String label;
     String image;
@@ -21,6 +24,40 @@ public class RecipeModel {
     TotalNutrientsModel totalNutrients;
     TotalDailyModel totalDaily;
     List<DigestModel> digest;
+
+    protected RecipeModel(Parcel in) {
+        uri = in.readString();
+        label = in.readString();
+        image = in.readString();
+        source = in.readString();
+        url = in.readString();
+        shareAs = in.readString();
+        yield = in.readDouble();
+        dietLabels = in.createStringArrayList();
+        healthLabels = in.createStringArrayList();
+        cautions = in.createStringArrayList();
+        ingredientLines = in.createStringArrayList();
+        calories = in.readDouble();
+        totalWeight = in.readDouble();
+        totalTime = in.readDouble();
+        //Parcelable
+        totalNutrients = in.readParcelable(TotalNutrientsModel.class.getClassLoader());
+        ingredients = in.createTypedArrayList (IngredientModel.CREATOR);
+    }
+
+    public static final Creator<RecipeModel> CREATOR = new Creator<RecipeModel>() {
+        @Override
+        public RecipeModel createFromParcel(Parcel in) {
+            return new RecipeModel(in);
+        }
+
+        @Override
+        public RecipeModel[] newArray(int size) {
+            return new RecipeModel[size];
+        }
+    };
+
+
 
     public String getUri() {
         return uri;
@@ -164,5 +201,34 @@ public class RecipeModel {
 
     public void setDigest(List<DigestModel> digest) {
         this.digest = digest;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(uri);
+        dest.writeString(label);
+        dest.writeString(image);
+        dest.writeString(source);
+        dest.writeString(url);
+        dest.writeString(shareAs);
+        dest.writeDouble(yield);
+        dest.writeStringList(dietLabels);
+        dest.writeStringList(healthLabels);
+        dest.writeStringList(cautions);
+        dest.writeStringList(ingredientLines);
+        dest.writeDouble(calories);
+        dest.writeDouble(totalWeight);
+        dest.writeDouble(totalTime);
+
+        //parcelable
+        dest.writeParcelable((Parcelable) totalNutrients, flags);
+        dest.writeTypedList(ingredients);
+
+    }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 }

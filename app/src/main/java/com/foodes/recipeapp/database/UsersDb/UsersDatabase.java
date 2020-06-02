@@ -7,6 +7,8 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.foodes.recipeapp.SignUpActivity;
+
 @Database(entities = {User.class} , exportSchema = false ,version = 1)
 public abstract class UsersDatabase extends RoomDatabase {
 
@@ -15,7 +17,7 @@ public abstract class UsersDatabase extends RoomDatabase {
 
     //prepei na orisw pws tha parw to instance auths ths database
     @NonNull
-    public static UsersDatabase getInstance(Context context) {
+    public static UsersDatabase getInstance(SignUpActivity context) {
         if (instance == null) {
             instance = Room.databaseBuilder(context.getApplicationContext(), UsersDatabase.class, "AppUsers.db")
                     .fallbackToDestructiveMigration()
