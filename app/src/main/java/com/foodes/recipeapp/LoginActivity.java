@@ -3,27 +3,44 @@ package com.foodes.recipeapp;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.room.Database;
+import com.foodes.recipeapp.database.UsersDb.User;
+import com.foodes.recipeapp.database.UsersDb.UsersDao;
+import com.foodes.recipeapp.database.UsersDb.UsersDatabase;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+import com.shashank.sony.fancytoastlib.FancyToast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private TextInputEditText getUsername, getPassword;
-    private String username, password;
+    private TextInputEditText getUsername, getEmail, getPassword;
+    private String username, email,  password;
+    String checkUsername, checkPassword;
     private Button loginBtn;
+    UsersDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        //getting db instance
+        database = UsersDatabase.getInstance(this);
     }
-    protected void onPostCreate(@Nullable Bundle savedInstanceState){
+
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
         //getting access on editTxts & Buttons
@@ -31,36 +48,55 @@ public class LoginActivity extends AppCompatActivity {
         getPassword = findViewById(R.id.loginPasswordTest);
         loginBtn = findViewById(R.id.loginLoginButton);
 
-        //getting values from EditTexts
-
-
         //login btn listener
-        loginBtn.setOnClickListener(new View.OnClickListener(){
+        loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                username = getUsername.getText().toString();
-                password = getPassword.getText().toString();
+                checkUsername = getUsername.getText().toString();
+                checkPassword = getPassword.getText().toString();
 
-                if (username.equals("admin") && password.equals("1234")){
-                    loginUser();
-                } else {
-                    displayError();
-                }
+                //trying to authenticate the user
+                authenticateUser();
             }
         });
     }
 
-    private void loginUser(){
+    private void authenticateUser() {
+        List<User> users = database.getUserDao().getAll();
+        for (User user : users) {
+            String name = user.getUsername();
+            String code = user.getPassword();
+
+            if (checkUsername.equals(name) && checkPassword.equals(code)){
+                loginUser();
+            } else {
+//                errorSnackbar();
+            }
+        }
+    }
+
+    private void loginUser() {
         //create method
-        Intent userIsLoggedIn = new Intent(LoginActivity.this, RecipesMenuActivity.class);
+        Intent userIsLoggedIn = new Intent(LoginActivity.this, AppHomeScreen.class);
+        //pass username to AppHomeScreen so we can greet the user in home screen
+        userIsLoggedIn.putExtra("Username", checkUsername);
         startActivity(userIsLoggedIn);
     }
 
-    private void displayError(){
+    private void successSnackbar(){
+        Toast snackbar = FancyToast.makeText(this,"Success",FancyToast.LENGTH_LONG,FancyToast.SUCCESS,false);
+        snackbar.show();
+    }
+
+    private void errorSnackbar(){
+        Toast snackbar = FancyToast.makeText(this,"Please enter valid credentials",FancyToast.LENGTH_LONG,FancyToast.ERROR,false);
+        snackbar.show();
+    }
+
+    private void displayError() {
         Context context = getApplicationContext();
         CharSequence text = "Please enter valid credentials";
         int duration = Toast.LENGTH_SHORT;
-
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
     }
