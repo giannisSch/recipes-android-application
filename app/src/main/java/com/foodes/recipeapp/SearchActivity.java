@@ -8,15 +8,26 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.textview.MaterialTextView;
+
 public class SearchActivity extends AppCompatActivity {
-private EditText basicIngredient;
-private Button searchBtn;
+
+    private EditText basicIngredient;
+    private Button searchBtn;
+    private MaterialTextView greeting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+        //getting access on textview
+        greeting = findViewById(R.id.user_greeting_txt);
+
+        //getting data from login activity
+        Intent GreetLoggedInUser = getIntent();
+        String username = GreetLoggedInUser.getStringExtra("Username");
+        greeting.setText("Hello" + " " + username + "!");
 
         basicIngredient = (EditText) findViewById(R.id.basicIngredientEditText);
         searchBtn = (Button) findViewById(R.id.searchBtn);
