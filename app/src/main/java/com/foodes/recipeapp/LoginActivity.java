@@ -16,8 +16,10 @@ import androidx.room.Database;
 import com.foodes.recipeapp.database.UsersDb.User;
 import com.foodes.recipeapp.database.UsersDb.UsersDao;
 import com.foodes.recipeapp.database.UsersDb.UsersDatabase;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +54,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 checkUsername = getUsername.getText().toString();
                 checkPassword = getPassword.getText().toString();
+
                 //trying to authenticate the user
                 authenticateUser();
             }
@@ -66,9 +69,8 @@ public class LoginActivity extends AppCompatActivity {
 
             if (checkUsername.equals(name) && checkPassword.equals(code)){
                 loginUser();
-            }
-            else{
-                displayError();
+            } else {
+//                errorSnackbar();
             }
         }
     }
@@ -79,6 +81,16 @@ public class LoginActivity extends AppCompatActivity {
         //pass username to AppHomeScreen so we can greet the user in home screen
         userIsLoggedIn.putExtra("Username", checkUsername);
         startActivity(userIsLoggedIn);
+    }
+
+    private void successSnackbar(){
+        Toast snackbar = FancyToast.makeText(this,"Success",FancyToast.LENGTH_LONG,FancyToast.SUCCESS,false);
+        snackbar.show();
+    }
+
+    private void errorSnackbar(){
+        Toast snackbar = FancyToast.makeText(this,"Please enter valid credentials",FancyToast.LENGTH_LONG,FancyToast.ERROR,false);
+        snackbar.show();
     }
 
     private void displayError() {

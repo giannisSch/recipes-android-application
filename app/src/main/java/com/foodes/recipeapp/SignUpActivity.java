@@ -101,7 +101,7 @@ public class SignUpActivity extends AppCompatActivity {
                 userExists();
             }
             else{
-                showErrorToast();
+                register();
             }
         }
     }
