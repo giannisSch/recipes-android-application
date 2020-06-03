@@ -22,6 +22,9 @@ public interface UsersDao {
     @Query("SELECT * FROM Users WHERE username = :username and password = :password")
     List<User> getUser(String username , String password);
 
+    @Query("SELECT * FROM Users WHERE username = :username")
+    List<User> getUserNames(String username);
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public void insert(User user);
 

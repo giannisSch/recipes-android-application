@@ -24,6 +24,8 @@ import com.foodes.recipeapp.database.UsersDb.UsersDatabase;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.List;
+
 public class SignUpActivity extends AppCompatActivity {
 
     private TextInputEditText  getUsername, getEmail, getPassword, getPasswordConfirm;
@@ -60,7 +62,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void checkIfPasswordsMatch(){
         if (password.equals(passwordConfirm)) {
-            register();
+            checkIfUsernameExists();
         } else {
             showErrorToast();
         }
@@ -77,12 +79,31 @@ public class SignUpActivity extends AppCompatActivity {
     //Register method
     private void register(){
         //creates new user in db & moves to new activity
-        User user = new User(username,password);  //creates new user with username,password,email parameters
-        database.getUserDao().insert(user); // **VM
+        try{
+            User user = new User(username,password);  //creates new user with username,password,email parameters
+            database.getUserDao().insert(user); // **VM
+        } catch (Exception e) {
+            showErrorToast();
+        }
 
         showToast(); //informs the user that his account has been created
         Intent regUser = new Intent(SignUpActivity.this, AccountCreated.class);
         startActivity(regUser);
+    }
+
+    private void checkIfUsernameExists() {
+        List<User> users = database.getUserDao().getAll();
+
+        for (User user : users) {
+            String checkName = user.getUsername();
+
+            if (username.equals(checkName)){
+                register();
+            }
+            else{
+                showErrorToast();
+            }
+        }
     }
 
     private void showToast(){

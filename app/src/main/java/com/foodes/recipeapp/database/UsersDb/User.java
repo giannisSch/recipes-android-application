@@ -11,10 +11,11 @@ import java.io.Serializable;
 public class User{
 
     //Fields
-    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     private int id;
-
+    
+    @NonNull
+    @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "username")
     private String username;
 

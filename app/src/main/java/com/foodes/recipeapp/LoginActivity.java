@@ -36,7 +36,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         //getting db instance
         database = UsersDatabase.getInstance(this);
-        database.getUserDao().getAll();
     }
 
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
@@ -66,16 +65,26 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void authenticateUser() {
-       if (checkUsername.equals(username) && checkPassword.equals(password)){
-           loginUser();
-       }
+        List<User> users = database.getUserDao().getAll();
+
+        for (User user : users) {
+            String name = user.getUsername();
+            String code = user.getPassword();
+
+            if (checkUsername.equals(name) && checkPassword.equals(code)){
+                loginUser();
+            }
+            else{
+                displayError();
+            }
+        }
     }
 
     private void loginUser() {
         //create method
         Intent userIsLoggedIn = new Intent(LoginActivity.this, AppHomeScreen.class);
         //pass username to AppHomeScreen so we can greet the user in home screen
-        userIsLoggedIn.putExtra("Username", username);
+        userIsLoggedIn.putExtra("Username", checkUsername);
         startActivity(userIsLoggedIn);
     }
 
