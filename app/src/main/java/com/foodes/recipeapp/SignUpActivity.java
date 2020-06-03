@@ -83,7 +83,7 @@ public class SignUpActivity extends AppCompatActivity {
             User user = new User(username,password);  //creates new user with username,password,email parameters
             database.getUserDao().insert(user); // **VM
         } catch (Exception e) {
-            showErrorToast();
+            //douleiesMeFoodes
         }
 
         showToast(); //informs the user that his account has been created
@@ -98,12 +98,20 @@ public class SignUpActivity extends AppCompatActivity {
             String checkName = user.getUsername();
 
             if (username.equals(checkName)){
-                register();
+                userExists();
             }
             else{
                 showErrorToast();
             }
         }
+    }
+
+    private void userExists(){
+        Context context = getApplicationContext();
+        CharSequence text = "This username exists";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
     }
 
     private void showToast(){

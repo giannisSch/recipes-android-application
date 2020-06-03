@@ -25,7 +25,7 @@ public interface UsersDao {
     @Query("SELECT * FROM Users WHERE username = :username")
     List<User> getUserNames(String username);
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert
     public void insert(User user);
 
     @Delete

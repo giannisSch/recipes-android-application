@@ -46,19 +46,13 @@ public class LoginActivity extends AppCompatActivity {
         getPassword = findViewById(R.id.loginPasswordTest);
         loginBtn = findViewById(R.id.loginLoginButton);
 
-
         //login btn listener
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkUsername = getUsername.getText().toString();
                 checkPassword = getPassword.getText().toString();
-
-//                if (username.equals("admin") && password.equals("1234")) {
-//                    loginUser();
-//                } else {
-//                    displayError();
-//                }
+                //trying to authenticate the user
                 authenticateUser();
             }
         });
@@ -66,7 +60,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void authenticateUser() {
         List<User> users = database.getUserDao().getAll();
-
         for (User user : users) {
             String name = user.getUsername();
             String code = user.getPassword();
@@ -92,7 +85,6 @@ public class LoginActivity extends AppCompatActivity {
         Context context = getApplicationContext();
         CharSequence text = "Please enter valid credentials";
         int duration = Toast.LENGTH_SHORT;
-
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
     }
