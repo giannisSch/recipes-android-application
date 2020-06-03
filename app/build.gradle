@@ -38,8 +38,12 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    //volley
+    //Cardview
+    implementation "androidx.cardview:cardview:1.0.0"
+
+    //Volley
     implementation 'com.android.volley:volley:1.1.1'
+    implementation 'com.google.code.gson:gson:2.8.6'
 
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
@@ -51,5 +55,9 @@ dependencies {
 
     //custom Snackbars
     implementation 'com.github.Shashank02051997:FancyToast-Android:0.1.6'
+
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
 
 }
