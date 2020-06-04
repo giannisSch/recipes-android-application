@@ -41,7 +41,10 @@ dependencies {
     //Cardview
     implementation "androidx.cardview:cardview:1.0.0"
 
-    //Volley
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    //volley
     implementation 'com.android.volley:volley:1.1.1'
     implementation 'com.google.code.gson:gson:2.8.6'
 
@@ -55,9 +58,5 @@ dependencies {
 
     //custom Snackbars
     implementation 'com.github.Shashank02051997:FancyToast-Android:0.1.6'
-
-    //Picasso
-    implementation 'com.squareup.picasso:picasso:2.71828'
-
 
 }

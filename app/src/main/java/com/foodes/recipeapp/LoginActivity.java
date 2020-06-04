@@ -10,9 +10,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Database;
+
 import com.foodes.recipeapp.database.UsersDb.User;
 import com.foodes.recipeapp.database.UsersDb.UsersDao;
 import com.foodes.recipeapp.database.UsersDb.UsersDatabase;
@@ -27,7 +29,7 @@ import java.util.List;
 public class LoginActivity extends AppCompatActivity {
 
     private TextInputEditText getUsername, getEmail, getPassword;
-    private String username, email,  password;
+    private String username, email, password;
     String checkUsername, checkPassword;
     private Button loginBtn;
     UsersDatabase database;
@@ -56,40 +58,42 @@ public class LoginActivity extends AppCompatActivity {
                 checkPassword = getPassword.getText().toString();
 
                 //trying to authenticate the user
-                authenticateUser();
+                if (authenticateUser()) {
+                    loginUser();
+                } else {
+                    displayError();
+                }
             }
         });
     }
 
-    private void authenticateUser() {
+    private boolean authenticateUser() {
         List<User> users = database.getUserDao().getAll();
         for (User user : users) {
             String name = user.getUsername();
             String code = user.getPassword();
-
-            if (checkUsername.equals(name) && checkPassword.equals(code)){
-                loginUser();
-            } else {
-//                errorSnackbar();
+            if (checkUsername.equals(name) && checkPassword.equals(code)) {
+                return true;
             }
         }
+        return false;
     }
 
     private void loginUser() {
         //create method
-        Intent userIsLoggedIn = new Intent(LoginActivity.this, AppHomeScreen.class);
+        Intent userIsLoggedIn = new Intent(LoginActivity.this, SearchActivity.class);
         //pass username to AppHomeScreen so we can greet the user in home screen
         userIsLoggedIn.putExtra("Username", checkUsername);
         startActivity(userIsLoggedIn);
     }
 
-    private void successSnackbar(){
-        Toast snackbar = FancyToast.makeText(this,"Success",FancyToast.LENGTH_LONG,FancyToast.SUCCESS,false);
+    private void successSnackbar() {
+        Toast snackbar = FancyToast.makeText(this, "Success", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false);
         snackbar.show();
     }
 
-    private void errorSnackbar(){
-        Toast snackbar = FancyToast.makeText(this,"Please enter valid credentials",FancyToast.LENGTH_LONG,FancyToast.ERROR,false);
+    private void errorSnackbar() {
+        Toast snackbar = FancyToast.makeText(this, "Please enter valid credentials", FancyToast.LENGTH_LONG, FancyToast.ERROR, false);
         snackbar.show();
     }
 
