@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorOnPrimary"
     tools:context=".MainActivity">
 
 
@@ -15,10 +16,10 @@
         android:layout_marginStart="36dp"
         android:layout_marginTop="80dp"
         android:layout_marginEnd="36dp"
+        android:text="Find your\nnext recipe"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="Find your\nnext recipe" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/mainDescriptionTextView"
@@ -28,45 +29,44 @@
         android:layout_marginStart="36dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="99dp"
+        android:text="Become the chef that you \n have always wanted"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainHeaderTextView"
-        android:text="Become the chef that you \n have always wanted" />
+        app:layout_constraintTop_toBottomOf="@+id/mainHeaderTextView" />
 
     <Button
         android:id="@+id/mainLoginButton"
         android:layout_width="match_parent"
         android:layout_height="52dp"
-        app:shapeAppearanceOverlay="@style/RoundFieldAppearance"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginBottom="179dp"
+        android:text="Already a user? Login"
         android:textAllCaps="false"
         android:textSize="16sp"
         android:textStyle="normal"
-        android:text="Already a user? Login"
-        android:layout_marginBottom="179dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginEnd="38dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:shapeAppearanceOverlay="@style/RoundFieldAppearance"
         tools:ignore="HardcodedText" />
 
     <Button
         android:id="@+id/mainCreateAnAccountButton"
         android:layout_width="match_parent"
         android:layout_height="52dp"
-        app:shapeAppearanceOverlay="@style/RoundFieldAppearance"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="38dp"
+        android:text="Create an Account"
         android:textAllCaps="false"
         android:textSize="16sp"
         android:textStyle="normal"
-        android:text="Create an Account"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginEnd="38dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mainLoginButton"
+        app:shapeAppearanceOverlay="@style/RoundFieldAppearance"
         tools:ignore="HardcodedText" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

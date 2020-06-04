@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group>
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Home" />
+
+        <item
+            android:id="@+id/nav_search"
+            android:icon="@drawable/ic_search_grey_24dp"
+            android:title="Search" />
+
+        <item
+            android:id="@+id/nav_favorites"
+            android:icon="@drawable/ic_favorite_black_24dp"
+            android:title="Favorites" />
+    </group>
+
+    <item android:title="User Properties">
+
+        <menu>
+
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/nav_profile"
+                    android:icon="@drawable/ic_person_24dp"
+                    android:title="Profile" />
+
+                <item
+                    android:id="@+id/nav_logout"
+                    android:icon="@drawable/ic_exit_to_app_black_24dp"
+                    android:title="Logout" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="Inspire others">
+
+        <menu>
+
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_share_black_24dp"
+                android:title="Share" />
+        </menu>
+    </item>
+</menu>
