@@ -52,11 +52,11 @@ public class RecipesMenuActivity extends AppCompatActivity {
         });
         recyclerView.setAdapter(adapter);
 
- //       Intent intent = getIntent();
-//        String ingredient = intent.getExtras().getString("ingredient");
+        //Intent intent = getIntent();
+        //String ingredient = intent.getExtras().getString("ingredient");
 
         RequestQueue queue = Volley.newRequestQueue(this);
-       // String url = "https://api.edamam.com/search?q=" + ingredient + "&app_id=57e6d292&app_key=000b571f7a78bfb4fb9820a7cc3b283e";
+        //String url = "https://api.edamam.com/search?q=" + ingredient + "&app_id=57e6d292&app_key=000b571f7a78bfb4fb9820a7cc3b283e";
         String url = "https://api.edamam.com/search?q=egg&app_id=57e6d292&app_key=000b571f7a78bfb4fb9820a7cc3b283e";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
