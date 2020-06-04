@@ -2,6 +2,8 @@ package com.foodes.recipeapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,9 +25,11 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     private TextView totalFat , totalCrabs, totalProtein, totalCalories;
     private ImageView foodImage;
     private CollapsingToolbarLayout title;
-
+    private Button shareButton;
+    private String shareURL;
     private List<Object> ingredientsList;
     private RecipeDetailsAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,12 +61,16 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         int protein = (int) recipe.getDigest().get(2).getTotal();
         int calories = (int) recipe.getCalories();
         String imageUrl = recipe.getImage();
+        shareURL = recipe.getShareAs();
+        shareFunctionality(shareURL);
 
         totalFat.setText(fat+"g");
         totalCrabs.setText(crabs+"g");
         totalProtein.setText(protein+"g");
         totalCalories.setText(calories+"");
         Picasso.get().load(imageUrl).into(foodImage);
+
+
     }
 
     private void addIngredientsToList(List<IngredientModel> ingredients) {
@@ -77,4 +85,16 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
+    private void shareFunctionality(final String shareURL){
+        shareButton = findViewById(R.id.shareButton);
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, shareURL);
+                startActivity(Intent.createChooser(shareIntent, "Sharing using"));
+            }
+        });
+    }
 }

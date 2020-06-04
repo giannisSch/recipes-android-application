@@ -6,6 +6,16 @@ public class JsonModel {
     String q;
     int from, to ;
     int count;
+
+    public boolean isMore() {
+        return more;
+    }
+
+    public void setMore(boolean more) {
+        this.more = more;
+    }
+
+    boolean more;
     List<HitModel> hits;
 
     public String getQ() {

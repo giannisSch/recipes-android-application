@@ -1,17 +1,21 @@
 package com.foodes.recipeapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -64,14 +68,21 @@ public class RecipesMenuActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         JsonModel jsonModel = new Gson().fromJson(response, JsonModel.class);
-                        Log.i("RESPONSE", jsonModel.getQ());
-                        addRecipesToList(jsonModel);
-                        adapter.submitList(recipeList);
+                        if (jsonModel.isMore()){    //check if json response have data
+                            addRecipesToList(jsonModel);
+                            adapter.submitList(recipeList);
+                        }else{
+                            showToastRecipesDoNotExists();
+                            goToSearchActivity();
+                        }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //do something
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    showToastErrorNetwork();
+                }
+                goToSearchActivity();
             }
         });
 
@@ -82,10 +93,27 @@ public class RecipesMenuActivity extends AppCompatActivity {
 
     private void addRecipesToList(JsonModel jsonModel){
         List<HitModel> hits =  jsonModel.getHit();
-        for(int i = 0; i < hits.size(); i++){
-            recipeList.add(hits.get(i).getRecipe());
+        for (HitModel hit : hits){
+            recipeList.add(hit.getRecipe());
         }
-
     }
 
+    private void showToastRecipesDoNotExists(){
+        Context context = getApplicationContext();
+        CharSequence text = "There are not available recipes with this ingredient";
+        int duration = Toast.LENGTH_LONG;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
+
+    private void showToastErrorNetwork(){
+        Context context = getApplicationContext();
+        CharSequence text = "Please check your Internet connection";
+        Toast.makeText(context, text, Toast.LENGTH_LONG).show();
+    }
+
+    private void goToSearchActivity(){
+        Intent intent = new Intent(RecipesMenuActivity.this, SearchActivity.class);
+        startActivity(intent);
+    }
 }

@@ -180,7 +180,15 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:textColor="#fff"
                 />
+            <Button
+                android:layout_width="202dp"
+                android:layout_height="202dp"
+                android:text="Share"
+                android:id="@+id/shareButton"/>
+
     </LinearLayout>
+
+
 
     </androidx.core.widget.NestedScrollView>
 
