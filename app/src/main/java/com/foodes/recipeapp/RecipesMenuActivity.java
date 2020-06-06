@@ -1,6 +1,5 @@
 package com.foodes.recipeapp;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -56,12 +55,12 @@ public class RecipesMenuActivity extends AppCompatActivity {
         });
         recyclerView.setAdapter(adapter);
 
-        Intent intent = getIntent();
-        String ingredient = intent.getExtras().getString("ingredient");
+        //Intent intent = getIntent();
+        //String ingredient = intent.getExtras().getString("ingredient");
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "https://api.edamam.com/search?q=" + ingredient + "&app_id=57e6d292&app_key=000b571f7a78bfb4fb9820a7cc3b283e";
-//        String url = "https://api.edamam.com/search?q=egg&app_id=57e6d292&app_key=000b571f7a78bfb4fb9820a7cc3b283e";
+        //String url = "https://api.edamam.com/search?q=" + ingredient + "&app_id=57e6d292&app_key=000b571f7a78bfb4fb9820a7cc3b283e";
+        String url = "https://api.edamam.com/search?q=egg&app_id=57e6d292&app_key=000b571f7a78bfb4fb9820a7cc3b283e";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -72,7 +71,7 @@ public class RecipesMenuActivity extends AppCompatActivity {
                             addRecipesToList(jsonModel);
                             adapter.submitList(recipeList);
                         }else{
-                            showToastRecipesDoNotExists();
+                            showToast("There are not available recipes with this ingredient", Toast.LENGTH_LONG);
                             goToSearchActivity();
                         }
                     }
@@ -80,7 +79,7 @@ public class RecipesMenuActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                    showToastErrorNetwork();
+                    showToast("Please check your internet connection", Toast.LENGTH_LONG);
                 }
                 goToSearchActivity();
             }
@@ -98,18 +97,8 @@ public class RecipesMenuActivity extends AppCompatActivity {
         }
     }
 
-    private void showToastRecipesDoNotExists(){
-        Context context = getApplicationContext();
-        CharSequence text = "There are not available recipes with this ingredient";
-        int duration = Toast.LENGTH_LONG;
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
-    }
-
-    private void showToastErrorNetwork(){
-        Context context = getApplicationContext();
-        CharSequence text = "Please check your Internet connection";
-        Toast.makeText(context, text, Toast.LENGTH_LONG).show();
+    private void showToast(CharSequence text, int duration){
+        Toast.makeText(getApplicationContext(), text, duration).show();
     }
 
     private void goToSearchActivity(){

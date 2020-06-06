@@ -22,7 +22,7 @@ import java.util.List;
 
 public class RecipeDetailsActivity extends AppCompatActivity {
 
-    private TextView totalFat , totalCrabs, totalProtein, totalCalories;
+    private TextView totalFat , totalCrabs, totalProtein, totalCalories, recipeName;
     private ImageView foodImage;
     private CollapsingToolbarLayout title;
     private Button shareButton;
@@ -53,22 +53,23 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         totalFat = (TextView)findViewById(R.id.numberOfFat);
         totalCrabs = (TextView)findViewById(R.id.numberOfCrab);
         totalProtein = (TextView)findViewById(R.id.numberOfProtein);
-        totalCalories = (TextView)findViewById(R.id.numberOfCalories);
-        foodImage = (ImageView)findViewById(R.id.foodImg);
+        foodImage = (ImageView)findViewById(R.id.recipeDetailsRecipeImageView);
+        recipeName = (TextView)findViewById(R.id.recipeDetailsRecipeNameTextView);
 
         int fat = (int) recipe.getDigest().get(0).getTotal();
         int crabs = (int) recipe.getDigest().get(1).getTotal();
         int protein = (int) recipe.getDigest().get(2).getTotal();
         int calories = (int) recipe.getCalories();
         String imageUrl = recipe.getImage();
+        String label = recipe.getLabel();
         shareURL = recipe.getShareAs();
-        shareFunctionality(shareURL);
+        //shareFunctionality(shareURL);
 
         totalFat.setText(fat+"g");
         totalCrabs.setText(crabs+"g");
         totalProtein.setText(protein+"g");
-        totalCalories.setText(calories+"");
-        Picasso.get().load(imageUrl).into(foodImage);
+        recipeName.setText(label);
+        Picasso.get().load(imageUrl).fit().centerCrop().into(foodImage);
 
 
     }
@@ -86,7 +87,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     }
 
     private void shareFunctionality(final String shareURL){
-        shareButton = findViewById(R.id.shareButton);
+        //shareButton = findViewById(R.id.shareButton);
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
