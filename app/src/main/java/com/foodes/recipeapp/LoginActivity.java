@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputEditText getUsername, getEmail, getPassword;
     private String username, email, password;
     String checkUsername, checkPassword;
-    private Button loginBtn;
+    private Button loginBtn, loginForgotPasswordButton;
     UsersDatabase database;
 
     @Override
@@ -49,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         getUsername = findViewById(R.id.loginUsernameTest);
         getPassword = findViewById(R.id.loginPasswordTest);
         loginBtn = findViewById(R.id.loginLoginButton);
+        loginForgotPasswordButton = findViewById(R.id.loginForgotPasswordButton);
 
         //login btn listener
         loginBtn.setOnClickListener(new View.OnClickListener() {
@@ -63,6 +64,14 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     displayError();
                 }
+            }
+        });
+
+        //forgot password listenter
+        loginForgotPasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ForgotPassword();
             }
         });
     }
@@ -85,6 +94,11 @@ public class LoginActivity extends AppCompatActivity {
         //pass username to AppHomeScreen so we can greet the user in home screen
         userIsLoggedIn.putExtra("Username", checkUsername);
         startActivity(userIsLoggedIn);
+    }
+
+    private void ForgotPassword() {
+        Intent forgotPass = new Intent(LoginActivity.this, ForgotPassword.class);
+        startActivity(forgotPass);
     }
 
     private void successSnackbar() {

@@ -26,8 +26,9 @@ public class User{
     private String password;
 
     //id auto generates so Im not including in constructor
-    public User(String username, String password) {
+    public User(@NonNull String username, String email, String password) {
         this.username = username;
+        this.email = email;
         this.password = password;
     }
 

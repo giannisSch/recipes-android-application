@@ -7,7 +7,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {User.class}, exportSchema = false, version = 2)
+@Database(entities = {User.class}, exportSchema = false, version = 3)
 public abstract class UsersDatabase extends RoomDatabase {
 
     //sigleton (= to instance mias klasis apo opoudhpote an to zhthsw tha mou fernei to idio instance)

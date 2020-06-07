@@ -28,8 +28,8 @@ import java.util.List;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private TextInputEditText  getUsername, getEmail, getPassword, getPasswordConfirm;
-    private String username, email,password,passwordConfirm;
+    private TextInputEditText getUsername, getEmail, getPassword, getPasswordConfirm;
+    private String username, email, password, passwordConfirm;
     private Button createAccountBtn;
     UsersDatabase database;
     UsersDao dao;
@@ -60,7 +60,7 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
-    private void checkIfPasswordsMatch(){
+    private void checkIfPasswordsMatch() {
         if (password.equals(passwordConfirm)) {
             checkIfUsernameExists();
         } else {
@@ -68,7 +68,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
-    private void getValuesToString(){
+    private void getValuesToString() {
         //getting values from EditTexts
         username = getUsername.getText().toString();
         email = getEmail.getText().toString();
@@ -77,10 +77,10 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     //Register method
-    private void register(){
+    private void register() {
         //creates new user in db & moves to new activity
-        try{
-            User user = new User(username,password);  //creates new user with username,password,email parameters
+        try {
+            User user = new User(username, email, password);  //creates new user with username,password,email parameters
             database.getUserDao().insert(user); // **VM
         } catch (Exception e) {
             //douleiesMeFoodes
@@ -93,20 +93,21 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void checkIfUsernameExists() {
         List<User> users = database.getUserDao().getAll();
+        if (users.size() == 0) {
+            register();
+        }
 
         for (User user : users) {
             String checkName = user.getUsername();
-
-            if (username.equals(checkName)){
+            if (username.equals(checkName)) {
                 userExists();
-            }
-            else{
+            } else {
                 register();
             }
         }
     }
 
-    private void userExists(){
+    private void userExists() {
         Context context = getApplicationContext();
         CharSequence text = "This username exists";
         int duration = Toast.LENGTH_SHORT;
@@ -114,7 +115,7 @@ public class SignUpActivity extends AppCompatActivity {
         toast.show();
     }
 
-    private void showToast(){
+    private void showToast() {
         Context context = getApplicationContext();
         CharSequence text = "Your account has been created!";
         int duration = Toast.LENGTH_SHORT;
@@ -122,7 +123,7 @@ public class SignUpActivity extends AppCompatActivity {
         toast.show();
     }
 
-    private void showErrorToast(){
+    private void showErrorToast() {
         Context context = getApplicationContext();
         CharSequence text = "Please enter valid credentials";
         int duration = Toast.LENGTH_SHORT;
