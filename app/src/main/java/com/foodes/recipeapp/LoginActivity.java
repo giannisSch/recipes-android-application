@@ -93,6 +93,7 @@ public class LoginActivity extends AppCompatActivity {
         Intent userIsLoggedIn = new Intent(LoginActivity.this, SearchActivity.class);
         //pass username to AppHomeScreen so we can greet the user in home screen
         userIsLoggedIn.putExtra("Username", checkUsername);
+        userIsLoggedIn.putExtra("Password", checkPassword);
         startActivity(userIsLoggedIn);
     }
 

@@ -67,13 +67,13 @@ public class ForgotPassword extends AppCompatActivity {
 
     private void proceedToChangePasswordScreen(){
         Intent proceedToStepTwo = new Intent(ForgotPassword.this, ForgotPasswordStepTwo.class);
-        proceedToStepTwo.putExtra("Username", checkEmail);
+        proceedToStepTwo.putExtra("Email", checkEmail);
         startActivity(proceedToStepTwo);
     }
 
     private void displayError() {
         Context context = getApplicationContext();
-        CharSequence text = "Please enter valid credentials";
+        CharSequence text = "Please enter valid email";
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
