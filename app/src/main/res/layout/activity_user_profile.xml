@@ -80,7 +80,7 @@
                     android:layout_height="30dp"
                     android:layout_centerHorizontal="true"
                     android:paddingTop="3dp"
-                    android:src="@drawable/ic_mail_outline_24dp" />
+                    android:src="@drawable/ic_favorite_black_24dp" />
 
                 <TextView
                     android:id="@+id/card_txt"

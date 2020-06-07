@@ -95,6 +95,7 @@ public class LoginActivity extends AppCompatActivity {
         userIsLoggedIn.putExtra("Username", checkUsername);
         userIsLoggedIn.putExtra("Password", checkPassword);
         startActivity(userIsLoggedIn);
+        sendDataToProfilePage();
     }
 
     private void ForgotPassword() {
@@ -118,6 +119,13 @@ public class LoginActivity extends AppCompatActivity {
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
+    }
+
+    private void sendDataToProfilePage(){
+        Intent sendData = new Intent(LoginActivity.this, UserProfile.class);
+        //pass username to AppHomeScreen so we can greet the user in home screen
+        sendData.putExtra("Username", checkUsername);
+        startActivity(sendData);
     }
 
 }
