@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        //forgot password listenter
+        //forgot password listener
         loginForgotPasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
