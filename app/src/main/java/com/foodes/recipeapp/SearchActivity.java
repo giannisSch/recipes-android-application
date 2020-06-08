@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.foodes.recipeapp.database.UsersDb.User;
@@ -24,6 +25,11 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
 
         //getting access on textview
         greeting = findViewById(R.id.user_greeting_txt);
@@ -53,4 +59,5 @@ public class SearchActivity extends AppCompatActivity {
         });
 
     }
+
 }

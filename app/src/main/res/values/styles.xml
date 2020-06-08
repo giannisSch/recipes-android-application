@@ -47,7 +47,7 @@
         <item name="android:lineSpacingExtra">8sp</item>
         <item name="android:layout_gravity">center</item>
     </style>
-    
+
     <style name="menuTitleText">
         <item name="android:textSize">18sp</item>
         <item name="android:fontFamily">sans-serif</item>
@@ -55,7 +55,7 @@
         <item name="android:textColor">#000000</item>
         <item name="android:lineSpacingExtra">6sp</item>
     </style>
-    
+
     <style name="menuSubtitleText">
         <item name="android:textSize">16sp</item>
         <item name="android:fontFamily">sans-serif</item>
@@ -64,5 +64,14 @@
         <item name="android:lineSpacingExtra">5sp</item>
     </style>
 
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

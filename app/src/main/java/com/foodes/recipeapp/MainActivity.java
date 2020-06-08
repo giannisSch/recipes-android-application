@@ -8,6 +8,7 @@ import android.widget.ImageButton;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,6 +45,11 @@ public class MainActivity extends AppCompatActivity {
     private void gotoRegisterActivity(){
         Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+       //does not allow to go back
     }
 
 }
