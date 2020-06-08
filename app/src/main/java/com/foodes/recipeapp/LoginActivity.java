@@ -2,28 +2,24 @@ package com.foodes.recipeapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
-import android.text.Editable;
+import android.os.Parcelable;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Database;
 
 import com.foodes.recipeapp.database.UsersDb.User;
-import com.foodes.recipeapp.database.UsersDb.UsersDao;
 import com.foodes.recipeapp.database.UsersDb.UsersDatabase;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.shashank.sony.fancytoastlib.FancyToast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
@@ -33,6 +29,9 @@ public class LoginActivity extends AppCompatActivity {
     String checkUsername, checkPassword;
     private Button loginBtn;
     UsersDatabase database;
+    private TextInputLayout usernameLayout, passwordLayout;
+    private int userId;
+ //   User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +48,10 @@ public class LoginActivity extends AppCompatActivity {
         getUsername = findViewById(R.id.loginUsernameTest);
         getPassword = findViewById(R.id.loginPasswordTest);
         loginBtn = findViewById(R.id.loginLoginButton);
+
+        //getting access on editText
+        usernameLayout = findViewById(R.id.loginUsernameTextField);
+        passwordLayout = findViewById(R.id.loginPasswordTextField);
 
         //login btn listener
         loginBtn.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +76,8 @@ public class LoginActivity extends AppCompatActivity {
             String name = user.getUsername();
             String code = user.getPassword();
             if (checkUsername.equals(name) && checkPassword.equals(code)) {
+                userId = user.getId();
+   //             currentUser = user;
                 return true;
             }
         }
@@ -84,6 +89,8 @@ public class LoginActivity extends AppCompatActivity {
         Intent userIsLoggedIn = new Intent(LoginActivity.this, SearchActivity.class);
         //pass username to AppHomeScreen so we can greet the user in home screen
         userIsLoggedIn.putExtra("Username", checkUsername);
+        userIsLoggedIn.putExtra("UserId", userId);
+  //      userIsLoggedIn.putExtra("User", (Parcelable) currentUser);
         startActivity(userIsLoggedIn);
     }
 
@@ -103,6 +110,18 @@ public class LoginActivity extends AppCompatActivity {
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
+
+        //Vibrate Phone
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        // Vibrate for 500 milliseconds
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+            //deprecated in API 26
+            v.vibrate(500);
+        }
+
+
     }
 
 }

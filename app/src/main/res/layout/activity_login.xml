@@ -50,7 +50,8 @@
         app:layout_constraintTop_toBottomOf="@+id/loginDescriptionTextView"
         app:layout_constraintVertical_chainStyle="packed"
         app:shapeAppearanceOverlay="@style/RoundFieldAppearance"
-        app:startIconDrawable="@drawable/ic_person_24dp">
+        app:startIconDrawable="@drawable/ic_person_24dp"
+        app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
 
@@ -74,7 +75,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginUsernameTextField"
         app:shapeAppearanceOverlay="@style/RoundFieldAppearance"
-        app:startIconDrawable="@drawable/ic_lock_outline_24dp">
+        app:startIconDrawable="@drawable/ic_lock_outline_24dp"
+        app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/loginPasswordTest"

@@ -64,6 +64,28 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <Button
+                android:id="@+id/goToRecipeBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Go to recipe"
+                />
+            <Button
+                android:id="@+id/goToFavoritesListBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Go to Favorites List"
+                />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/favorite_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+                android:layout_margin="16dp"
+                app:srcCompat="@drawable/ic_baseline_not_favorite"/>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -180,8 +202,8 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:textColor="#fff"
                 />
-    </LinearLayout>
 
+    </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
 

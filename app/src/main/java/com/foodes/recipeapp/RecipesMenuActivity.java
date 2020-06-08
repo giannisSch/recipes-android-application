@@ -15,6 +15,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.foodes.recipeapp.database.UsersDb.User;
 import com.foodes.recipeapp.json.nutrientsModels.HitModel;
 import com.foodes.recipeapp.json.nutrientsModels.JsonModel;
 import com.foodes.recipeapp.recyclerviews.ItemClickListener;
@@ -28,6 +29,8 @@ public class RecipesMenuActivity extends AppCompatActivity {
 
     private List<Object> recipeList;
     private CustomAdapter adapter;
+    int userId;
+   // User currentUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +43,8 @@ public class RecipesMenuActivity extends AppCompatActivity {
         recipeList = new ArrayList<Object>();
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        userId = getIntent().getIntExtra("UserId",0);
+       // currentUser = getIntent().getParcelableExtra("User");
 
         adapter = new CustomAdapter(new ItemClickListener() {
             @Override
@@ -47,13 +52,15 @@ public class RecipesMenuActivity extends AppCompatActivity {
                 Log.i("CUSTOM", item.toString());
                 Intent intent = new Intent(RecipesMenuActivity.this, RecipeDetailsActivity.class);
                 intent.putExtra("RecipeModel", (Parcelable) item);
+                intent.putExtra("UserId", userId);
+    //            intent.putExtra("User", currentUser);
                 startActivity(intent);
             }
         });
         recyclerView.setAdapter(adapter);
 
         Intent intent = getIntent();
-        String ingredient = intent.getExtras().getString("ingredient");
+        String ingredient = intent.getStringExtra("ingredient");
 
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "https://api.edamam.com/search?q=" + ingredient + "&app_id=57e6d292&app_key=000b571f7a78bfb4fb9820a7cc3b283e";

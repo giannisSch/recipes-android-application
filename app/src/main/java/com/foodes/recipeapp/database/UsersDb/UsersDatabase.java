@@ -6,8 +6,10 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
-@Database(entities = {User.class}, exportSchema = false, version = 2)
+@Database(entities = {User.class}, exportSchema = false, version = 4)
+@TypeConverters({Converters.class})
 public abstract class UsersDatabase extends RoomDatabase {
 
     //sigleton (= to instance mias klasis apo opoudhpote an to zhthsw tha mou fernei to idio instance)

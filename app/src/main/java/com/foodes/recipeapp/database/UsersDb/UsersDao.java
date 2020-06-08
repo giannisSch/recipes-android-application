@@ -19,11 +19,16 @@ public interface UsersDao {
     public List<User> getAll();
 
     //login
-    @Query("SELECT * FROM Users WHERE username = :username and password = :password")
-    List<User> getUser(String username , String password);
+    @Query("SELECT * FROM Users WHERE id = :id")
+    List<User> getUser(int id);
 
     @Query("SELECT * FROM Users WHERE username = :username")
     List<User> getUserNames(String username);
+
+//    @Query("SELECT * FROM Users WHERE id = :id")
+//    List<User> getFavorites(int id);
+
+
 
     @Insert
     public void insert(User user);

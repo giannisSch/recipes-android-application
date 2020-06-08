@@ -8,4 +8,5 @@
     <color name="colorOnBackground">#a6000000</color>
     <color name="colorOnPrimary">#fcfcfc</color>
     <color name="colorOnHint">#a6707070</color>
+    <color name="colorRed">#FF0000</color>
 </resources>
