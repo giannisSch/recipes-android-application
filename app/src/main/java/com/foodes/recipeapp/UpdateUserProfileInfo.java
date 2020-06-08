@@ -59,7 +59,6 @@ public class UpdateUserProfileInfo extends AppCompatActivity {
     }
 
     private void checkIfPasswordsMatch(){
-
         if (newPass.equals(newPassConf)) {
             checkIfValuesAreCorrect();
         }
