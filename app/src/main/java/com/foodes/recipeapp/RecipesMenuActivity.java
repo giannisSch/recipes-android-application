@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -31,15 +33,19 @@ public class RecipesMenuActivity extends AppCompatActivity {
 
     private List<Object> recipeList;
     private CustomAdapter adapter;
+    private ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipes__menu);
+        progressBar = (ProgressBar)findViewById(R.id.progressBar);
     }
 
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
+
         recipeList = new ArrayList<Object>();
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -55,17 +61,18 @@ public class RecipesMenuActivity extends AppCompatActivity {
         });
         recyclerView.setAdapter(adapter);
 
-        //Intent intent = getIntent();
-        //String ingredient = intent.getExtras().getString("ingredient");
+        Intent intent = getIntent();
+        String ingredient = intent.getExtras().getString("ingredient");
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        //String url = "https://api.edamam.com/search?q=" + ingredient + "&app_id=57e6d292&app_key=000b571f7a78bfb4fb9820a7cc3b283e";
-        String url = "https://api.edamam.com/search?q=egg&app_id=57e6d292&app_key=000b571f7a78bfb4fb9820a7cc3b283e";
+        String url = "https://api.edamam.com/search?q=" + ingredient + "&app_id=57e6d292&app_key=000b571f7a78bfb4fb9820a7cc3b283e";
+        //String url = "https://api.edamam.com/search?q=egg&app_id=57e6d292&app_key=000b571f7a78bfb4fb9820a7cc3b283e";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        progressBar.setVisibility(View.GONE); // make progress bar invisible
                         JsonModel jsonModel = new Gson().fromJson(response, JsonModel.class);
                         if (jsonModel.isMore()){    //check if json response have data
                             addRecipesToList(jsonModel);

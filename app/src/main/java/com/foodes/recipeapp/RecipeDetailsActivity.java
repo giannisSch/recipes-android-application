@@ -30,7 +30,6 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     private List<Object> ingredientsList;
     private RecipeDetailsAdapter adapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

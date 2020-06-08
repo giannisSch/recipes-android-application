@@ -40,6 +40,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@tools:sample/avatars" />
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/recipeDetailsButtonsConstraint"
         android:layout_width="match_parent"
