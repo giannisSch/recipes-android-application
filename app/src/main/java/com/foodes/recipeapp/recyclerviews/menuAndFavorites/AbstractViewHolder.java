@@ -1,4 +1,4 @@
-package com.foodes.recipeapp.recyclerviews.menu;
+package com.foodes.recipeapp.recyclerviews.menuAndFavorites;
 
 import android.view.View;
 
@@ -34,5 +34,5 @@ public abstract class AbstractViewHolder<T extends Object> extends RecyclerView.
         this.data = data;
     }
 
-    abstract void present(T data);
+    protected abstract void present(T data);
 }

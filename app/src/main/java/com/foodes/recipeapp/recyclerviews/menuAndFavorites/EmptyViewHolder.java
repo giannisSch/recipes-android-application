@@ -1,4 +1,4 @@
-package com.foodes.recipeapp.recyclerviews.menu;
+package com.foodes.recipeapp.recyclerviews.menuAndFavorites;
 
 import android.view.View;
 
@@ -10,7 +10,7 @@ public class EmptyViewHolder extends AbstractViewHolder<Object>{
     }
 
     @Override
-    void present(Object data) {
+    public void present(Object data) {
 
     }
 }

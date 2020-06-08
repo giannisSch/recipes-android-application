@@ -1,4 +1,4 @@
-package com.foodes.recipeapp.recyclerviews.menu;
+package com.foodes.recipeapp.recyclerviews.menuAndFavorites;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -29,7 +29,7 @@ public class CustomViewHolder extends AbstractViewHolder<Object> {
 
 
     @Override
-    void present(Object data) {
+    public void present(Object data) {
         setData(data);
         if (data instanceof RecipeModel) {
             Picasso.get().load(((RecipeModel) data).getImage()).into(recipeImage);

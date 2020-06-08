@@ -15,11 +15,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.foodes.recipeapp.database.UsersDb.User;
 import com.foodes.recipeapp.json.nutrientsModels.HitModel;
 import com.foodes.recipeapp.json.nutrientsModels.JsonModel;
 import com.foodes.recipeapp.recyclerviews.ItemClickListener;
-import com.foodes.recipeapp.recyclerviews.menu.CustomAdapter;
+import com.foodes.recipeapp.recyclerviews.menuAndFavorites.CustomAdapter;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;

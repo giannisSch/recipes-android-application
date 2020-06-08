@@ -1,4 +1,4 @@
-package com.foodes.recipeapp.recyclerviews.menu;
+package com.foodes.recipeapp.recyclerviews.menuAndFavorites;
 
 import android.view.LayoutInflater;
 import android.view.View;

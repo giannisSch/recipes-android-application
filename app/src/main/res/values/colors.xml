@@ -9,4 +9,5 @@
     <color name="colorOnPrimary">#fcfcfc</color>
     <color name="colorOnHint">#a6707070</color>
     <color name="colorRed">#FF0000</color>
+    <color name="colorLightPurple">#B085CF</color>
 </resources>
