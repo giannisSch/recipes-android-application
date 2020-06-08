@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ import com.foodes.recipeapp.database.UsersDb.UsersDatabase;
 import com.foodes.recipeapp.json.nutrientsModels.IngredientModel;
 import com.foodes.recipeapp.json.nutrientsModels.RecipeModel;
 import com.foodes.recipeapp.recyclerviews.recipedetails.RecipeDetailsAdapter;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.squareup.picasso.Picasso;
 
@@ -27,13 +29,15 @@ import java.util.List;
 
 public class RecipeDetailsActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView totalFat , totalCrabs, totalProtein, totalCalories;
+    private TextView totalFat , totalCrabs, totalProtein, totalCalories, recipeName;
     private ImageView foodImage, favoriteButton;
-    private MaterialToolbar title;
+//    private MaterialToolbar title;
     UsersDatabase database;
+    private ImageButton shareButton, backButton;
+    private CollapsingToolbarLayout title;
     Button gotoRecipeButton, gotoFavoritesList;
     int userId;
-    private String recipeTitle, imageUrl, recipeUrl;
+    private String recipeTitle, imageUrl, recipeUrl, shareURL;
   //  User currentUser;
 
 
@@ -64,15 +68,18 @@ public class RecipeDetailsActivity extends AppCompatActivity implements View.OnC
         addIngredientsToList(recipe.getIngredients());
         adapter.submitList(ingredientsList);
 
-        title = (MaterialToolbar)findViewById(R.id.topAppBar);
         totalFat = (TextView)findViewById(R.id.numberOfFat);
         totalCrabs = (TextView)findViewById(R.id.numberOfCrab);
         totalProtein = (TextView)findViewById(R.id.numberOfProtein);
-        totalCalories = (TextView)findViewById(R.id.numberOfCalories);
-        foodImage = (ImageView)findViewById(R.id.foodImg);
-        favoriteButton = (ImageView)findViewById(R.id.favorite_button);
-        gotoRecipeButton = (Button)findViewById(R.id.goToRecipeBtn);
-        gotoFavoritesList = (Button)findViewById(R.id.goToFavoritesListBtn);
+        foodImage = (ImageView)findViewById(R.id.recipeDetailsRecipeImageView);
+        recipeName = (TextView)findViewById(R.id.recipeDetailsRecipeNameTextView);
+        backButton = findViewById(R.id.recipeDetailsBackButton);
+        backButton.bringToFront(); //back button in front of image
+        favoriteButton = (ImageView)findViewById(R.id.recipeDetailsFavoritesImageButton);
+        backbuttonListener();
+
+//        gotoRecipeButton = (Button)findViewById(R.id.goToRecipeBtn);
+//        gotoFavoritesList = (Button)findViewById(R.id.goToFavoritesListBtn);
 
         recipeTitle = recipe.getLabel();
         int fat = (int) recipe.getDigest().get(0).getTotal();
@@ -81,32 +88,32 @@ public class RecipeDetailsActivity extends AppCompatActivity implements View.OnC
         int calories = (int) recipe.getCalories();
         imageUrl = recipe.getImage();
         recipeUrl = recipe.getUrl();
+        shareURL = recipe.getShareAs();
+        shareFunctionality(shareURL);
 
 
-        title.setTitle(recipeTitle);
         totalFat.setText(fat+"g");
         totalCrabs.setText(crabs+"g");
         totalProtein.setText(protein+"g");
-        totalCalories.setText(calories+"");
         Picasso.get().load(imageUrl).into(foodImage);
 
         if(isAlreadyFavorite(new Favorites(recipeTitle, imageUrl))){
             favoriteButton.setImageResource(R.drawable.ic_baseline_favorite_24);
         }
 
-        if (!recipeUrl.startsWith("http://") && !recipeUrl.startsWith("https://")){
-            recipeUrl = "http://" + recipeUrl;
-        }
+//        if (!recipeUrl.startsWith("http://") && !recipeUrl.startsWith("https://")){
+//            recipeUrl = "http://" + recipeUrl;
+//        }
 
         favoriteButton.setOnClickListener(this);
-        gotoRecipeButton.setOnClickListener(this);
-        gotoFavoritesList.setOnClickListener(this);
+//        gotoRecipeButton.setOnClickListener(this);
+//        gotoFavoritesList.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.favorite_button:
+            case R.id.recipeDetailsFavoritesImageButton:
                 Favorites fav = new Favorites(recipeTitle, imageUrl);
                 if(isAlreadyFavorite(fav)){
                     removeFromFavorites(fav);
@@ -114,16 +121,24 @@ public class RecipeDetailsActivity extends AppCompatActivity implements View.OnC
                     addFavoriteToUser(fav);
                 }
                 break;
-            case R.id.goToRecipeBtn:
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(recipeUrl));
-                startActivity(browserIntent);
-                break;
-            case R.id.goToFavoritesListBtn:
-                Intent favoriteList = new Intent(RecipeDetailsActivity.this, FavoritesActivity.class);
-                favoriteList.putExtra("userId", userId);
-                startActivity(favoriteList);
-                break;
+//            case R.id.goToRecipeBtn:
+//                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(recipeUrl));
+//                startActivity(browserIntent);
+//                break;
+//            case R.id.goToFavoritesListBtn:
+//                Intent favoriteList = new Intent(RecipeDetailsActivity.this, FavoritesActivity.class);
+//                favoriteList.putExtra("userId", userId);
+//                startActivity(favoriteList);
+//                break;
         }
+    }
+    private void backbuttonListener() {
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RecipeDetailsActivity.super.onBackPressed();
+            }
+        });
     }
 
     private void addFavoriteToUser(Favorites favorite){
@@ -185,5 +200,17 @@ public class RecipeDetailsActivity extends AppCompatActivity implements View.OnC
         recyclerView.setAdapter(adapter);
     }
 
+    private void shareFunctionality(final String shareURL){
+        shareButton = findViewById(R.id.recipeDetailsShareImageButton);
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, shareURL);
+                startActivity(Intent.createChooser(shareIntent, "Sharing using"));
+            }
+        });
+    }
 
 }

@@ -4,14 +4,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -29,11 +34,13 @@ public class RecipesMenuActivity extends AppCompatActivity {
     private List<Object> recipeList;
     private CustomAdapter adapter;
     int userId;
+    private ProgressBar progressBar;
    // User currentUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipes__menu);
+        progressBar = (ProgressBar)findViewById(R.id.progressBar);
     }
 
     @Override
@@ -69,15 +76,23 @@ public class RecipesMenuActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        progressBar.setVisibility(View.GONE); // make progress bar invisible
                         JsonModel jsonModel = new Gson().fromJson(response, JsonModel.class);
-                        Log.i("RESPONSE", jsonModel.getQ());
-                        addRecipesToList(jsonModel);
-                        adapter.submitList(recipeList);
+                        if (jsonModel.isMore()){    //check if json response have data
+                            addRecipesToList(jsonModel);
+                            adapter.submitList(recipeList);
+                        }else{
+                            showToast("There are not available recipes with this ingredient", Toast.LENGTH_LONG);
+                            goToSearchActivity();
+                        }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //do something
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    showToast("Please check your internet connection", Toast.LENGTH_LONG);
+                }
+                goToSearchActivity();
             }
         });
 
@@ -94,4 +109,12 @@ public class RecipesMenuActivity extends AppCompatActivity {
 
     }
 
+    private void showToast(CharSequence text, int duration){
+        Toast.makeText(getApplicationContext(), text, duration).show();
+    }
+
+    private void goToSearchActivity(){
+        Intent intent = new Intent(RecipesMenuActivity.this, SearchActivity.class);
+        startActivity(intent);
+    }
 }
