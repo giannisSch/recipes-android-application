@@ -12,9 +12,6 @@
     <string name="login_failed">"Login failed"</string>
     <string name="forgot_password"><b>Forgot password?</b></string>
     <string name="main_ingredient"><b> Your main ingredient</b></string>
-    <string name="proteins"><b>proteins</b></string>
-    <string name="carbs"><b>carbs</b></string>
-    <string name="fat"><b>Fats</b></string>
     <string name="calories"><b>Calories</b></string>
 
 </resources>

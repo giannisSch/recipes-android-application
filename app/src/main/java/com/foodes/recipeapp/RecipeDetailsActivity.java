@@ -3,7 +3,7 @@ package com.foodes.recipeapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,7 +25,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     private TextView totalFat , totalCrabs, totalProtein, totalCalories, recipeName;
     private ImageView foodImage;
     private CollapsingToolbarLayout title;
-    private Button shareButton;
+    private ImageButton shareButton, backButton;
     private String shareURL;
     private List<Object> ingredientsList;
     private RecipeDetailsAdapter adapter;
@@ -55,6 +55,10 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         totalProtein = (TextView)findViewById(R.id.numberOfProtein);
         foodImage = (ImageView)findViewById(R.id.recipeDetailsRecipeImageView);
         recipeName = (TextView)findViewById(R.id.recipeDetailsRecipeNameTextView);
+        backButton = findViewById(R.id.recipeDetailsBackButton);
+        backButton.bringToFront(); //back button in front of image
+        backbuttonListener();
+
 
         int fat = (int) recipe.getDigest().get(0).getTotal();
         int crabs = (int) recipe.getDigest().get(1).getTotal();
@@ -63,15 +67,27 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         String imageUrl = recipe.getImage();
         String label = recipe.getLabel();
         shareURL = recipe.getShareAs();
-        //shareFunctionality(shareURL);
+        shareFunctionality(shareURL);
 
         totalFat.setText(fat+"g");
         totalCrabs.setText(crabs+"g");
         totalProtein.setText(protein+"g");
         recipeName.setText(label);
+
+
+        //Picasso.get().load(imageUrl).transform(new CircleTransform()).into(foodImage);
         Picasso.get().load(imageUrl).fit().centerCrop().into(foodImage);
 
 
+    }
+
+    private void backbuttonListener() {
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RecipeDetailsActivity.super.onBackPressed();
+            }
+        });
     }
 
     private void addIngredientsToList(List<IngredientModel> ingredients) {
@@ -87,7 +103,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     }
 
     private void shareFunctionality(final String shareURL){
-        //shareButton = findViewById(R.id.shareButton);
+        shareButton = findViewById(R.id.recipeDetailsShareImageButton);
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

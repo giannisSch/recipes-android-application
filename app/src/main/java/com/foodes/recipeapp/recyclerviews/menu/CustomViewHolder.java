@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.foodes.recipeapp.CircleTransform;
 import com.foodes.recipeapp.R;
 import com.foodes.recipeapp.json.nutrientsModels.RecipeModel;
 import com.foodes.recipeapp.recyclerviews.ItemClickListener;
@@ -31,13 +32,16 @@ public class CustomViewHolder extends AbstractViewHolder<Object> {
     void present(Object data) {
         setData(data);
         if (data instanceof RecipeModel) {
-            Picasso.get().load(((RecipeModel) data).getImage()).into(recipeImage);
+            //Picasso.get().load(((RecipeModel) data).getImage()).into(recipeImage);
+            Picasso.get().load(((RecipeModel) data).getImage()).transform(new CircleTransform()).into(recipeImage);
             titleText.setText(((RecipeModel) data).getLabel());
+            dietLabelText.setText(""); // in order to be empty every time
             int sizeOfDietLabels = ((RecipeModel) data).getDietLabels().size();
             for(int i=0; i<sizeOfDietLabels; i++) {
                 dietLabelText.append(((RecipeModel) data).getDietLabels().get(i));
+                dietLabelText.append(" ");
             }
-            caloriesText.setText((int)(((RecipeModel) data).getCalories())+"");
+            caloriesText.setText((int)(((RecipeModel) data).getCalories())+" cal");
         } else {
             //Do something for better User Experience
         }
