@@ -86,7 +86,6 @@ public class drawer_test extends AppCompatActivity implements NavigationView.OnN
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.nav_home:
-                Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_logout:
                 askIfUserIsSure();
@@ -95,6 +94,7 @@ public class drawer_test extends AppCompatActivity implements NavigationView.OnN
                 Intent goToProfile = new Intent(drawer_test.this,UserProfile.class);
                 goToProfile.putExtra("Username", loggedInUsername);
                 startActivity(goToProfile);
+                break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;

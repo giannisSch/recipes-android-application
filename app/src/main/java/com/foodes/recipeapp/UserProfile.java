@@ -2,8 +2,10 @@ package com.foodes.recipeapp;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.room.Database;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 
 import com.foodes.recipeapp.database.UsersDb.User;
 import com.foodes.recipeapp.database.UsersDb.UsersDatabase;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.List;
 
@@ -62,11 +65,35 @@ public class UserProfile extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToUpdateUserInfo = new Intent(UserProfile.this, UpdateUserProfileInfo.class);
-                goToUpdateUserInfo.putExtra("Username", getUsername);
-                startActivity(goToUpdateUserInfo);
+                //msg box
+                askIfUserIsSure();
             }
         });
+    }
+    
+    private void askIfUserIsSure(){
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(UserProfile.this);
+        builder.setTitle("Update user info");
+        builder.setMessage("Are you sure?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                gotoUpdateUserInfo();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //close drawer
+            }
+        });
+        builder.show();
+    }
+
+    private void gotoUpdateUserInfo(){
+        Intent goToUpdateUserInfo = new Intent(UserProfile.this, UpdateUserProfileInfo.class);
+        goToUpdateUserInfo.putExtra("Username", getUsername);
+        startActivity(goToUpdateUserInfo);
     }
 
 }
