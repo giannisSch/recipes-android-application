@@ -9,8 +9,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.foodes.recipeapp.database.UsersDb.User;
 import com.foodes.recipeapp.database.UsersDb.UsersDatabase;
+
+import java.util.List;
 
 public class UserProfile extends AppCompatActivity {
 
@@ -31,12 +35,9 @@ public class UserProfile extends AppCompatActivity {
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
+        //get data with intent to display username & mail next to profile photo
         username = findViewById(R.id.profile_username);
         email = findViewById(R.id.profile_email);
-
-        Intent DisplayUserInfo = getIntent();
-        String Username = DisplayUserInfo.getStringExtra("Username");
-        username.setText(Username);
 
         btn = findViewById(R.id.profile_btn);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -45,6 +46,5 @@ public class UserProfile extends AppCompatActivity {
                 //
             }
         });
-
     }
 }

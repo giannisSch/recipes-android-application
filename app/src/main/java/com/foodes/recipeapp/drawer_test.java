@@ -2,13 +2,10 @@ package com.foodes.recipeapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -16,9 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-
-import com.bumptech.glide.Glide;
-import com.google.android.material.internal.NavigationMenuItemView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textview.MaterialTextView;
 
@@ -43,7 +37,6 @@ public class drawer_test extends AppCompatActivity implements NavigationView.OnN
         navigationView = findViewById(R.id.nav_view);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
     }
 
     @Override
@@ -68,6 +61,8 @@ public class drawer_test extends AppCompatActivity implements NavigationView.OnN
                 startActivity(logoutUser);
             }
         });
+
+        toggle.syncState();
     }
 
     //swipe right or back button functionality
@@ -83,8 +78,11 @@ public class drawer_test extends AppCompatActivity implements NavigationView.OnN
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
+            case R.id.nav_home:
+                Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show();
+                break;
             case R.id.nav_logout:
-                Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show();
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
