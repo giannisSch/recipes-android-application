@@ -38,7 +38,7 @@ import java.util.List;
 public class FavoritesActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     UsersDatabase database;
-    private List<RecipeModel> currentUserFavorites;
+    private ArrayList<RecipeModel> currentUserFavorites;
     private List<Object> currentUserFavoritesInObjectForm;
     private FavoritesAdapter adapter;
     int userId;
@@ -47,6 +47,7 @@ public class FavoritesActivity extends AppCompatActivity implements NavigationVi
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     ActionBarDrawerToggle toggle;
+    User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,13 +70,14 @@ public class FavoritesActivity extends AppCompatActivity implements NavigationVi
         userId = getIntent().getIntExtra("userId", 0);
         loggedInUsername = getIntent().getStringExtra("Username");
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.favoritesRecyclerView);
-        User currentUser = findCurrentUser();
+        currentUser = findCurrentUser();
         currentUserFavorites = new ArrayList<>();
         currentUserFavoritesInObjectForm = new ArrayList<>();
         navigationView.setNavigationItemSelectedListener(this);
         noFavoritesImage = (ImageView)findViewById(R.id.noFavoritesImg);
 
-        currentUserFavorites = currentUser.getFavorite();
+        currentUserFavorites = new ArrayList<>();
+        currentUserFavorites.addAll(currentUser.getFavorite());
         convertToObjectList(currentUserFavorites);
 
 
@@ -85,11 +87,14 @@ public class FavoritesActivity extends AppCompatActivity implements NavigationVi
                 //do nothing
             }
             @Override
-            public void onFavoriteClick(RecipeModel item) {
-                Log.i("CUSTOM", item.toString());
+            public void onFavoriteClick(RecipeModel data) {
                 Intent intent = new Intent(FavoritesActivity.this, RecipeDetailsActivity.class);
-                intent.putExtra("RecipeModel", item);
-                intent.putExtra("userId", userId);
+                    intent.putExtra("RecipeModel", data);
+                    intent.putExtra("userId", userId);
+//                Bundle parameter = new Bundle();
+//                parameter.putParcelable("RecipeModel", data);
+//                parameter.putInt("userId", userId);
+//                intent.putExtras(parameter);
                 startActivity(intent);
             }
         }, currentUser, database);

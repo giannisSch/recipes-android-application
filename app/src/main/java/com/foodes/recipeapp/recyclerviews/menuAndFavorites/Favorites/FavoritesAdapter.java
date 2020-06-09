@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,14 +30,14 @@ import java.util.List;
 
 public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesViewHolder> implements ItemTouchHelperAdapter {
 
-    private List<RecipeModel> mFavorites = new ArrayList<>();
+    private ArrayList<RecipeModel> mFavorites = new ArrayList<>();
     private ItemClickListener listener;
     ItemTouchHelper mItemTouchHelper;
     int userId;
     User currentUser;
     UsersDatabase database;
 
-    public FavoritesAdapter(List<RecipeModel> mFavorites, ItemClickListener listener, User currentUser, UsersDatabase database) {
+    public FavoritesAdapter(ArrayList<RecipeModel> mFavorites, ItemClickListener listener, User currentUser, UsersDatabase database) {
         this.mFavorites = mFavorites;
         this.listener = listener;
         this.currentUser = currentUser;
@@ -46,12 +47,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesViewHolder> 
     @NonNull
     @Override
     public FavoritesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if( mFavorites!=null && mFavorites.isEmpty() ){
-            viewType = R.layout.holder_empty;
-        }else {
-            viewType = R.layout.holder_favorites;
-        }
-        View view = LayoutInflater.from(parent.getContext()).inflate(viewType, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.holder_favorites, parent, false);
         return new FavoritesViewHolder(view, listener, mItemTouchHelper);
     }
 

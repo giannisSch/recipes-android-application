@@ -230,7 +230,7 @@ public class RecipeModel  implements Parcelable {
         dest.writeDouble(totalTime);
 
         //parcelable
-        dest.writeParcelable((Parcelable) totalNutrients, flags);
+        dest.writeParcelable(totalNutrients, flags);
         dest.writeTypedList(ingredients);
         dest.writeTypedList(digest);
 

@@ -90,8 +90,8 @@ public class RecipesMenuActivity extends AppCompatActivity implements Navigation
                 startActivity(intent);
             }
             @Override
-            public void onFavoriteClick(RecipeModel item) {
-                //do nothing
+            public void onFavoriteClick(RecipeModel data) {
+            //do nothing
             }
         });
         recyclerView.setAdapter(adapter);

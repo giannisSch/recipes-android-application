@@ -24,7 +24,8 @@ public class FavoritesViewHolder extends AbstractViewHolder<RecipeModel> impleme
     ImageView recipeImg;
     GestureDetector mGestureDetector;
     ItemTouchHelper mItemTouchHelper;
-    ItemClickListener listener;
+    RecipeModel data;
+
 
     public FavoritesViewHolder(@NonNull View itemView, ItemClickListener listener, ItemTouchHelper mItemTouchHelper) {
         super(itemView);
@@ -38,6 +39,7 @@ public class FavoritesViewHolder extends AbstractViewHolder<RecipeModel> impleme
 
     @Override
     protected void present(RecipeModel data) {
+        this.data = data;
         Picasso.get().load(data.getImage()).into(recipeImg);
         title.setText(data.getLabel());
     }
@@ -45,7 +47,7 @@ public class FavoritesViewHolder extends AbstractViewHolder<RecipeModel> impleme
 
     @Override
     public boolean onDown(MotionEvent e) {
-        return false;
+        return true;
     }
 
     @Override
@@ -55,8 +57,8 @@ public class FavoritesViewHolder extends AbstractViewHolder<RecipeModel> impleme
 
     @Override
     public boolean onSingleTapUp(MotionEvent e) {
-        setListener(listener);
-        return true;
+        listener.onFavoriteClick(data);
+        return false;
     }
 
     @Override
