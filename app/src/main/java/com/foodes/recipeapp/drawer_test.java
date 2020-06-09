@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,6 +28,9 @@ public class drawer_test extends AppCompatActivity implements NavigationView.OnN
     ActionBarDrawerToggle toggle;
     private MaterialTextView greeting;
     Button searchBtn;
+    private EditText basicIngredient;
+    int userId;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,8 +39,7 @@ public class drawer_test extends AppCompatActivity implements NavigationView.OnN
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(null);
-
+        basicIngredient = (EditText)findViewById(R.id.basicIngredientEditText);
         drawerLayout = findViewById(R.id.drawer);
         navigationView = findViewById(R.id.nav_view);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
@@ -56,16 +59,19 @@ public class drawer_test extends AppCompatActivity implements NavigationView.OnN
         Intent GreetLoggedInUser = getIntent();
         String username = GreetLoggedInUser.getStringExtra("Username");
         greeting.setText("Hello" + " " + username + "!");
-
+        userId = getIntent().getIntExtra("userId",0);
         //drawer selection switch
         navigationView.setNavigationItemSelectedListener(this);
 
-        searchBtn = findViewById(R.id.searchBtn);
+        searchBtn = findViewById(R.id.drawerSearchBtn);
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent logoutUser = new Intent(drawer_test.this, MainActivity.class);
-                startActivity(logoutUser);
+                Intent intent = new Intent(drawer_test.this, RecipesMenuActivity.class);
+                intent.putExtra("ingredient", basicIngredient.getText().toString().toLowerCase().trim());
+                intent.putExtra("userId",userId);
+                intent.putExtra("Username", loggedInUsername);
+                startActivity(intent);
             }
         });
 
@@ -93,7 +99,14 @@ public class drawer_test extends AppCompatActivity implements NavigationView.OnN
             case R.id.nav_profile:
                 Intent goToProfile = new Intent(drawer_test.this,UserProfile.class);
                 goToProfile.putExtra("Username", loggedInUsername);
+                goToProfile.putExtra("userId", userId);
                 startActivity(goToProfile);
+                break;
+            case R.id.nav_favorites:
+                Intent goToFavoriteList = new Intent(drawer_test.this, FavoritesActivity.class);
+                goToFavoriteList.putExtra("Username", loggedInUsername);
+                goToFavoriteList.putExtra("userId", userId);
+                startActivity(goToFavoriteList);
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);

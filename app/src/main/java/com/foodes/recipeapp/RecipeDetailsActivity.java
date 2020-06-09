@@ -39,9 +39,6 @@ public class RecipeDetailsActivity extends AppCompatActivity implements View.OnC
     int userId;
     private String recipeTitle, imageUrl, recipeUrl, shareURL;
   //  User currentUser;
-
-
-
     private List<Object> ingredientsList;
     private RecipeDetailsAdapter adapter;
 
@@ -60,7 +57,7 @@ public class RecipeDetailsActivity extends AppCompatActivity implements View.OnC
         //Get Details from Activity
         Intent intent = getIntent();
         RecipeModel recipe = intent.getParcelableExtra("RecipeModel");
-        userId = getIntent().getIntExtra("UserId",0);
+        userId = getIntent().getIntExtra("userId",0);
        // currentUser = getIntent().getParcelableExtra("User");
 
         database = UsersDatabase.getInstance(this);
@@ -76,7 +73,7 @@ public class RecipeDetailsActivity extends AppCompatActivity implements View.OnC
         backButton = findViewById(R.id.recipeDetailsBackButton);
         backButton.bringToFront(); //back button in front of image
         favoriteButton = (ImageView)findViewById(R.id.recipeDetailsFavoritesImageButton);
-        backbuttonListener();
+        backButtonListener();
 
 //        gotoRecipeButton = (Button)findViewById(R.id.goToRecipeBtn);
 //        gotoFavoritesList = (Button)findViewById(R.id.goToFavoritesListBtn);
@@ -98,7 +95,7 @@ public class RecipeDetailsActivity extends AppCompatActivity implements View.OnC
         Picasso.get().load(imageUrl).into(foodImage);
 
         if(isAlreadyFavorite(new Favorites(recipeTitle, imageUrl))){
-            favoriteButton.setImageResource(R.drawable.ic_baseline_favorite_24);
+            favoriteButton.setImageResource(R.drawable.ic_favorite_red_24dp);
         }
 
 //        if (!recipeUrl.startsWith("http://") && !recipeUrl.startsWith("https://")){
@@ -107,7 +104,6 @@ public class RecipeDetailsActivity extends AppCompatActivity implements View.OnC
 
         favoriteButton.setOnClickListener(this);
 //        gotoRecipeButton.setOnClickListener(this);
-//        gotoFavoritesList.setOnClickListener(this);
     }
 
     @Override
@@ -125,14 +121,9 @@ public class RecipeDetailsActivity extends AppCompatActivity implements View.OnC
 //                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(recipeUrl));
 //                startActivity(browserIntent);
 //                break;
-//            case R.id.goToFavoritesListBtn:
-//                Intent favoriteList = new Intent(RecipeDetailsActivity.this, FavoritesActivity.class);
-//                favoriteList.putExtra("userId", userId);
-//                startActivity(favoriteList);
-//                break;
         }
     }
-    private void backbuttonListener() {
+    private void backButtonListener() {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -152,7 +143,7 @@ public class RecipeDetailsActivity extends AppCompatActivity implements View.OnC
                 break;
             }
         }
-        favoriteButton.setImageResource(R.drawable.ic_baseline_favorite_24);
+        favoriteButton.setImageResource(R.drawable.ic_favorite_red_24dp);
     }
 
     private void removeFromFavorites(Favorites favorites) {

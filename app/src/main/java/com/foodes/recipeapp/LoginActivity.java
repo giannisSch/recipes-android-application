@@ -2,7 +2,10 @@ package com.foodes.recipeapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
@@ -33,6 +36,8 @@ public class LoginActivity extends AppCompatActivity {
     String checkUsername, checkPassword;
     private Button loginBtn, loginForgotPasswordButton;
     UsersDatabase database;
+    private TextInputLayout usernameLayout, passwordLayout;
+    private int userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +55,9 @@ public class LoginActivity extends AppCompatActivity {
         getPassword = findViewById(R.id.loginPasswordTest);
         loginBtn = findViewById(R.id.loginLoginButton);
         loginForgotPasswordButton = findViewById(R.id.loginForgotPasswordButton);
+
+        usernameLayout = findViewById(R.id.loginUsernameTextField);
+        passwordLayout = findViewById(R.id.loginPasswordTextField);
 
         //login btn listener
         loginBtn.setOnClickListener(new View.OnClickListener() {
@@ -82,6 +90,7 @@ public class LoginActivity extends AppCompatActivity {
             String name = user.getUsername();
             String code = user.getPassword();
             if (checkUsername.equals(name) && checkPassword.equals(code)) {
+                userId = user.getId();
                 return true;
             }
         }
@@ -94,6 +103,7 @@ public class LoginActivity extends AppCompatActivity {
         //pass username to AppHomeScreen so we can greet the user in home screen
         userIsLoggedIn.putExtra("Username", checkUsername);
         userIsLoggedIn.putExtra("Password", checkPassword);
+        userIsLoggedIn.putExtra("userId", userId);
         startActivity(userIsLoggedIn);
     }
 
@@ -118,6 +128,18 @@ public class LoginActivity extends AppCompatActivity {
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
+
+        //Vibrate Phone
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        // Vibrate for 500 milliseconds
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+            //deprecated in API 26
+            v.vibrate(500);
+        }
+
+
     }
 
 }

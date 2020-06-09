@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/food_logo"
@@ -11,14 +13,20 @@
         android:roundIcon="@mipmap/food_logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".UpdateUserProfileInfo"></activity>
+        <activity android:name=".drawer_test" />
+        <activity android:name=".UserProfile" />
+        <activity android:name=".ForgotPassword" />
         <activity android:name=".RecipeDetailsActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".FavoritesActivity" />
         <activity android:name=".AccountCreated" />
-        <activity android:name=".RecipesMenuActivity" />
+        <activity android:name=".SearchActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".SearchActivity" />
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".SplashActivity" >
+        <activity android:name=".ForgotPasswordStepTwo" />
+        <activity android:name=".RecipesMenuActivity" />
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

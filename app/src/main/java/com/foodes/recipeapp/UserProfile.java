@@ -21,8 +21,9 @@ import java.util.List;
 
 public class UserProfile extends AppCompatActivity {
 
-    TextView username, email, username_info, email_info;
-    private String favoriteCounter, getUsername;
+    TextView username, email, username_info, email_info, totalFavorites;
+    private String getUsername;
+    private int userId;
     Button btn;
     UsersDatabase database;
 
@@ -43,21 +44,23 @@ public class UserProfile extends AppCompatActivity {
         email = findViewById(R.id.profile_email);
         username_info = findViewById(R.id.user_txtview);
         email_info = findViewById(R.id.mail_txtview);
+        totalFavorites =(TextView) findViewById(R.id.card_fav_counter);
 
         //getting username
         Intent UsernameIntent = getIntent();
         getUsername = UsernameIntent.getStringExtra("Username");
 
+        userId = getIntent().getIntExtra("userId",0);
+
         List<User> users = database.getUserDao().getAll();
         for (User user : users) {
             String user_username = user.getUsername();
             if (getUsername.equals(user_username)) {
-                String loggedIn_username = user.getUsername();
-                String loggedIn_email = user.getEmail();
-                username.setText(loggedIn_username);
-                email.setText(loggedIn_email);
-                username_info.setText(loggedIn_username);
-                email_info.setText(loggedIn_email);
+                username.setText(user.getUsername());
+                email.setText(user.getEmail());
+                username_info.setText(user.getUsername());
+                email_info.setText(user.getEmail());
+                totalFavorites.setText(user.getFavorite().size());
             }
         }
 

@@ -14,8 +14,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.foodes.recipeapp.FavoritesActivity;
 import com.foodes.recipeapp.R;
 import com.foodes.recipeapp.database.UsersDb.Favorites;
+import com.foodes.recipeapp.database.UsersDb.User;
+import com.foodes.recipeapp.database.UsersDb.UsersDatabase;
 import com.foodes.recipeapp.recyclerviews.ItemClickListener;
 import com.foodes.recipeapp.recyclerviews.ItemTouchHelperAdapter;
 import com.squareup.picasso.Picasso;
@@ -28,10 +31,15 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesViewHolder> 
     private List<Favorites> mFavorites = new ArrayList<>();
     private ItemClickListener listener;
     ItemTouchHelper mItemTouchHelper;
+    int userId;
+    User currentUser;
+    UsersDatabase database;
 
-    public FavoritesAdapter(List<Favorites> mFavorites, ItemClickListener listener) {
+    public FavoritesAdapter(List<Favorites> mFavorites, ItemClickListener listener, User currentUser, UsersDatabase database) {
         this.mFavorites = mFavorites;
         this.listener = listener;
+        this.currentUser = currentUser;
+        this.database = database;
     }
 
     @NonNull
@@ -66,6 +74,10 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesViewHolder> 
         mFavorites.remove(fromFavorite);
         mFavorites.add(toPosition, fromFavorite);
         notifyItemMoved(fromPosition, toPosition);
+        for(Favorites favorites: mFavorites){
+            currentUser.getFavorite().add(favorites);
+        }
+        database.getUserDao().update(currentUser);
     }
 
     @Override

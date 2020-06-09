@@ -35,10 +35,10 @@ public class CustomViewHolder extends AbstractViewHolder<Object> {
             Picasso.get().load(((RecipeModel) data).getImage()).into(recipeImage);
             titleText.setText(((RecipeModel) data).getLabel());
             int sizeOfDietLabels = ((RecipeModel) data).getDietLabels().size();
-            for(int i=0; i<sizeOfDietLabels; i++) {
-                dietLabelText.append(((RecipeModel) data).getDietLabels().get(i));
-            }
-            caloriesText.setText((int)(((RecipeModel) data).getCalories())+"");
+            try{
+            //    dietLabelText.append(((RecipeModel) data).getDietLabels().get(0));
+            }catch (Exception e){ }
+            caloriesText.setText("Calories: "+(int)(((RecipeModel) data).getCalories()));
         } else if(data instanceof Favorites) {
             Picasso.get().load(((Favorites) data).getFoodImage()).into(recipeImage);
             titleText.setText(((Favorites) data).getFoodName());
