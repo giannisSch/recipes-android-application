@@ -19,7 +19,7 @@ import com.foodes.recipeapp.recyclerviews.menuAndFavorites.AbstractViewHolder;
 import com.foodes.recipeapp.recyclerviews.recipedetails.MyItemTouchHelper;
 import com.squareup.picasso.Picasso;
 
-public class FavoritesViewHolder extends AbstractViewHolder<Favorites> implements View.OnTouchListener, GestureDetector.OnGestureListener{
+public class FavoritesViewHolder extends AbstractViewHolder<RecipeModel> implements View.OnTouchListener, GestureDetector.OnGestureListener{
     TextView title;
     ImageView recipeImg;
     GestureDetector mGestureDetector;
@@ -37,9 +37,9 @@ public class FavoritesViewHolder extends AbstractViewHolder<Favorites> implement
     }
 
     @Override
-    protected void present(Favorites data) {
-        Picasso.get().load(data.getFoodImage()).into(recipeImg);
-        title.setText(data.getFoodName());
+    protected void present(RecipeModel data) {
+        Picasso.get().load(data.getImage()).into(recipeImg);
+        title.setText(data.getLabel());
     }
 
 

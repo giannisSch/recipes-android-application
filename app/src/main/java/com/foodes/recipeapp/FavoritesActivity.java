@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.foodes.recipeapp.database.UsersDb.Favorites;
 import com.foodes.recipeapp.database.UsersDb.User;
 import com.foodes.recipeapp.database.UsersDb.UsersDatabase;
+import com.foodes.recipeapp.json.nutrientsModels.RecipeModel;
 import com.foodes.recipeapp.recyclerviews.ItemClickListener;
 import com.foodes.recipeapp.recyclerviews.menuAndFavorites.CustomAdapter;
 import com.foodes.recipeapp.recyclerviews.menuAndFavorites.Favorites.FavoritesAdapter;
@@ -37,7 +38,7 @@ import java.util.List;
 public class FavoritesActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     UsersDatabase database;
-    private List<Favorites> currentUserFavorites;
+    private List<RecipeModel> currentUserFavorites;
     private List<Object> currentUserFavoritesInObjectForm;
     private FavoritesAdapter adapter;
     int userId;
@@ -81,9 +82,13 @@ public class FavoritesActivity extends AppCompatActivity implements NavigationVi
         adapter = new FavoritesAdapter(currentUserFavorites, new ItemClickListener() {
             @Override
             public void onItemClick(Object item) {
+                //do nothing
+            }
+            @Override
+            public void onFavoriteClick(RecipeModel item) {
                 Log.i("CUSTOM", item.toString());
                 Intent intent = new Intent(FavoritesActivity.this, RecipeDetailsActivity.class);
-                intent.putExtra("RecipeModel", (Parcelable) item);
+                intent.putExtra("RecipeModel", item);
                 intent.putExtra("userId", userId);
                 startActivity(intent);
             }
@@ -100,8 +105,8 @@ public class FavoritesActivity extends AppCompatActivity implements NavigationVi
         toggle.syncState();
     }
 
-    private void convertToObjectList(List<Favorites> currentUserFavorites) {
-        for (Favorites favorite : currentUserFavorites) {
+    private void convertToObjectList(List<RecipeModel> currentUserFavorites) {
+        for (RecipeModel favorite : currentUserFavorites) {
             currentUserFavoritesInObjectForm.add(favorite);
         }
     }

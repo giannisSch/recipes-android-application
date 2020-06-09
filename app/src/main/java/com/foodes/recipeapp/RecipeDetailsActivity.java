@@ -41,6 +41,7 @@ public class RecipeDetailsActivity extends AppCompatActivity implements View.OnC
   //  User currentUser;
     private List<Object> ingredientsList;
     private RecipeDetailsAdapter adapter;
+    RecipeModel recipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class RecipeDetailsActivity extends AppCompatActivity implements View.OnC
         initAdapter();
         //Get Details from Activity
         Intent intent = getIntent();
-        RecipeModel recipe = intent.getParcelableExtra("RecipeModel");
+        recipe = intent.getParcelableExtra("RecipeModel");
         userId = getIntent().getIntExtra("userId",0);
        // currentUser = getIntent().getParcelableExtra("User");
 
@@ -94,7 +95,7 @@ public class RecipeDetailsActivity extends AppCompatActivity implements View.OnC
         totalProtein.setText(protein+"g");
         Picasso.get().load(imageUrl).into(foodImage);
 
-        if(isAlreadyFavorite(new Favorites(recipeTitle, imageUrl))){
+        if(isAlreadyFavorite(new RecipeModel(recipeTitle,imageUrl,recipeUrl,shareURL))){
             favoriteButton.setImageResource(R.drawable.ic_favorite_red_24dp);
         }
 
@@ -110,7 +111,7 @@ public class RecipeDetailsActivity extends AppCompatActivity implements View.OnC
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.recipeDetailsFavoritesImageButton:
-                Favorites fav = new Favorites(recipeTitle, imageUrl);
+                RecipeModel fav = new RecipeModel(recipeTitle,imageUrl,recipeUrl,shareURL);
                 if(isAlreadyFavorite(fav)){
                     removeFromFavorites(fav);
                 }else{
@@ -132,26 +133,24 @@ public class RecipeDetailsActivity extends AppCompatActivity implements View.OnC
         });
     }
 
-    private void addFavoriteToUser(Favorites favorite){
+    private void addFavoriteToUser(RecipeModel favorite){
         List<User> users = database.getUserDao().getAll();
         for(User user: users){
             if(user.getId() == userId){
-                user.addFavorite(favorite);
+                user.addFavorite(recipe);
                 database.getUserDao().update(user);
-                Log.e("list1",user.getFavorite().toString());
-                Log.e("list1",user.getFavorite().size()+"");
                 break;
             }
         }
         favoriteButton.setImageResource(R.drawable.ic_favorite_red_24dp);
     }
 
-    private void removeFromFavorites(Favorites favorites) {
+    private void removeFromFavorites(RecipeModel favorites) {
         List<User> users = database.getUserDao().getAll();
         for (User user : users) {
             if (user.getId() == userId) {
-                List<Favorites> currentUserFavList = user.getFavorite();
-                for (Favorites fav : currentUserFavList) {
+                List<RecipeModel> currentUserFavList = user.getFavorite();
+                for (RecipeModel fav : currentUserFavList) {
                     if (favorites.equals(fav)) {
                         user.removeFavorite(favorites);
                         database.getUserDao().update(user);
@@ -165,12 +164,12 @@ public class RecipeDetailsActivity extends AppCompatActivity implements View.OnC
         favoriteButton.setImageResource(R.drawable.ic_baseline_not_favorite);
     }
 
-    private boolean isAlreadyFavorite(Favorites favorites){
+    private boolean isAlreadyFavorite(RecipeModel favorites){
         List<User> users = database.getUserDao().getAll();
         for (User user : users) {
             if (user.getId() == userId) {
-                List<Favorites> currentUserFavList = user.getFavorite();
-                for (Favorites favorite : currentUserFavList) {
+                List<RecipeModel> currentUserFavList = user.getFavorite();
+                for (RecipeModel favorite : currentUserFavList) {
                     if (favorite.equals(favorites)) {
                        return true;
                     }

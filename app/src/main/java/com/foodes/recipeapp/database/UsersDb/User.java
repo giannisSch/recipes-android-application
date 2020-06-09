@@ -33,7 +33,7 @@ public class User {
     private String password;
 
     @ColumnInfo(name = "favorites")
-    private List<Favorites> favorite;
+    private List<RecipeModel> favorite;
 
 //id auto generates so Im not including in constructor
 
@@ -80,17 +80,17 @@ public class User {
         this.password = password;
     }
 
-    public List<Favorites> getFavorite() {
+    public List<RecipeModel> getFavorite() {
         return favorite;
     }
 
-    public void setFavorite(List<Favorites> favorite) {
+    public void setFavorite(List<RecipeModel> favorite) {
         this.favorite = favorite;
     }
 
-    public void addFavorite(Favorites favorites){ this.favorite.add(favorites);}
+    public void addFavorite(RecipeModel recipeModel){ this.favorite.add(recipeModel);}
 
-    public void removeFavorite(Favorites favorites){ this.favorite.remove(favorites);}
+    public void removeFavorite(RecipeModel recipeModel){ this.favorite.remove(recipeModel);}
 
 //    @Override
 //    public int describeContents() {

@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.foodes.recipeapp.json.nutrientsModels.RecipeModel;
 import com.foodes.recipeapp.recyclerviews.ItemClickListener;
 
 public abstract class AbstractViewHolder<T extends Object> extends RecyclerView.ViewHolder {
@@ -21,6 +22,7 @@ public abstract class AbstractViewHolder<T extends Object> extends RecyclerView.
             public void onClick(View v) {
                 if (listener != null && data != null) {
                     listener.onItemClick(data);
+                    listener.onFavoriteClick((RecipeModel) data);
                 }
             }
         });

@@ -60,7 +60,7 @@ public class UserProfile extends AppCompatActivity {
                 email.setText(user.getEmail());
                 username_info.setText(user.getUsername());
                 email_info.setText(user.getEmail());
-                totalFavorites.setText(user.getFavorite().size());
+                totalFavorites.setText(user.getFavorite().size()+"");
             }
         }
 

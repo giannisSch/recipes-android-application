@@ -19,6 +19,7 @@ import com.foodes.recipeapp.R;
 import com.foodes.recipeapp.database.UsersDb.Favorites;
 import com.foodes.recipeapp.database.UsersDb.User;
 import com.foodes.recipeapp.database.UsersDb.UsersDatabase;
+import com.foodes.recipeapp.json.nutrientsModels.RecipeModel;
 import com.foodes.recipeapp.recyclerviews.ItemClickListener;
 import com.foodes.recipeapp.recyclerviews.ItemTouchHelperAdapter;
 import com.squareup.picasso.Picasso;
@@ -28,14 +29,14 @@ import java.util.List;
 
 public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesViewHolder> implements ItemTouchHelperAdapter {
 
-    private List<Favorites> mFavorites = new ArrayList<>();
+    private List<RecipeModel> mFavorites = new ArrayList<>();
     private ItemClickListener listener;
     ItemTouchHelper mItemTouchHelper;
     int userId;
     User currentUser;
     UsersDatabase database;
 
-    public FavoritesAdapter(List<Favorites> mFavorites, ItemClickListener listener, User currentUser, UsersDatabase database) {
+    public FavoritesAdapter(List<RecipeModel> mFavorites, ItemClickListener listener, User currentUser, UsersDatabase database) {
         this.mFavorites = mFavorites;
         this.listener = listener;
         this.currentUser = currentUser;
@@ -67,7 +68,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesViewHolder> 
 
     @Override
     public void onItemMove(int fromPosition, int toPosition) {
-        Favorites fromFavorite = mFavorites.get(fromPosition);
+        RecipeModel fromFavorite = mFavorites.get(fromPosition);
         mFavorites.remove(fromFavorite);
         mFavorites.add(toPosition, fromFavorite);
         notifyItemMoved(fromPosition, toPosition);

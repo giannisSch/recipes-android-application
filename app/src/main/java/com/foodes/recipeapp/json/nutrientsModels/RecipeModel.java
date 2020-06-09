@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.List;
+import java.util.Objects;
 
 public class RecipeModel  implements Parcelable {
     String uri;
@@ -24,6 +25,13 @@ public class RecipeModel  implements Parcelable {
     TotalNutrientsModel totalNutrients;
     TotalDailyModel totalDaily;
     List<DigestModel> digest;
+
+    public RecipeModel(String label, String image, String url, String shareAs) {
+        this.label = label;
+        this.image = image;
+        this.url = url;
+        this.shareAs = shareAs;
+    }
 
     protected RecipeModel(Parcel in) {
         uri = in.readString();
@@ -229,6 +237,21 @@ public class RecipeModel  implements Parcelable {
 
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RecipeModel that = (RecipeModel) o;
+        return Objects.equals(label, that.label) &&
+                Objects.equals(image, that.image) &&
+                Objects.equals(url, that.url) &&
+                Objects.equals(shareAs, that.shareAs);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(label, image, url, shareAs);
+    }
 
     @Override
     public int describeContents() {

@@ -29,6 +29,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.foodes.recipeapp.json.nutrientsModels.HitModel;
 import com.foodes.recipeapp.json.nutrientsModels.JsonModel;
+import com.foodes.recipeapp.json.nutrientsModels.RecipeModel;
 import com.foodes.recipeapp.recyclerviews.ItemClickListener;
 import com.foodes.recipeapp.recyclerviews.menuAndFavorites.CustomAdapter;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -87,6 +88,10 @@ public class RecipesMenuActivity extends AppCompatActivity implements Navigation
                 intent.putExtra("Username", loggedInUsername);
     //            intent.putExtra("User", currentUser);
                 startActivity(intent);
+            }
+            @Override
+            public void onFavoriteClick(RecipeModel item) {
+                //do nothing
             }
         });
         recyclerView.setAdapter(adapter);
