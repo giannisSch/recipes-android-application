@@ -84,7 +84,7 @@ public class FavoritesActivity extends AppCompatActivity implements NavigationVi
                 Log.i("CUSTOM", item.toString());
                 Intent intent = new Intent(FavoritesActivity.this, RecipeDetailsActivity.class);
                 intent.putExtra("RecipeModel", (Parcelable) item);
-                intent.putExtra("UserId", userId);
+                intent.putExtra("userId", userId);
                 startActivity(intent);
             }
         }, currentUser, database);
