@@ -45,21 +45,18 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesViewHolder> 
     @NonNull
     @Override
     public FavoritesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.holder_favorites, parent, false);
+        if( mFavorites!=null && mFavorites.isEmpty() ){
+            viewType = R.layout.holder_empty;
+        }else {
+            viewType = R.layout.holder_favorites;
+        }
+        View view = LayoutInflater.from(parent.getContext()).inflate(viewType, parent, false);
         return new FavoritesViewHolder(view, listener, mItemTouchHelper);
     }
 
     @Override
     public void onBindViewHolder(@NonNull FavoritesViewHolder holder, int position) {
         holder.present(mFavorites.get(position));
-//        try {
-//            String title = mFavorites.get(position).getFoodName();
-//            String foodImg = mFavorites.get(position).getFoodImage();
-//            holder.title.setText(title);
-//            Picasso.get().load(foodImg).into(holder.recipeImg);
-//        } catch (NullPointerException e) {
-//            Log.e("ERROR", "onBindViewHolder: Null Pointer: " + e.getMessage());
-//        }
     }
 
     @Override
@@ -74,9 +71,6 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesViewHolder> 
         mFavorites.remove(fromFavorite);
         mFavorites.add(toPosition, fromFavorite);
         notifyItemMoved(fromPosition, toPosition);
-        for(Favorites favorites: mFavorites){
-            currentUser.getFavorite().add(favorites);
-        }
         database.getUserDao().update(currentUser);
     }
 
@@ -84,70 +78,11 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesViewHolder> 
     public void onItemSwiped(int position) {
         mFavorites.remove(position);
         notifyItemRemoved(position);
+        database.getUserDao().update(currentUser);
     }
 
     public void setmItemTouchHelper(ItemTouchHelper mItemTouchHelper) {
         this.mItemTouchHelper = mItemTouchHelper;
     }
-
-//    public class ViewHolder extends RecyclerView.ViewHolder implements
-//            View.OnTouchListener,
-//            GestureDetector.OnGestureListener
-//    {
-//
-//        TextView title;
-//        ImageView recipeImg;
-//        ItemClickListener listener;
-//        GestureDetector mGestureDetector;
-//
-//        public ViewHolder(View itemView, ItemClickListener listener) {
-//            super(itemView);
-//            title = (TextView)itemView.findViewById(R.id.favoriteTitleTextView);
-//            recipeImg = (ImageView)itemView.findViewById(R.id.favoriteHolderImageView);
-//            this.listener = listener;
-//
-//            mGestureDetector = new GestureDetector(itemView.getContext(), this);
-//            itemView.setOnTouchListener(this);
-//        }
-//
-//
-//        @Override
-//        public boolean onTouch(View v, MotionEvent event) {
-//            mGestureDetector.onTouchEvent(event);
-//            return true;
-//        }
-//
-//        @Override
-//        public boolean onDown(MotionEvent e) {
-//            return false;
-//        }
-//
-//        @Override
-//        public void onShowPress(MotionEvent e) {
-//
-//        }
-//
-//        @Override
-//        public boolean onSingleTapUp(MotionEvent e) {
-//            listener.onItemClick(getAdapterPosition());
-//            return true;
-//        }
-//
-//        @Override
-//        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-//            return true;
-//        }
-//
-//        @Override
-//        public void onLongPress(MotionEvent e) {
-//            mItemTouchHelper.startDrag(this);
-//        }
-//
-//        @Override
-//        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-//            return false;
-//        }
-//
-//    }
 }
 

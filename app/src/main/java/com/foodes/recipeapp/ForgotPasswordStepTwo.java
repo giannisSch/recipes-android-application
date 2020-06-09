@@ -20,7 +20,7 @@ import java.util.List;
 
 public class ForgotPasswordStepTwo extends AppCompatActivity {
 
-    TextInputEditText forgotPass, forgotPassConfirm;
+    TextInputEditText newPass, ConfirmNewPass;
     String fPass, fPassConfirm, submittedEmail, NewPassword, UserUsername, UserPassword;
     Button Submit;
     UsersDatabase database;
@@ -40,16 +40,16 @@ public class ForgotPasswordStepTwo extends AppCompatActivity {
             Intent getSubmittedEmail = getIntent();
             submittedEmail = getSubmittedEmail.getStringExtra("Email");
 
-            forgotPass = findViewById(R.id.forgot_Password);
-            forgotPassConfirm = findViewById(R.id.forgot_PasswordConf);
+            newPass = findViewById(R.id.newPassword);
+            ConfirmNewPass = findViewById(R.id.newPasswordConf);
 
 
         Submit = findViewById(R.id.forgotPass_UpdateLoginInfoBtn);
         Submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fPass = forgotPass.getText().toString();
-                fPassConfirm = forgotPassConfirm.getText().toString();
+                fPass = newPass.getText().toString();
+                fPassConfirm = ConfirmNewPass.getText().toString();
 
                 checkIfPasswordsMatch();
             }

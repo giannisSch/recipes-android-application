@@ -17,6 +17,7 @@ import android.os.Parcelable;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -40,8 +41,8 @@ public class FavoritesActivity extends AppCompatActivity implements NavigationVi
     private List<Object> currentUserFavoritesInObjectForm;
     private FavoritesAdapter adapter;
     int userId;
-    private ProgressBar progressBar;
     private String loggedInUsername;
+    ImageView noFavoritesImage;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     ActionBarDrawerToggle toggle;
@@ -50,8 +51,6 @@ public class FavoritesActivity extends AppCompatActivity implements NavigationVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorites);
-
-        progressBar = (ProgressBar) findViewById(R.id.favoritesProgressBar);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -73,6 +72,7 @@ public class FavoritesActivity extends AppCompatActivity implements NavigationVi
         currentUserFavorites = new ArrayList<>();
         currentUserFavoritesInObjectForm = new ArrayList<>();
         navigationView.setNavigationItemSelectedListener(this);
+        noFavoritesImage = (ImageView)findViewById(R.id.noFavoritesImg);
 
         currentUserFavorites = currentUser.getFavorite();
         convertToObjectList(currentUserFavorites);
@@ -93,10 +93,9 @@ public class FavoritesActivity extends AppCompatActivity implements NavigationVi
         adapter.setmItemTouchHelper(itemTouchHelper);
         itemTouchHelper.attachToRecyclerView(recyclerView);
         recyclerView.setAdapter(adapter);
-        if(adapter.getItemCount() == 0){
+        if(adapter.getItemCount() == 0) {
             Toast.makeText(this, "There are no favorites", Toast.LENGTH_SHORT).show();
-        }else{
-            progressBar.setVisibility(View.GONE);
+            noFavoritesImage.setVisibility(View.VISIBLE);
         }
         toggle.syncState();
     }
