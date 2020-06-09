@@ -9,10 +9,9 @@
 
     <ImageView
         android:id="@+id/onboarding_img"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:background="#0000ff"
-        android:layout_marginBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:src="@drawable/ic_onboarding_three"
         app:layout_constraintBottom_toTopOf="@+id/onboarding_title_one"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
@@ -48,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Previous"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:gravity="center"
         android:clickable="true"
         android:focusable="true"
