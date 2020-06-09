@@ -82,8 +82,10 @@ public class SignUpActivity extends AppCompatActivity {
         try {
             User user = new User(username, email, password);  //creates new user with username,password,email parameters
             database.getUserDao().insert(user); // **VM
+
         } catch (Exception e) {
             //douleiesMeFoodes
+            Toast.makeText(this, "Could not make this user please try again...", Toast.LENGTH_SHORT).show();
         }
 
         showToast(); //informs the user that his account has been created
