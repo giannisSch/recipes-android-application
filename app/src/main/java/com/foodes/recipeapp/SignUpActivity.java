@@ -3,7 +3,10 @@ package com.foodes.recipeapp;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,21 +21,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.room.Room;
 
+import com.foodes.recipeapp.database.UsersDb.Favorites;
 import com.foodes.recipeapp.database.UsersDb.User;
 import com.foodes.recipeapp.database.UsersDb.UsersDao;
 import com.foodes.recipeapp.database.UsersDb.UsersDatabase;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private TextInputEditText getUsername, getEmail, getPassword, getPasswordConfirm;
-    private String username, email, password, passwordConfirm;
+    private TextInputEditText  getUsername, getEmail, getPassword, getPasswordConfirm;
+    private String username, email,password,passwordConfirm;
     private Button createAccountBtn;
     UsersDatabase database;
-    UsersDao dao;
+    List<Favorites> favorites;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +63,10 @@ public class SignUpActivity extends AppCompatActivity {
                 checkIfPasswordsMatch();
             }
         });
+        favorites = new ArrayList<>();
     }
 
-    private void checkIfPasswordsMatch() {
+    private void checkIfPasswordsMatch(){
         if (password.equals(passwordConfirm)) {
             checkIfUsernameExists();
         } else {
@@ -68,7 +74,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
-    private void getValuesToString() {
+    private void getValuesToString(){
         //getting values from EditTexts
         username = getUsername.getText().toString();
         email = getEmail.getText().toString();
@@ -77,15 +83,13 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     //Register method
-    private void register() {
+    private void register(){
         //creates new user in db & moves to new activity
-        try {
-            User user = new User(username, email, password);  //creates new user with username,password,email parameters
+        try{
+            User user = new User(username, password, email);  //creates new user with username,password,email parameters
             database.getUserDao().insert(user); // **VM
-
         } catch (Exception e) {
             //douleiesMeFoodes
-            Toast.makeText(this, "Could not make this user please try again...", Toast.LENGTH_SHORT).show();
         }
 
         showToast(); //informs the user that his account has been created
@@ -94,30 +98,44 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void checkIfUsernameExists() {
+        boolean thisUserExists = false;
         List<User> users = database.getUserDao().getAll();
         if (users.size() == 0) {
             register();
-        }
-
-        for (User user : users) {
-            String checkName = user.getUsername();
-            if (username.equals(checkName)) {
+        } else {
+            for (User user : users) {
+                String checkName = user.getUsername();
+                if (username.equals(checkName)) {
+                    thisUserExists = true;
+                    break;
+                }
+            }
+            if(thisUserExists){
                 userExists();
-            } else {
+            }else{
                 register();
             }
         }
     }
 
-    private void userExists() {
+    private void userExists(){
         Context context = getApplicationContext();
         CharSequence text = "This username exists";
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
+        //Vibrate Phone
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        // Vibrate for 500 milliseconds
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+            //deprecated in API 26
+            v.vibrate(500);
+        }
     }
 
-    private void showToast() {
+    private void showToast(){
         Context context = getApplicationContext();
         CharSequence text = "Your account has been created!";
         int duration = Toast.LENGTH_SHORT;
@@ -125,7 +143,7 @@ public class SignUpActivity extends AppCompatActivity {
         toast.show();
     }
 
-    private void showErrorToast() {
+    private void showErrorToast(){
         Context context = getApplicationContext();
         CharSequence text = "Please enter valid credentials";
         int duration = Toast.LENGTH_SHORT;

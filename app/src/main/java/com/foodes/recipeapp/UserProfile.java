@@ -54,8 +54,7 @@ public class UserProfile extends AppCompatActivity {
 
         List<User> users = database.getUserDao().getAll();
         for (User user : users) {
-            String user_username = user.getUsername();
-            if (getUsername.equals(user_username)) {
+            if (user.getId() == userId) {
                 username.setText(user.getUsername());
                 email.setText(user.getEmail());
                 username_info.setText(user.getUsername());
