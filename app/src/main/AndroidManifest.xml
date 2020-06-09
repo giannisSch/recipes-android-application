@@ -11,8 +11,9 @@
         android:roundIcon="@mipmap/food_logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UpdateUserProfileInfo"></activity>
         <activity android:name=".drawer_test" />
+        <activity android:name=".UpdateUserProfileInfo" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".UserProfile" />
         <activity android:name=".ForgotPassword" />
         <activity android:name=".RecipeDetailsActivity" />
@@ -23,7 +24,7 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".ForgotPasswordStepTwo" />
         <activity android:name=".RecipesMenuActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".UserOnboarding">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
