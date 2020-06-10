@@ -3,6 +3,7 @@
     package="com.foodes.recipeapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -14,17 +15,17 @@
         <activity android:name=".drawer_test" />
         <activity android:name=".UpdateUserProfileInfo" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".UserProfile" />
+        <activity android:name=".UserOnboarding" />
         <activity android:name=".ForgotPassword" />
         <activity android:name=".RecipeDetailsActivity" />
         <activity android:name=".SplashActivity" />
         <activity android:name=".AccountCreated" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".UserProfile" />
         <activity android:name=".ForgotPasswordStepTwo" />
         <activity android:name=".RecipesMenuActivity" />
-        <activity android:name=".UserOnboarding">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
