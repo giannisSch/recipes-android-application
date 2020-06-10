@@ -117,6 +117,9 @@ public class SearchActivity extends AppCompatActivity implements NavigationView.
                 goToOtherUsers.putExtra("Username", loggedInUsername);
                 goToOtherUsers.putExtra("userId", userId);
                 startActivity(goToOtherUsers);
+            case R.id.nav_about:
+                Intent goToAbout = new Intent(SearchActivity.this, About.class);
+                startActivity(goToAbout);
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;

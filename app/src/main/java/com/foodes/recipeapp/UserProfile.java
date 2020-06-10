@@ -21,7 +21,9 @@ import android.widget.Toast;
 
 import com.foodes.recipeapp.database.UsersDb.User;
 import com.foodes.recipeapp.database.UsersDb.UsersDatabase;
+import com.foodes.recipeapp.json.nutrientsModels.RecipeModel;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -33,9 +35,7 @@ public class UserProfile extends AppCompatActivity {
     private int userId;
     Button btn;
     UsersDatabase database;
-
     private static final int RESULT_LOAD_IMAGE = 1;
-
     ImageView userImg;
 
 
@@ -58,6 +58,8 @@ public class UserProfile extends AppCompatActivity {
         email_info = findViewById(R.id.mail_txtview);
         totalFavorites =(TextView) findViewById(R.id.card_fav_counter);
         userImg = findViewById(R.id.profile_photo);
+
+//        Picasso.get().load(((RecipeModel) data).getImage()).transform(new CircleTransform()).into(userImg);
 
         //getting username
         Intent UsernameIntent = getIntent();
