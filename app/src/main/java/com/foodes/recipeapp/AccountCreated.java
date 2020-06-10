@@ -19,7 +19,7 @@ public class AccountCreated extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent homeIntent = new Intent(AccountCreated.this, LoginActivity.class);
+                Intent homeIntent = new Intent(AccountCreated.this, UserOnboarding.class);
                 startActivity(homeIntent);
                 finish();
             }

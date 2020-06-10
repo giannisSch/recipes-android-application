@@ -167,7 +167,7 @@ public class RecipesMenuActivity extends AppCompatActivity implements Navigation
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.nav_home:
-                Intent goToHomePage = new Intent(RecipesMenuActivity.this, drawer_test.class);
+                Intent goToHomePage = new Intent(RecipesMenuActivity.this, SearchActivity.class);
                 goToHomePage.putExtra("Username", loggedInUsername);
                 goToHomePage.putExtra("userId", userId);
                 startActivity(goToHomePage);

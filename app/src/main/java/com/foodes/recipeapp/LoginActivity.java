@@ -6,27 +6,19 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Database;
 
 import com.foodes.recipeapp.database.UsersDb.User;
-import com.foodes.recipeapp.database.UsersDb.UsersDao;
 import com.foodes.recipeapp.database.UsersDb.UsersDatabase;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.shashank.sony.fancytoastlib.FancyToast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
@@ -99,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void loginUser() {
         //create method
-        Intent userIsLoggedIn = new Intent(LoginActivity.this, drawer_test.class);
+        Intent userIsLoggedIn = new Intent(LoginActivity.this, SearchActivity.class);
         //pass username to AppHomeScreen so we can greet the user in home screen
         userIsLoggedIn.putExtra("Username", checkUsername);
         userIsLoggedIn.putExtra("Password", checkPassword);

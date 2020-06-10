@@ -13,20 +13,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.foodes.recipeapp.database.UsersDb.Favorites;
 import com.foodes.recipeapp.database.UsersDb.User;
 import com.foodes.recipeapp.database.UsersDb.UsersDatabase;
 import com.foodes.recipeapp.json.nutrientsModels.RecipeModel;
 import com.foodes.recipeapp.recyclerviews.ItemClickListener;
-import com.foodes.recipeapp.recyclerviews.menuAndFavorites.CustomAdapter;
 import com.foodes.recipeapp.recyclerviews.menuAndFavorites.Favorites.FavoritesAdapter;
 import com.foodes.recipeapp.recyclerviews.recipedetails.MyItemTouchHelper;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -146,7 +141,7 @@ public class FavoritesActivity extends AppCompatActivity implements NavigationVi
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_home:
-                Intent goToHomePage = new Intent(FavoritesActivity.this, drawer_test.class);
+                Intent goToHomePage = new Intent(FavoritesActivity.this, SearchActivity.class);
                 goToHomePage.putExtra("Username", loggedInUsername);
                 goToHomePage.putExtra("userId", userId);
                 startActivity(goToHomePage);
