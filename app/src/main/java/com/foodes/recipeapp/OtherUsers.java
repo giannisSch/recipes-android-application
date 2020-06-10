@@ -25,6 +25,7 @@ public class OtherUsers extends AppCompatActivity {
     private int userId;
     private List<User> allUsers;
     private CustomAdapter adapter;
+    private double kapa, k;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +35,12 @@ public class OtherUsers extends AppCompatActivity {
         database = UsersDatabase.getInstance(this);
     }
 
+
+
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
+
 
         userId = getIntent().getIntExtra("userId", 0);
         allUsers = database.getUserDao().getAll();
