@@ -45,7 +45,6 @@
         android:id="@+id/recipeDetailsButtonsConstraint"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="20dp"
         app:layout_constraintTop_toBottomOf="@id/recipeDetailsRecipeImageView">
 
 
@@ -59,6 +58,7 @@
             android:textColor="#787878"
             android:textSize="22sp"
             android:textStyle="bold"
+            android:ellipsize="end"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -73,11 +73,24 @@
         android:background="@color/colorBackground"
         android:src="@drawable/ic_favorite_border_black_24dp"
         app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintEnd_toStartOf="@id/recipeDetailsShareImageButton"
+        app:layout_constraintEnd_toStartOf="@id/recipeDetailsGoToRecipeImageButton"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/recipeDetailsRecipeNameTextView">
     </ImageButton>
+
+        <ImageButton
+            android:id="@+id/recipeDetailsGoToRecipeImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBackground"
+            android:src="@drawable/ic_room_service_black_24dp"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintEnd_toStartOf="@id/recipeDetailsShareImageButton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/recipeDetailsFavoritesImageButton">
+        </ImageButton>
 
     <ImageButton
         android:id="@+id/recipeDetailsShareImageButton"
@@ -85,7 +98,7 @@
         android:layout_height="wrap_content"
         android:background="@color/colorBackground"
         android:src="@drawable/ic_share_black_24dp"
-        app:layout_constraintStart_toEndOf="@id/recipeDetailsFavoritesImageButton"
+        app:layout_constraintStart_toEndOf="@id/recipeDetailsGoToRecipeImageButton"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">

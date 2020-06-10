@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context=".SearchActivity"
-    tools:openDrawer="start">
+    tools:openDrawer="end">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,6 +17,8 @@
             android:id="@+id/toolbar"
             android:gravity="top"
             app:title="Home"
+            app:titleMarginTop="13dp"
+            android:foregroundGravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -70,6 +72,7 @@
             app:startIconDrawable="@drawable/ic_search_grey_24dp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:singleLine='true'
                 android:id="@+id/basicIngredientEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

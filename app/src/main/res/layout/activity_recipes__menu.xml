@@ -19,6 +19,7 @@ tools:context=".RecipesMenuActivity">
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="top"
+        app:titleMarginTop="13dp"
         app:title="Results for "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

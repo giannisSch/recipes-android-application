@@ -1,10 +1,10 @@
 package com.foodes.recipeapp;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,9 +30,8 @@ public class RecipeDetailsActivity extends AppCompatActivity implements View.OnC
     private ImageView foodImage, favoriteButton;
 //    private MaterialToolbar title;
     UsersDatabase database;
-    private ImageButton shareButton, backButton;
+    private ImageButton shareButton, backButton, gotoRecipeButton;
     private CollapsingToolbarLayout title;
-    Button gotoRecipeButton, gotoFavoritesList;
     int userId;
     private String recipeTitle, imageUrl, recipeUrl, shareURL;
   //  User currentUser;
@@ -73,8 +72,7 @@ public class RecipeDetailsActivity extends AppCompatActivity implements View.OnC
         favoriteButton = (ImageView)findViewById(R.id.recipeDetailsFavoritesImageButton);
         backButtonListener();
 
-//        gotoRecipeButton = (Button)findViewById(R.id.goToRecipeBtn);
-//        gotoFavoritesList = (Button)findViewById(R.id.goToFavoritesListBtn);
+        gotoRecipeButton = findViewById(R.id.recipeDetailsGoToRecipeImageButton);
 
         recipeTitle = recipe.getLabel();
         int fat = (int) recipe.getDigest().get(0).getTotal();
@@ -96,12 +94,12 @@ public class RecipeDetailsActivity extends AppCompatActivity implements View.OnC
             favoriteButton.setImageResource(R.drawable.ic_favorite_red_24dp);
         }
 
-//        if (!recipeUrl.startsWith("http://") && !recipeUrl.startsWith("https://")){
-//            recipeUrl = "http://" + recipeUrl;
-//        }
+        if (!recipeUrl.startsWith("http://") && !recipeUrl.startsWith("https://")){
+            recipeUrl = "http://" + recipeUrl;
+        }
 
         favoriteButton.setOnClickListener(this);
-//        gotoRecipeButton.setOnClickListener(this);
+        gotoRecipeButton.setOnClickListener(this);
     }
 
     @Override
@@ -115,10 +113,10 @@ public class RecipeDetailsActivity extends AppCompatActivity implements View.OnC
                     addFavoriteToUser(fav);
                 }
                 break;
-//            case R.id.goToRecipeBtn:
-//                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(recipeUrl));
-//                startActivity(browserIntent);
-//                break;
+            case R.id.recipeDetailsGoToRecipeImageButton:
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(recipeUrl));
+                startActivity(browserIntent);
+                break;
         }
     }
     private void backButtonListener() {

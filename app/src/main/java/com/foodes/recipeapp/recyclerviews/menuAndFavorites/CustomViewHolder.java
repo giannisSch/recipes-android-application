@@ -41,12 +41,13 @@ public class CustomViewHolder extends AbstractViewHolder<Object> {
             }catch (Exception e){ }
             caloriesText.setText("Calories: "+(int)(((RecipeModel) data).getCalories()));
         } else if(data instanceof User) {
-           // Picasso.get().load(((Favorites) data).getFoodImage()).into(recipeImage);
+            Picasso.get().load(R.drawable.typas).transform(new CircleTransform()).into(recipeImage);
             titleText.setText(((User) data).getUsername());
             dietLabelText.setText("Favorite Recipes: "+((User) data).getFavorite().size());
             caloriesText.setText("");
         }else{
             //Do something for better User Experience
         }
+
     }
 }
