@@ -3,7 +3,7 @@
     package="com.foodes.recipeapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
@@ -13,54 +13,22 @@
         android:roundIcon="@mipmap/food_logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".OtherUserFavorites"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".OtherUsers"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".UpdateUserProfileInfo"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".drawer_test"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".UserOnboarding"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ForgotPassword"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".RecipeDetailsActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".FavoritesActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".AccountCreated"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".SearchActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".SignUpActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".LoginActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".UserProfile"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".MainActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ForgotPasswordStepTwo"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".RecipesMenuActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name=".OtherUserFavorites"></activity>
+        <activity android:name=".OtherUsers" />
+        <activity android:name=".UpdateUserProfileInfo" />
+        <activity android:name=".drawer_test" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".UserOnboarding" />
+        <activity android:name=".ForgotPassword" />
+        <activity android:name=".RecipeDetailsActivity" />
+        <activity android:name=".FavoritesActivity" />
+        <activity android:name=".AccountCreated" />
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".UserProfile" />
+        <activity android:name=".ForgotPasswordStepTwo" />
+        <activity android:name=".RecipesMenuActivity" />
+        <activity android:name=".SignUpActivity"/>
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
