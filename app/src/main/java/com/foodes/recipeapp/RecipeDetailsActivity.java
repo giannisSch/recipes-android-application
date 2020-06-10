@@ -1,7 +1,6 @@
 package com.foodes.recipeapp;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,14 +13,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.foodes.recipeapp.database.UsersDb.Favorites;
 import com.foodes.recipeapp.database.UsersDb.User;
 import com.foodes.recipeapp.database.UsersDb.UsersDatabase;
 import com.foodes.recipeapp.json.nutrientsModels.IngredientModel;
 import com.foodes.recipeapp.json.nutrientsModels.RecipeModel;
 import com.foodes.recipeapp.recyclerviews.recipedetails.RecipeDetailsAdapter;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
-import com.google.android.material.appbar.MaterialToolbar;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -89,11 +86,11 @@ public class RecipeDetailsActivity extends AppCompatActivity implements View.OnC
         shareURL = recipe.getShareAs();
         shareFunctionality(shareURL);
 
-
+        recipeName.setText(recipeTitle);
         totalFat.setText(fat+"g");
         totalCrabs.setText(crabs+"g");
         totalProtein.setText(protein+"g");
-        Picasso.get().load(imageUrl).into(foodImage);
+        Picasso.get().load(imageUrl).fit().centerCrop().into(foodImage);
 
         if(isAlreadyFavorite(new RecipeModel(recipeTitle,imageUrl,recipeUrl,shareURL))){
             favoriteButton.setImageResource(R.drawable.ic_favorite_red_24dp);

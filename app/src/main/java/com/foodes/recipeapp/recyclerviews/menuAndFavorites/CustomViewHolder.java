@@ -6,8 +6,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.foodes.recipeapp.CircleTransform;
 import com.foodes.recipeapp.R;
-import com.foodes.recipeapp.database.UsersDb.Favorites;
 import com.foodes.recipeapp.database.UsersDb.User;
 import com.foodes.recipeapp.json.nutrientsModels.RecipeModel;
 import com.foodes.recipeapp.recyclerviews.ItemClickListener;
@@ -33,7 +33,7 @@ public class CustomViewHolder extends AbstractViewHolder<Object> {
     public void present(Object data) {
         setData(data);
         if (data instanceof RecipeModel) {
-            Picasso.get().load(((RecipeModel) data).getImage()).into(recipeImage);
+            Picasso.get().load(((RecipeModel) data).getImage()).transform(new CircleTransform()).into(recipeImage);
             titleText.setText(((RecipeModel) data).getLabel());
             int sizeOfDietLabels = ((RecipeModel) data).getDietLabels().size();
             try{
