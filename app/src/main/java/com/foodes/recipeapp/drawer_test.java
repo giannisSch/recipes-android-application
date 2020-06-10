@@ -108,6 +108,11 @@ public class drawer_test extends AppCompatActivity implements NavigationView.OnN
                 goToFavoriteList.putExtra("userId", userId);
                 startActivity(goToFavoriteList);
                 break;
+            case R.id.nav_otherUsers:
+                Intent goToOtherUsers = new Intent(drawer_test.this, OtherUsers.class);
+                goToOtherUsers.putExtra("Username", loggedInUsername);
+                goToOtherUsers.putExtra("userId", userId);
+                startActivity(goToOtherUsers);
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;

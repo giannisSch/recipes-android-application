@@ -68,6 +68,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesViewHolder> 
         mFavorites.remove(fromFavorite);
         mFavorites.add(toPosition, fromFavorite);
         notifyItemMoved(fromPosition, toPosition);
+        currentUser.setFavorite(mFavorites);
         database.getUserDao().update(currentUser);
     }
 
@@ -75,6 +76,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesViewHolder> 
     public void onItemSwiped(int position) {
         mFavorites.remove(position);
         notifyItemRemoved(position);
+        currentUser.setFavorite(mFavorites);
         database.getUserDao().update(currentUser);
     }
 

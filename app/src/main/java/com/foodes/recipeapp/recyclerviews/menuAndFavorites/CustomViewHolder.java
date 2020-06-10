@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 
 import com.foodes.recipeapp.R;
 import com.foodes.recipeapp.database.UsersDb.Favorites;
+import com.foodes.recipeapp.database.UsersDb.User;
 import com.foodes.recipeapp.json.nutrientsModels.RecipeModel;
 import com.foodes.recipeapp.recyclerviews.ItemClickListener;
 import com.squareup.picasso.Picasso;
@@ -39,10 +40,10 @@ public class CustomViewHolder extends AbstractViewHolder<Object> {
             //    dietLabelText.append(((RecipeModel) data).getDietLabels().get(0));
             }catch (Exception e){ }
             caloriesText.setText("Calories: "+(int)(((RecipeModel) data).getCalories()));
-        } else if(data instanceof Favorites) {
-            Picasso.get().load(((Favorites) data).getFoodImage()).into(recipeImage);
-            titleText.setText(((Favorites) data).getFoodName());
-            dietLabelText.append("");
+        } else if(data instanceof User) {
+           // Picasso.get().load(((Favorites) data).getFoodImage()).into(recipeImage);
+            titleText.setText(((User) data).getUsername());
+            dietLabelText.setText("Favorite Recipes: "+((User) data).getFavorite().size());
             caloriesText.setText("");
         }else{
             //Do something for better User Experience

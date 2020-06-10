@@ -97,6 +97,12 @@ public class FavoritesActivity extends AppCompatActivity implements NavigationVi
 //                intent.putExtras(parameter);
                 startActivity(intent);
             }
+
+            @Override
+            public void onOtherUserClick(User user) {
+                //do nothing
+            }
+
         }, currentUser, database);
         ItemTouchHelper.Callback callback = new MyItemTouchHelper(adapter);
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
@@ -157,6 +163,11 @@ public class FavoritesActivity extends AppCompatActivity implements NavigationVi
             case R.id.nav_favorites:
                 Toast.makeText(this, "Yor're already in your favorites list", Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.nav_otherUsers:
+                Intent goToOtherUsers = new Intent(FavoritesActivity.this, OtherUsers.class);
+                goToOtherUsers.putExtra("Username", loggedInUsername);
+                goToOtherUsers.putExtra("userId", userId);
+                startActivity(goToOtherUsers);
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;

@@ -27,6 +27,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.foodes.recipeapp.database.UsersDb.User;
 import com.foodes.recipeapp.json.nutrientsModels.HitModel;
 import com.foodes.recipeapp.json.nutrientsModels.JsonModel;
 import com.foodes.recipeapp.json.nutrientsModels.RecipeModel;
@@ -89,10 +90,17 @@ public class RecipesMenuActivity extends AppCompatActivity implements Navigation
     //            intent.putExtra("User", currentUser);
                 startActivity(intent);
             }
+
             @Override
             public void onFavoriteClick(RecipeModel data) {
-            //do nothing
+                //do nothing
             }
+
+            @Override
+            public void onOtherUserClick(User user) {
+                //do nothing
+            }
+
         });
         recyclerView.setAdapter(adapter);
 
@@ -179,6 +187,11 @@ public class RecipesMenuActivity extends AppCompatActivity implements Navigation
                 goToFavoriteList.putExtra("userId", userId);
                 startActivity(goToFavoriteList);
                 break;
+            case R.id.nav_otherUsers:
+                Intent goToOtherUsers = new Intent(RecipesMenuActivity.this, OtherUsers.class);
+                goToOtherUsers.putExtra("Username", loggedInUsername);
+                goToOtherUsers.putExtra("userId", userId);
+                startActivity(goToOtherUsers);
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;

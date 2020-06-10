@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import java.util.List;
 import java.util.Objects;
 
-public class RecipeModel  implements Parcelable {
+public class RecipeModel implements Parcelable {
     String uri;
     String label;
     String image;

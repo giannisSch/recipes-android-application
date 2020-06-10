@@ -47,7 +47,7 @@ public class FavoritesViewHolder extends AbstractViewHolder<RecipeModel> impleme
 
     @Override
     public boolean onDown(MotionEvent e) {
-        return true;
+        return false;
     }
 
     @Override
