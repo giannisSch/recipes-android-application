@@ -7,9 +7,15 @@ import androidx.room.Database;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,9 +29,15 @@ public class UserProfile extends AppCompatActivity {
 
     TextView username, email, username_info, email_info, totalFavorites;
     private String getUsername;
+    private String favoriteCounter;
     private int userId;
     Button btn;
     UsersDatabase database;
+
+    private static final int RESULT_LOAD_IMAGE = 1;
+
+    ImageView userImg;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +57,7 @@ public class UserProfile extends AppCompatActivity {
         username_info = findViewById(R.id.user_txtview);
         email_info = findViewById(R.id.mail_txtview);
         totalFavorites =(TextView) findViewById(R.id.card_fav_counter);
+        userImg = findViewById(R.id.profile_photo);
 
         //getting username
         Intent UsernameIntent = getIntent();
@@ -63,6 +76,15 @@ public class UserProfile extends AppCompatActivity {
             }
         }
 
+        userImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent uploadUserPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(uploadUserPhoto, RESULT_LOAD_IMAGE);
+                saveUserImg();
+            }
+        });
+
         btn = findViewById(R.id.profile_btn);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +94,33 @@ public class UserProfile extends AppCompatActivity {
             }
         });
     }
-    
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null){
+            Uri selectedImage = data.getData();
+            userImg.setImageURI(selectedImage);
+        }
+    }
+
+    private void saveUserImg(){
+        List<User> users = database.getUserDao().getAll();
+        for (User user : users) {
+            String user_username = user.getUsername();
+            String user_email = user.getEmail();
+            String user_pass = user.getPassword();
+
+            if (getUsername.equals(user_username)) {
+                Bitmap bitmap = ((BitmapDrawable) userImg.getDrawable()).getBitmap();
+                User newUser = new User(user_username, user_email, user_pass);
+                database.getUserDao().update(newUser);
+            }
+        }
+    }
+
+
+
     private void askIfUserIsSure(){
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(UserProfile.this);
         builder.setTitle("Update user info");
