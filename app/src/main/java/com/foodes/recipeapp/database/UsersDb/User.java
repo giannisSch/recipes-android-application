@@ -1,11 +1,11 @@
 package com.foodes.recipeapp.database.UsersDb;
 
+import android.graphics.Bitmap;
+
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
-import java.io.Serializable;
 
 @Entity(tableName = "Users")
 public class User{
@@ -26,6 +26,7 @@ public class User{
     private String password;
 
     //id auto generates so Im not including in constructor
+
     public User(@NonNull String username, String email, String password) {
         this.username = username;
         this.email = email;

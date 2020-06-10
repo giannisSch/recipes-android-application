@@ -7,6 +7,8 @@ import androidx.room.Database;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -72,6 +74,7 @@ public class UserProfile extends AppCompatActivity {
             public void onClick(View v) {
                 Intent uploadUserPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(uploadUserPhoto, RESULT_LOAD_IMAGE);
+                saveUserImg();
             }
         });
 
@@ -93,7 +96,24 @@ public class UserProfile extends AppCompatActivity {
             userImg.setImageURI(selectedImage);
         }
     }
-    
+
+    private void saveUserImg(){
+        List<User> users = database.getUserDao().getAll();
+        for (User user : users) {
+            String user_username = user.getUsername();
+            String user_email = user.getEmail();
+            String user_pass = user.getPassword();
+
+            if (getUsername.equals(user_username)) {
+                Bitmap bitmap = ((BitmapDrawable) userImg.getDrawable()).getBitmap();
+                User newUser = new User(user_username, user_email, user_pass, bitmap);
+                database.getUserDao().update(newUser);
+            }
+        }
+    }
+
+
+
     private void askIfUserIsSure(){
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(UserProfile.this);
         builder.setTitle("Update user info");

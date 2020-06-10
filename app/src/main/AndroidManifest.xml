@@ -21,11 +21,11 @@
         <activity android:name=".SplashActivity" />
         <activity android:name=".AccountCreated" />
         <activity android:name=".SearchActivity" />
-        <activity android:name=".SignUpActivity" />
+        <activity android:name=".LoginActivity" />
         <activity android:name=".UserProfile" />
         <activity android:name=".ForgotPasswordStepTwo" />
         <activity android:name=".RecipesMenuActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".SignUpActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

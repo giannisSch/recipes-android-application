@@ -2,7 +2,6 @@ package com.foodes.recipeapp;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Database;
 
 import android.content.DialogInterface;
 import android.content.Intent;
