@@ -34,6 +34,8 @@ import com.google.android.material.textview.MaterialTextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.Random;
+
 public class SearchActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private String loggedInUsername;
@@ -41,11 +43,12 @@ public class SearchActivity extends AppCompatActivity implements NavigationView.
     NavigationView navigationView;
     ActionBarDrawerToggle toggle;
     private MaterialTextView greeting;
-    Button searchBtn;
+    Button searchBtn, feelLucky;
     private EditText basicIngredient;
     private SuggestionCustomAdapter suggestionAdapter;
     private List<Object> suggestionList;
     int userId;
+    private int random;
 
 
     @Override
@@ -79,6 +82,22 @@ public class SearchActivity extends AppCompatActivity implements NavigationView.
         //drawer selection switch
         navigationView.setNavigationItemSelectedListener(this);
 
+        //Feel luky button
+        feelLucky   =   (Button)findViewById(R.id.drawerRandomSearchBtn);
+        final String[] randomIngredients = getResources().getStringArray(R.array.randomIngredients);
+        feelLucky.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               random = new Random().nextInt(63) + 0;
+                Intent intent = new Intent(SearchActivity.this, RecipesMenuActivity.class);
+                intent.putExtra("ingredient", randomIngredients[random]);
+                intent.putExtra("userId",userId);
+                intent.putExtra("Username", loggedInUsername);
+                startActivity(intent);
+            }
+        });
+
+        //Search Button
         searchBtn = findViewById(R.id.drawerSearchBtn);
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
