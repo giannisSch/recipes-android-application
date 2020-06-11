@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".SuccessUpdateInfo" android:screenOrientation="portrait"/>
-        <activity android:name=".SplashActivity" android:screenOrientation="portrait" />
+        <activity android:name=".MainActivity" android:screenOrientation="portrait" />
         <activity android:name=".OtherUserFavorites" android:screenOrientation="portrait" />
         <activity android:name=".OtherUsers" android:screenOrientation="portrait" />
         <activity android:name=".UpdateUserProfileInfo" android:screenOrientation="portrait" />
@@ -31,7 +31,7 @@
         <activity android:name=".ForgotPasswordStepTwo" android:screenOrientation="portrait" />
         <activity android:name=".RecipesMenuActivity" android:screenOrientation="portrait" />
         <activity android:name=".SignUpActivity" android:screenOrientation="portrait" />
-        <activity android:name=".MainActivity" android:screenOrientation="portrait" >
+        <activity android:name=".SplashActivity" android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
