@@ -20,10 +20,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.foodes.recipeapp.database.UsersDb.User;
+import com.foodes.recipeapp.json.nutrientsModels.RecipeModel;
+import com.foodes.recipeapp.recyclerviews.ItemClickListener;
+import com.foodes.recipeapp.recyclerviews.suggestions.Suggestion;
+import com.foodes.recipeapp.recyclerviews.suggestions.SuggestionCustomAdapter;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textview.MaterialTextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SearchActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -34,6 +43,8 @@ public class SearchActivity extends AppCompatActivity implements NavigationView.
     private MaterialTextView greeting;
     Button searchBtn;
     private EditText basicIngredient;
+    private SuggestionCustomAdapter suggestionAdapter;
+    private List<Object> suggestionList;
     int userId;
 
 
@@ -81,6 +92,43 @@ public class SearchActivity extends AppCompatActivity implements NavigationView.
         });
 
         toggle.syncState();
+
+    //recyclerView
+    suggestionList = new ArrayList<Object>();
+
+    RecyclerView recyclerView = (RecyclerView) findViewById(R.id.searchActivityRecyclerView);
+    suggestionAdapter = new SuggestionCustomAdapter(new ItemClickListener() {
+        @Override
+        public void onItemClick(Object item) {
+            Intent intent = new Intent(SearchActivity.this, RecipesMenuActivity.class);
+            if (item instanceof Suggestion) {
+                intent.putExtra("ingredient", ((Suggestion) item).getParameter());
+            }
+            intent.putExtra("userId",userId);
+            intent.putExtra("Username", loggedInUsername);
+            startActivity(intent);
+        }
+
+        @Override
+        public void onFavoriteClick(RecipeModel data) {
+            //do nothing
+        }
+
+        @Override
+        public void onOtherUserClick(User user) {
+            //do nothing
+        }
+    });
+        recyclerView.setAdapter(suggestionAdapter);
+        addSuggestionsToList();
+        suggestionAdapter.submitList(suggestionList);
+    }
+
+    private void addSuggestionsToList() {
+        suggestionList.add(new Suggestion("Kotopulo", R.drawable.typas));
+        suggestionList.add(new Suggestion("Kotopulo", R.drawable.typas));
+        suggestionList.add(new Suggestion("Kotopulo", R.drawable.typas));
+
     }
 
     //swipe right or back button functionality
