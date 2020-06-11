@@ -5,17 +5,27 @@
     android:layout_height="match_parent"
     tools:context=".SplashActivity">
 
-    <ImageView
-        android:id="@+id/splashLogoImageView"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginBottom="145dp"
-        android:src="@mipmap/food_logo_foreground"
+
+    <RelativeLayout
+        android:id="@+id/rel_layout"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:padding="5dp"
+        android:background="#25AE88"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/card_icon"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="3dp"
+            android:src="@drawable/ic_person_add_black_24dp" />
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/splashAppNameTextView"
@@ -23,9 +33,10 @@
         android:layout_height="wrap_content"
         style="@style/TextHeader"
         android:text="Success"
+        android:layout_marginTop="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/splashLogoImageView"/>
+        app:layout_constraintTop_toBottomOf="@+id/rel_layout"/>
 
     <TextView
         android:id="@+id/splashDescriptionTextView"

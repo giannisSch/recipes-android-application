@@ -23,13 +23,13 @@
         <activity android:name=".ForgotPassword" />
         <activity android:name=".RecipeDetailsActivity" />
         <activity android:name=".FavoritesActivity" />
-        <activity android:name=".AccountCreated" />
+        <activity android:name=".About" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".UserProfile" />
         <activity android:name=".ForgotPasswordStepTwo" />
         <activity android:name=".RecipesMenuActivity" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".About">
+        <activity android:name=".AccountCreated">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
