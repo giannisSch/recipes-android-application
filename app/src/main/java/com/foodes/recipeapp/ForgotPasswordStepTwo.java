@@ -3,11 +3,16 @@ package com.foodes.recipeapp;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.foodes.recipeapp.database.UsersDb.User;
@@ -82,7 +87,7 @@ public class ForgotPasswordStepTwo extends AppCompatActivity {
         builder.show();
     }
 
-    private boolean checkIfMailIsCorrect(){
+    private void checkIfMailIsCorrect(){
         List<User> users = database.getUserDao().getAll();
         for (User user : users) {
             String email = user.getEmail();
@@ -90,7 +95,6 @@ public class ForgotPasswordStepTwo extends AppCompatActivity {
                 getUserInfo();
             }
         }
-        return false;
     }
 
     private void getUserInfo(){
@@ -99,9 +103,9 @@ public class ForgotPasswordStepTwo extends AppCompatActivity {
             for (User user : users) {
                 String email = user.getEmail();
                 if (email.equals(submittedEmail)){
-                    UserUsername = user.getUsername();
-                    UserPassword = user.getPassword();
-                    updateUserInfo();
+                    user.setPassword(NewPassword);
+                    database.getUserDao().update(user);
+                    moveToLoginScreen();
                 }
             }
         } catch (Exception e) {
@@ -109,16 +113,28 @@ public class ForgotPasswordStepTwo extends AppCompatActivity {
         }
     }
 
-    private void updateUserInfo(){
-        User user = new User(UserUsername, submittedEmail, NewPassword);
-        database.getUserDao().update(user);
-        Toast.makeText(this, "Your password has been changed successfully", Toast.LENGTH_SHORT).show();
-        moveToLoginScreen();
-    }
+
 
     private void moveToLoginScreen(){
         Intent move = new Intent(ForgotPasswordStepTwo.this, LoginActivity.class);
         startActivity(move);
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            View v = getCurrentFocus();
+            if (v instanceof EditText) {
+                Rect outRect = new Rect();
+                v.getGlobalVisibleRect(outRect);
+                if (!outRect.contains((int)event.getRawX(), (int)event.getRawY())) {
+                    v.clearFocus();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+            }
+        }
+        return super.dispatchTouchEvent( event );
     }
 
 }

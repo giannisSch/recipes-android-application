@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.foodes.recipeapp.database.UsersDb.User;
 import com.foodes.recipeapp.database.UsersDb.UsersDatabase;
@@ -20,6 +21,8 @@ public class UpdateUserProfileInfo extends AppCompatActivity {
     private String Username,newUsername, newEmail, newPass, newPassConf;
     Button updateBtn;
     UsersDatabase database;
+    User user;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,8 @@ public class UpdateUserProfileInfo extends AppCompatActivity {
         //getting username
         Intent UsernameIntent = getIntent();
         Username = UsernameIntent.getStringExtra("Username");
+
+        user = findCurrentUser(Username);
 
         //getting fields
         username = findViewById(R.id.update_username_txt);
@@ -58,25 +63,44 @@ public class UpdateUserProfileInfo extends AppCompatActivity {
         });
     }
 
-    private void checkIfPasswordsMatch(){
-        if (newPass.equals(newPassConf)) {
-            checkIfValuesAreCorrect();
-        }
-    }
-
-    private void checkIfValuesAreCorrect(){
+    private User findCurrentUser(String username) {
         List<User> users = database.getUserDao().getAll();
         for (User user : users) {
-            String name = user.getUsername();
-            if (Username.equals(name)) {
-                updateUserProfileInfo();
+            if (user.getUsername() == username) {
+                return user;
             }
+        }
+        //this will never return
+        return new User("douleies", "me", "foodes");
+    }
+
+    private void checkIfPasswordsMatch(){
+        if (newPass.equals(newPassConf)) {
+           if(checkIfUsernameExists(newUsername)){
+               Toast.makeText(this, "This Username isn't available", Toast.LENGTH_SHORT).show();
+           }else{
+               updateUser();
+           }
         }
     }
 
-    private void updateUserProfileInfo(){
-            User user = new User(newUsername, newEmail, newPass);
-            database.getUserDao().update(user);
+    private boolean checkIfUsernameExists(String username){
+        List<User> users = database.getUserDao().getAll();
+        for (User user : users) {
+            if (user.getUsername() == username) {
+                return true;
+            }
         }
+        //this will never return
+        return false;
+    }
+
+
+    private void updateUser(){
+       user.setUsername(newUsername);
+       user.setEmail(newEmail);
+       user.setPassword(newPass);
+       database.getUserDao().update(user);
+    }
 
 }
