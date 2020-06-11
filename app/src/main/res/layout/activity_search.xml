@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="55dp"
+            android:layout_marginTop="70dp"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -96,6 +96,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="200dp"
+            android:layout_marginTop="10dp"
             android:text="Feel lucky"
             android:textAllCaps="false"
             android:textSize="16sp"
@@ -103,6 +104,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/drawerSearchBtn"
+            app:layout_constraintBottom_toTopOf="@id/suggestion_txt"
             app:shapeAppearanceOverlay="@style/RoundFieldAppearance"
             tools:ignore="HardcodedText" />
 
@@ -111,11 +113,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="25dp"
-            android:text="Our top suggestions"
+            android:text="Our suggestions"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="20dp"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/drawerRandomSearchBtn" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/searchActivityRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/suggestion_txt" />
             app:layout_constraintTop_toBottomOf="@+id/drawerRandomSearchBtn" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
