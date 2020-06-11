@@ -34,4 +34,75 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string-array name="randomIngredients">
+        <item>beef</item>
+        <item>goat</item>
+        <item>meatball</item>
+        <item>pork</item>
+        <item>bat</item>
+        <item>rice</item>
+        <item>wasabi</item>
+        <item>egg</item>
+        <item>Octopus</item>
+        <item>pancakes</item>
+        <item>crepa</item>
+        <item>chocolate</item>
+        <item>vanilla</item>
+        <item>ice cream</item>
+        <item>rice</item>
+        <item>carrot</item>
+        <item>Asian greens</item>
+        <item>Broccoli</item>
+        <item>Capsicums</item>
+        <item>Cucumber</item>
+        <item>Ginger</item>
+        <item>Garlic</item>
+        <item>Mushrooms</item>
+        <item>Onions</item>
+        <item>Peas</item>
+        <item>Tomatoes</item>
+        <item>Sweet corn</item>
+        <item>Potatoes</item>
+        <item>Lettuce</item>
+        <item>Eggplant</item>
+        <item>Beans</item>
+        <item>Melons</item>
+        <item>Chilli</item>
+        <item>Spinach</item>
+        <item>Chicken</item>
+        <item>Crab</item>
+        <item>Deer</item>
+        <item>Eel</item>
+        <item>Elk</item>
+        <item>Frog</item>
+        <item>Mouse</item>
+        <item>Quail</item>
+        <item>Scorpion</item>
+        <item>Shark</item>
+        <item>Spider</item>
+        <item>Zebra</item>
+        <item>Turkey</item>
+        <item>Turtle</item>
+        <item>Snail</item>
+        <item>Snake</item>
+        <item>Squid</item>
+        <item>Swan</item>
+        <item>Mussels</item>
+        <item>Rabbit</item>
+        <item>Salmon</item>
+        <item>Ant</item>
+        <item>Bear</item>
+        <item>Duck</item>
+        <item>sweet potato</item>
+        <item>pizza</item>
+        <item>pasta</item>
+        <item>minced meat</item>
+        <item>worm</item>
+
+
+
+
+
+    </string-array>
+
 </resources>
