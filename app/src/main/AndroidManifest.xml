@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/food_logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashActivity"></activity>
+        <activity android:name=".About"></activity>
         <activity android:name=".OtherUserFavorites" />
         <activity android:name=".OtherUsers" />
         <activity android:name=".UpdateUserProfileInfo" />
@@ -29,7 +29,7 @@
         <activity android:name=".ForgotPasswordStepTwo" />
         <activity android:name=".RecipesMenuActivity" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".About">
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

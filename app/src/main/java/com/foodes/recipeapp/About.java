@@ -55,6 +55,10 @@ public class About extends AppCompatActivity implements NavigationView.OnNavigat
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.nav_home:
+                Intent goToSearhActivity = new Intent(About.this, SearchActivity.class);
+                goToSearhActivity.putExtra("Username", loggedInUsername);
+                goToSearhActivity.putExtra("userId", userId);
+                startActivity(goToSearhActivity);
                 break;
             case R.id.nav_logout:
                 askIfUserIsSure();
