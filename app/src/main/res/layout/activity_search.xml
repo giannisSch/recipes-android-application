@@ -36,14 +36,6 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Hello {User}!" />
 
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/error_shape"
-            app:layout_constraintTop_toTopOf="@+id/user_greeting_txt"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginRight="25dp"/>
-
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/greet_subtitle"
             android:layout_width="wrap_content"
