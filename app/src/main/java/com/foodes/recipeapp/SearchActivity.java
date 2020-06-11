@@ -125,9 +125,14 @@ public class SearchActivity extends AppCompatActivity implements NavigationView.
     }
 
     private void addSuggestionsToList() {
-        suggestionList.add(new Suggestion("Kotopulo", R.drawable.typas));
-        suggestionList.add(new Suggestion("Kotopulo", R.drawable.typas));
-        suggestionList.add(new Suggestion("Kotopulo", R.drawable.typas));
+        suggestionList.add(new Suggestion("Beef", R.drawable.beef));
+        suggestionList.add(new Suggestion("Burger", R.drawable.burger));
+        suggestionList.add(new Suggestion("Chicken", R.drawable.chicken));
+        suggestionList.add(new Suggestion("Eggs", R.drawable.eggs));
+        suggestionList.add(new Suggestion("Pasta", R.drawable.pasta));
+        suggestionList.add(new Suggestion("Rice", R.drawable.riceplate));
+        suggestionList.add(new Suggestion("Steak", R.drawable.streak));
+
 
     }
 
