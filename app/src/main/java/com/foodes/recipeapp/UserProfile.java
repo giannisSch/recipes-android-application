@@ -2,24 +2,33 @@ package com.foodes.recipeapp;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.room.Database;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,11 +38,13 @@ import com.foodes.recipeapp.database.UsersDb.User;
 import com.foodes.recipeapp.database.UsersDb.UsersDatabase;
 import com.foodes.recipeapp.json.nutrientsModels.RecipeModel;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.textview.MaterialTextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class UserProfile extends AppCompatActivity {
+public class UserProfile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     TextView username, email, username_info, email_info, totalFavorites;
     private String getUsername;
@@ -45,6 +56,11 @@ public class UserProfile extends AppCompatActivity {
     private int STORAGE_PERMISSION_CODE = 2;
     private int WRITE_PERMISSION_CODE = 3;
     ImageView userImg;
+    private String loggedInUsername;
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    ActionBarDrawerToggle toggle;
+    private MaterialTextView greeting;
 
 
     @Override
@@ -53,6 +69,14 @@ public class UserProfile extends AppCompatActivity {
         setContentView(R.layout.activity_user_profile);
         //getting db instance
         database = UsersDatabase.getInstance(this);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        drawerLayout = findViewById(R.id.drawer);
+        navigationView = findViewById(R.id.nav_view);
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
+        drawerLayout.addDrawerListener(toggle);
+        loggedInUsername = getIntent().getStringExtra("Username");
     }
 
     @Override
@@ -66,6 +90,8 @@ public class UserProfile extends AppCompatActivity {
         email_info = findViewById(R.id.mail_txtview);
         totalFavorites =(TextView) findViewById(R.id.card_fav_counter);
         userImg = findViewById(R.id.profile_photo);
+
+        navigationView.setNavigationItemSelectedListener(this);
 
         //getting username
         Intent UsernameIntent = getIntent();
@@ -103,6 +129,8 @@ public class UserProfile extends AppCompatActivity {
                 askIfUserIsSure();
             }
         });
+
+        toggle.syncState();
     }
 
     @Override
@@ -180,4 +208,86 @@ public class UserProfile extends AppCompatActivity {
         startActivity(goToUpdateUserInfo);
     }
 
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            //do not go back
+        }
+    }
+
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.nav_home:
+                Intent goToSearhActivity = new Intent(UserProfile.this, SearchActivity.class);
+                goToSearhActivity.putExtra("Username", loggedInUsername);
+                goToSearhActivity.putExtra("userId", userId);
+                startActivity(goToSearhActivity);
+                break;
+            case R.id.nav_logout:
+                askIfUserIsSureForLoggingOut();
+                break;
+            case R.id.nav_profile:
+                break;
+            case R.id.nav_favorites:
+                Intent goToFavoriteList = new Intent(UserProfile.this, FavoritesActivity.class);
+                goToFavoriteList.putExtra("Username", loggedInUsername);
+                goToFavoriteList.putExtra("userId", userId);
+                startActivity(goToFavoriteList);
+                break;
+            case R.id.nav_otherUsers:
+                Intent goToOtherUsers = new Intent(UserProfile.this, OtherUsers.class);
+                goToOtherUsers.putExtra("Username", loggedInUsername);
+                goToOtherUsers.putExtra("userId", userId);
+                startActivity(goToOtherUsers);
+                break;
+            case R.id.nav_about:
+                Intent goToAbout = new Intent(UserProfile.this, About.class);
+                startActivity(goToAbout);
+                break;
+        }
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    private void askIfUserIsSureForLoggingOut(){
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(UserProfile.this);
+        builder.setTitle("Logout");
+        builder.setMessage("Are you sure that you want to logout?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent redirectToMainScreen = new Intent(UserProfile.this,MainActivity.class);
+                startActivity(redirectToMainScreen);
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //close drawer
+                drawerLayout.closeDrawer(GravityCompat.START);
+            }
+        });
+        builder.show();
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            View v = getCurrentFocus();
+            if (v instanceof EditText) {
+                Rect outRect = new Rect();
+                v.getGlobalVisibleRect(outRect);
+                if (!outRect.contains((int)event.getRawX(), (int)event.getRawY())) {
+                    v.clearFocus();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+            }
+        }
+        return super.dispatchTouchEvent( event );
+    }
 }
