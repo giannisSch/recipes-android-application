@@ -1,12 +1,18 @@
 package com.foodes.recipeapp;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.room.Database;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
@@ -36,6 +42,8 @@ public class UserProfile extends AppCompatActivity {
     Button btn;
     UsersDatabase database;
     private static final int RESULT_LOAD_IMAGE = 1;
+    private int STORAGE_PERMISSION_CODE = 2;
+    private int WRITE_PERMISSION_CODE = 3;
     ImageView userImg;
 
 
@@ -59,8 +67,6 @@ public class UserProfile extends AppCompatActivity {
         totalFavorites =(TextView) findViewById(R.id.card_fav_counter);
         userImg = findViewById(R.id.profile_photo);
 
-//        Picasso.get().load(((RecipeModel) data).getImage()).transform(new CircleTransform()).into(userImg);
-
         //getting username
         Intent UsernameIntent = getIntent();
         getUsername = UsernameIntent.getStringExtra("Username");
@@ -81,9 +87,11 @@ public class UserProfile extends AppCompatActivity {
         userImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent uploadUserPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(uploadUserPhoto, RESULT_LOAD_IMAGE);
-                saveUserImg();
+                if (ContextCompat.checkSelfPermission(UserProfile.this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+                    Toast.makeText(UserProfile.this, "You have already granted this permission!", Toast.LENGTH_SHORT).show();
+                } else {
+                    requestStoragePermission();
+                }
             }
         });
 
@@ -105,23 +113,47 @@ public class UserProfile extends AppCompatActivity {
             userImg.setImageURI(selectedImage);
         }
     }
+    private void pickAnImg(){
+        Intent uploadUserPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(uploadUserPhoto, RESULT_LOAD_IMAGE);
+    }
 
-    private void saveUserImg(){
-        List<User> users = database.getUserDao().getAll();
-        for (User user : users) {
-            String user_username = user.getUsername();
-            String user_email = user.getEmail();
-            String user_pass = user.getPassword();
+    private void requestStoragePermission(){
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)){
 
-            if (getUsername.equals(user_username)) {
-                Bitmap bitmap = ((BitmapDrawable) userImg.getDrawable()).getBitmap();
-                User newUser = new User(user_username, user_email, user_pass);
-                database.getUserDao().update(newUser);
-            }
+            new AlertDialog.Builder(this)
+            .setTitle("Permission needed")
+            .setMessage("This permission is needed so you can upload your own photo to the profile. Do you want to grand permission?")
+            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    ActivityCompat.requestPermissions(UserProfile.this, new String []  {Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+                }
+            })
+            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss(); //closes dialogue
+                }
+            })
+            .create().show();
+
+        } else {
+            ActivityCompat.requestPermissions(this, new String []  {Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
         }
     }
 
-
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == STORAGE_PERMISSION_CODE){
+            if (grantResults.length >0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                pickAnImg();
+            } else {
+                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
     private void askIfUserIsSure(){
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(UserProfile.this);
