@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.navigation.NavigationView;
@@ -77,11 +78,11 @@ public class About extends AppCompatActivity implements NavigationView.OnNavigat
                 break;
             case R.id.nav_otherUsers:
                 Intent goToOtherUsers = new Intent(About.this, OtherUsers.class);
-                goToOtherUsers.putExtra("Username", loggedInUsername);
                 goToOtherUsers.putExtra("userId", userId);
                 startActivity(goToOtherUsers);
+                break;
             case R.id.nav_about:
-                return true;
+                break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;

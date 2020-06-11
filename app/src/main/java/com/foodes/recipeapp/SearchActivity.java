@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -96,6 +97,7 @@ public class SearchActivity extends AppCompatActivity implements NavigationView.
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.nav_home:
+                Toast.makeText(this, "Yor're already in Home", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_logout:
                 askIfUserIsSure();

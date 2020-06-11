@@ -163,6 +163,7 @@ public class FavoritesActivity extends AppCompatActivity implements NavigationVi
                 goToOtherUsers.putExtra("Username", loggedInUsername);
                 goToOtherUsers.putExtra("userId", userId);
                 startActivity(goToOtherUsers);
+                break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;

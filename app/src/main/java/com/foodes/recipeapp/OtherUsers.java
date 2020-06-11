@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.foodes.recipeapp.database.UsersDb.User;
 import com.foodes.recipeapp.database.UsersDb.UsersDatabase;
@@ -108,6 +109,8 @@ public class OtherUsers extends AppCompatActivity implements NavigationView.OnNa
 
     }
 
+
+
     private void deleteCurrentUserFromUsersList(List<User> allUsersList) {
         for (User user : allUsersList) {
             if(user.getId() == userId){
@@ -115,12 +118,6 @@ public class OtherUsers extends AppCompatActivity implements NavigationView.OnNa
                 break;
             }
         }
-    }
-
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
-        deleteCurrentUserFromUsersList(allUsers);
     }
 
     private List<Object> convertToObjectList(List<User> currentUserFavorites) {
@@ -171,7 +168,7 @@ public class OtherUsers extends AppCompatActivity implements NavigationView.OnNa
                 startActivity(goToFavoriteList);
                 break;
             case R.id.nav_otherUsers:
-               break;
+                break;
             case R.id.nav_about:
                 Intent goToAbout = new Intent(OtherUsers.this, About.class);
                 startActivity(goToAbout);
