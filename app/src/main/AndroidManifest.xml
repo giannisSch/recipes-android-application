@@ -13,7 +13,6 @@
         android:roundIcon="@mipmap/food_logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".About"></activity>
         <activity android:name=".OtherUserFavorites" />
         <activity android:name=".OtherUsers" />
         <activity android:name=".UpdateUserProfileInfo" />
@@ -23,12 +22,13 @@
         <activity android:name=".ForgotPassword" />
         <activity android:name=".RecipeDetailsActivity" />
         <activity android:name=".FavoritesActivity" />
-        <activity android:name=".AccountCreated" />
+        <activity android:name=".About" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".UserProfile" />
         <activity android:name=".ForgotPasswordStepTwo" />
         <activity android:name=".RecipesMenuActivity" />
         <activity android:name=".SignUpActivity" />
+        <activity android:name=".AccountCreated">
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
