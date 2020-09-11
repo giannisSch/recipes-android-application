@@ -1,6 +1,6 @@
 # Foodes 
 
-![](logo-foodes.png)
+![](logo-foodes.png | width=100)
 
 Foodes is a Android application for recipes designed for people who are looking for simple and tasty recipes every day 
 
@@ -16,7 +16,7 @@ Foodes is a Android application for recipes designed for people who are looking 
 - Reorder user favorites
 - Share a recipe
 
-![](logo.png)
+![](features.png)
 
 ### Workflow
 ![](workflow.png)
